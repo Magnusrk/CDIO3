@@ -1,17 +1,17 @@
 package org.g16.MonopolyJR;
 
 public class Player {
+    private boolean jailed = false;
     MoneyBalance balance = new MoneyBalance();
-    String name;
     public Player(){
 
     }
 
-    public int GetPlayerBalance(){
+    public int getPlayerBalance(){
         return balance.getBalance();
     }
 
-    public void AddBalance(int add){
+    public void addBalance(int add){
         balance.addmoney(add);
     }
     public void reset(){
