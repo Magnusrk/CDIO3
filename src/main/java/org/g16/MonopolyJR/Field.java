@@ -1,6 +1,6 @@
 package org.g16.MonopolyJR;
 
-public class Field {
+public abstract class Field {
 
     protected String name;
     public Field(){
