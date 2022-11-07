@@ -9,30 +9,3 @@ test4;+-.,123test EN 4
 #e.g.
 #throwDiceText;You rolled the die!
 
-welcomeText;Welcome!
-languageSetText;Language: English
-getEng;English
-player;Player
-roll;roll
-rolled;You rolled
-gold; gold coins
-gain;You gain
-lose;You lose
-yBalance;Your gold:
-p1Won;Player 1 you won!
-p2Won;Player 2 you won!
-exTurn;You get an extra turn!
-
-tower;You find yourself at the tower and come across a chest full of gold.
-
-crater;You fall into a crater and have to pay someone to rescue you.
-
-palace;You meet the queen by the palace gates, she gives you 100 gold to f*ck off.
-desert;You find yourself in the cold desert. Someone is selling blankets. It's too cold not to buy.
-city;You go to the walled city. You're entrant number 1.000.000.000.000 and get a price.
-monastery;You go to the monastery to pray. Nothing happens.
-cave;You find yourself in a black cave. You can't see anything and trips over a rock. Some gold falls out of you pocket but you can't find it.
-huts;You go for a hike and finds some huts in the mountain. You scavenge them for a small amount of gold.
-werewall;You get lost and by some unfortunate bad luck end up at the Werewall. A werewolf spots you and takes chase. You try to throw whatever is in your pocket at it.
-pit;You fall into the pit. Luckily there is a ladder to get out. Unluckily you have to pay to use it.
-goldmine;You go to the abandoned goldmine in hopes of making a quick buck, for some reason it works.
