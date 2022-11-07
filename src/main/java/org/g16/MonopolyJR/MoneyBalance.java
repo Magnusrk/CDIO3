@@ -1,8 +1,8 @@
 package org.g16.MonopolyJR;
 
 public class MoneyBalance {
-    private static int startingbalance = 1000;
-    private int balance = startingbalance;
+    private final int STARTBALANCE = 20;
+    private int balance = STARTBALANCE;
     public MoneyBalance(){
 
     }
@@ -20,12 +20,9 @@ public class MoneyBalance {
     }
 
     public void reset(){
-        balance = startingbalance;
+        balance = STARTBALANCE;
     }
     public int getStartingbalance(){
-        return startingbalance;
-    }
-    public void setStartingbalance (int newStartingbalance){
-        startingbalance = newStartingbalance;
+        return STARTBALANCE;
     }
 }
