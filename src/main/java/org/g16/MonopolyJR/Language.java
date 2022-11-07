@@ -1,7 +1,11 @@
 package org.g16.MonopolyJR;
 
+
+import org.g16.Main;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -9,7 +13,7 @@ import java.util.Scanner;
 
 public class Language {
     //Get path to the package LanguagePacks. The LanguagePacks contains files (or "language packs") used in translating the program.
-    private static final String languagePackPath = Objects.requireNonNull(Language.class.getResource("LanguagePacks")).getPath();
+    private static final String languagePackPath = "LanguagePacks";
     private static final String languagePackDelimiter = ";"; //Delimiter between key and value in language pack files.
     private static final String languagePackExtension = ".csv";
 
@@ -17,18 +21,23 @@ public class Language {
 
     private static String currentLanguagePack = "da";
 
+
     /**
      * Set language pack
      * @param pack with the name of the language pack to be used.
      * The name of a language pack is its filename without the extension.
      */
     public static void SetLanguage(String pack){
-        File languagePack = new File(languagePackPath +"/" + pack + ".csv");
-        if(languagePack.exists()){
+        try {
+            //Reads file from resources folder
+            File languagePack = new File(Objects.requireNonNull(Main.class.getClassLoader()
+                    .getResource(languagePackPath + "/" + pack + ".csv")).toURI());
+
             currentLanguagePack = pack;
-            InitializeLanguagePack();
-        } else {
+            InitializeLanguagePack(languagePack);
+        } catch (URISyntaxException | NullPointerException e){
             System.out.println("Couldn't find language pack '" + pack+languagePackExtension + "'");
+
         }
     }
 
@@ -40,7 +49,7 @@ public class Language {
      */
     public static String GetString(String key){
         if(dictionary.isEmpty())
-            InitializeLanguagePack();
+            SetLanguage(currentLanguagePack);
         return dictionary.getOrDefault(key, "STRING-NOT-FOUND");
 
     }
@@ -49,8 +58,7 @@ public class Language {
      * Initialize current language pack
      * Reads the language pack file and maps the keys and values to the dictionary variable.
      */
-    private static void InitializeLanguagePack(){
-        File languagePack = new File(languagePackPath +"/" + currentLanguagePack + languagePackExtension);
+    private static void InitializeLanguagePack(File languagePack){
         dictionary.clear();
         try {
             Scanner fileReader = new Scanner(languagePack);
