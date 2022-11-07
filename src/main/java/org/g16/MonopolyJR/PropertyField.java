@@ -5,7 +5,7 @@ public class PropertyField extends Field {
     protected int rent;
     protected Color color;
     public PropertyField(){
-
+        super();
     }
 
 }
