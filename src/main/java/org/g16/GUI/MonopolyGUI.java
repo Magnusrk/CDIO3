@@ -5,11 +5,19 @@ import gui_main.GUI;
 
 import java.awt.*;
 import java.awt.Color;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class MonopolyGUI {
 
     private GUI gui;
-    public void initGUI(Field[] startingFields){
+
+    private final int MAX_PLAYERS = 4;
+
+    private GUI_Player[] guiPlayers = new GUI_Player[MAX_PLAYERS];
+    private int playerCount = 0;
+    public GUI initGUI(Field[] startingFields){
 
         GUI_Field[] guiFields = new GUI_Field[startingFields.length];
 
@@ -38,12 +46,54 @@ public class MonopolyGUI {
         }
 
         gui = new GUI(guiFields);
-        StartGameScreen();
+        return gui;
     }
+
+
+
 
     private void StartGameScreen(){
 
+    }
 
+    public String ChooseLanguage(){
+        String chosenLanguage = gui.getUserSelection(
+                "Choose game language",
+                "Dansk",
+                        "English",
+                        "Test"
+        );
+
+        return switch (chosenLanguage) {
+            default -> "da";
+            case "Engelsk" -> "en";
+            case "Thai" -> "th";
+            case "JP" -> "jp";
+        };
+    }
+
+    public void SetupPlayers(){
+        GUI_Player newPlayer = AddPlayerPrompt();
+        //Tell GameController to add player
+        //GameController.AddPlayer()...
+        playerCount++;
+        if(playerCount < MAX_PLAYERS){
+            String addAnotherPlayerRequest = gui.getUserButtonPressed(
+                    "Do you want to add another player?",
+                    "Yes", "No"
+            );
+            if(Objects.equals(addAnotherPlayerRequest, "Yes")){
+                SetupPlayers();
+            }
+        }
+    }
+
+    private GUI_Player AddPlayerPrompt(){
+        String player = gui.getUserString("Enter player name. ");
+        GUI_Player guiPlayer = new GUI_Player(player);
+        gui.addPlayer(guiPlayer);
+        gui.showMessage("Added player " + player);
+        return guiPlayer;
     }
 
 }
