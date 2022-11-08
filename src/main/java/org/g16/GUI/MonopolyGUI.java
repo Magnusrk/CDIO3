@@ -4,9 +4,11 @@ import org.g16.MonopolyJR.*;
 import gui_main.GUI;
 
 import java.awt.*;
+import java.awt.Color;
 
 public class MonopolyGUI {
 
+    private GUI gui;
     public void initGUI(Field[] startingFields){
 
         GUI_Field[] guiFields = new GUI_Field[startingFields.length];
@@ -18,6 +20,7 @@ public class MonopolyGUI {
                     //If i == 0, it's the start field
                     if(i == 0){
                         guiFields[i] = new GUI_Start();
+
                     } else {
                         guiFields[i] = new GUI_Refuge();
                     }
@@ -27,14 +30,19 @@ public class MonopolyGUI {
                     break;
                 case "PropertyField":
                     guiFields[i] = new GUI_Street();
-                    guiFields[i].setTitle("Titel");
-                    guiFields[i].setDescription("Beskrivelse");
-                    guiFields[i].setBackGroundColor(Color.red);
+                    //COlor
+                    //Price/subtitle
                     break;
             }
+            //guiFields[i].setTitle(startingFields[i].getName());
         }
 
-        GUI gui = new GUI(guiFields);
+        gui = new GUI(guiFields);
+        StartGameScreen();
+    }
+
+    private void StartGameScreen(){
+
 
     }
 

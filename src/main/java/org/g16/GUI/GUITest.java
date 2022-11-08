@@ -1,6 +1,6 @@
 package org.g16.GUI;
 import gui_main.GUI;
-import org.g16.MonopolyJR.Field;
+import org.g16.MonopolyJR.*;
 
 public class GUITest {
 
@@ -9,14 +9,15 @@ public class GUITest {
         MonopolyGUI mpg = new MonopolyGUI();
         mpg.initGUI(
                 new Field[]{
-                        new Field(),new Field(),new Field(),new Field(),new Field(),
-                        new Field(),new Field(),new Field(),new Field(),new Field(),
-                        new Field(),new Field(),new Field(),new Field(),new Field(),
-                        new Field(),new Field(),new Field(),new Field(),new Field(),
+                        new VisitorField(),new Field(),new Field(),new Field(),new Field(),
+                        new Field(),new GoToJailField(),new PropertyField(),new PropertyField(),new Field(),
+                        new Field(),new VisitorField(),new ChanceField(),new Field(),new Field(),
+                        new Field(),new PropertyField(),new PropertyField(),new Field(),new Field(),
                         new Field(),new Field(),new Field(),new Field()
 
 
                 }
                 );
+
 }
 }
