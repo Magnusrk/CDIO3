@@ -3,10 +3,13 @@ package org.g16.MonopolyJR;
 public abstract class Field {
 
     protected String name;
-    public Field(){
+
+    public Field(String name){
+        this.name = name;
 
     }
-    public int getField(int dieCount) {
-        return 0;
-        }
+
+    public String getName() {
+        return name;
+    }
 }
