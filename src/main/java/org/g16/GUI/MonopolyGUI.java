@@ -10,14 +10,15 @@ public class MonopolyGUI {
 
     private GUI gui;
     private final int MAX_PLAYERS = 4;
+    private final int startingBalance = 20;
     private final java.awt.Color[] playerCarColors = new java.awt.Color[]{
             Color.orange,
             Color.green,
             Color.blue,
             Color.black
     };
-    private GUI_Player[] guiPlayers = new GUI_Player[MAX_PLAYERS];
-    private int[] guiAges = new int[MAX_PLAYERS];
+    private GUI_Player[] guiPlayers;
+    private int[] guiAges;
     private int playerCount = 0;
 
     private GameController gameController;
@@ -175,26 +176,21 @@ public class MonopolyGUI {
      * the amount of players is already at it's maximum
      */
     public void SetupPlayers(){
-        boolean addMorePlayers = true;
+        int desiredPlayers = gui.getUserInteger("How many players are you? " + "(2-4)");
+        while(desiredPlayers < 2 || desiredPlayers > 4){
+            gui.showMessage("Too many or too few players.. ");
+            desiredPlayers = gui.getUserInteger("How many players are you? " + "(2-4)");
+        }
+
+        guiPlayers = new GUI_Player[desiredPlayers];
+        guiAges = new int[desiredPlayers];
 
 
-        while (addMorePlayers){
+        while (playerCount < desiredPlayers){
             GUI_Player newPlayer = AddPlayerPrompt();
             guiPlayers[playerCount] = newPlayer;
             guiAges[playerCount] = gui.getUserInteger("Enter age");
             DrawPlayerPosition(playerCount,0);
-
-            if(playerCount < MAX_PLAYERS-1){
-                String addAnotherPlayerRequest = gui.getUserButtonPressed(
-                        "Do you want to add another player?",
-                        "Yes", "No"
-                );
-                if(!Objects.equals(addAnotherPlayerRequest, "Yes")){
-                    addMorePlayers = false;
-                }
-            } else {
-                addMorePlayers = false;
-            }
             playerCount++;
         }
         gameController.createPlayers(guiAges);
@@ -208,6 +204,7 @@ public class MonopolyGUI {
     private GUI_Player AddPlayerPrompt(){
         String player = gui.getUserString("Enter player name. ");
         GUI_Player guiPlayer = new GUI_Player(player);
+        guiPlayer.setBalance(startingBalance);
         guiPlayer.getCar().setPrimaryColor(playerCarColors[playerCount]);
         gui.addPlayer(guiPlayer);
         gui.showMessage("Added player " + player);

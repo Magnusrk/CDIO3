@@ -58,7 +58,7 @@ public class GameController {
         landOnField(currentPlayer);
 
         if (!winnerFound){
-            if (pt == 4){
+            if (pt == players.length){
                 pt = 1;
             }else {
                 pt++;
