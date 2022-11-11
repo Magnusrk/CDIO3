@@ -20,6 +20,26 @@ public class ChanceCard {
         return addcash;
     }
 
+    public int Homework(){
+        int addcash= 2;
+        return addcash;
+    }
+
+    public void FreeField(){
+
+    }
+
+    public void GetOutOfJail(){
+
+    }
+
+    public void TokenCard(){
+
+    }
+
+    public void MoveTo(){
+
+    }
 
 }
 
