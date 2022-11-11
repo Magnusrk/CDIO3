@@ -32,26 +32,26 @@ public class GameController {
         Player currentPlayer = null;
         currentPlayer = players[pt-1];
 
-        if (currentPlayer.getJailed()){
-            if (currentPlayer.getOutOfJailCards() > 0){
-                currentPlayer.addOutOfJailCard(-1);
-                currentPlayer.setJailed(false);
-            }
-            if (currentPlayer.getPlayerBalance() > 1){
-                currentPlayer.AddBalance(-1);
-                checkBankrupt(currentPlayer);
-                currentPlayer.setJailed(false);
-            }
-        }
+        checkJail(currentPlayer);
 
         int roll = Die.throwDie();
         movePlayer(currentPlayer,roll);
-        System.out.println(currentPlayer.getPlayerPosition());
 
-        if (currentPlayer.getPlayerPosition() < currentPlayer.getPrevPlayerPosition()){
-            currentPlayer.AddBalance(2);
-            System.out.println("Passed start");
+        checkPassStart(currentPlayer);
+        landOnField(currentPlayer);
+
+        if (!winnerFound){
+            if (pt == 4){
+                pt = 1;
+            }else {
+                pt++;
+            }
+            playRound(pt);
         }
+
+    }
+
+    private void landOnField(Player currentPlayer) {
         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
             System.out.println(property.getName());
             if (property.getOwner() == null) {
@@ -76,15 +76,27 @@ public class GameController {
             currentPlayer.setJailed(true);
             System.out.println("You're jailed");
         }
-        if (!winnerFound){
-            if (pt == 4){
-                pt = 1;
-            }else {
-                pt++;
-            }
-            playRound(pt);
-        }
+    }
 
+    private static void checkPassStart(Player currentPlayer) {
+        if (currentPlayer.getPlayerPosition() < currentPlayer.getPrevPlayerPosition()){
+            currentPlayer.AddBalance(2);
+            System.out.println("Passed start");
+        }
+    }
+
+    private void checkJail(Player currentPlayer) {
+        if (currentPlayer.getJailed()){
+            if (currentPlayer.getOutOfJailCards() > 0){
+                currentPlayer.addOutOfJailCard(-1);
+                currentPlayer.setJailed(false);
+            }
+            if (currentPlayer.getPlayerBalance() > 1){
+                currentPlayer.AddBalance(-1);
+                checkBankrupt(currentPlayer);
+                currentPlayer.setJailed(false);
+            }
+        }
     }
 
     private Field getField(int dieCount){
