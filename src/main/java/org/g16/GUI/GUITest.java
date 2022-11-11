@@ -4,7 +4,7 @@ import org.g16.MonopolyJR.*;
 
 public class GUITest {
 
-
+/*
     public static void main(String[] args) {
         MonopolyGUI mpg = new MonopolyGUI();
         mpg.initGUI(
@@ -20,4 +20,6 @@ public class GUITest {
                 );
 
 }
+
+ */
 }
