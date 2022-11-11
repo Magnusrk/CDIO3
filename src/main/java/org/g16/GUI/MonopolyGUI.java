@@ -29,11 +29,8 @@ public class MonopolyGUI {
      * @return GUI object.
      */
     public GUI initGUI(Field[] startingFields){
-
         GUI_Field[] guiFields = new GUI_Field[startingFields.length];
-
         for(int i = 0; i < startingFields.length; i++){
-
             switch (startingFields[i].getClass().getSimpleName()){
                 default:
                     //If i == 0, it's the start field
