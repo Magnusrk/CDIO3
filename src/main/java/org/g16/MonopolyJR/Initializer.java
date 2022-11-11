@@ -17,7 +17,7 @@ public class Initializer {
         ChanceField chance1 = new ChanceField("Chance1");
         fields[3] = chance1;
         //field 4
-        PropertyField slikButik = new PropertyField("Slik",Color.Blue, 1);
+        PropertyField slikButik = new PropertyField(Language.GetString("candy"),Color.Blue, 1);
         fields[4] = slikButik;
         //field 5
         PropertyField isButik = new PropertyField("Is",Color.Blue,1 );

@@ -7,10 +7,10 @@ public class GameController {
     }
 
     public void play(){
+        Language.SetLanguage("dansk");
         playRound();
     }
     private void playRound(){
-
         Player player1 = new Player();
         int roll = Die.throwDie();
         player1.setPlayerPosition(roll);
@@ -18,6 +18,7 @@ public class GameController {
         if (getField(player1.getPlayerPosition()) instanceof PropertyField property){
             System.out.println(property.getPrice());
             System.out.println(property.getColor());
+            System.out.println(Language.GetString("roll"));
             System.out.println(property.getName());
         } else if (getField(player1.getPlayerPosition()) instanceof VisitorField visitor) {
             System.out.println(visitor.getName());

@@ -1,0 +1,13 @@
+#USAGE:
+#key;value
+#e.g.
+#throwDiceText;Du kastede med terningerne!
+
+welcomeText;Velkommen!
+languageSetText;Sprog: Dansk
+getDan;Dansk
+player;Spiller
+roll;kast
+rolled;Du slog
+
+candy;Slik butiken
