@@ -9,10 +9,18 @@ public class Player {
     private boolean jailed = false;
     private boolean bankrupt = false;
     private int outOfJailCards = 0;
+    private int ID = -1;
 
     public Player(Token playerToken) {
         this.playerToken = playerToken;
 
+    }
+
+    public void setID(int ID){
+        this.ID = ID;
+    }
+    public int getID(){
+        return ID;
     }
     public int getPlayerBalance(){
         return balance.getBalance();

@@ -1,41 +1,58 @@
 package org.g16.MonopolyJR;
 
+import org.g16.GUI.MonopolyGUI;
+
 public class GameController {
     private boolean winnerFound = false;
-    private Player[] players = new Player[]{
-    new Player(Token.Cat),
-    new Player(Token.Car),
-    new Player(Token.Dog),
-    new Player(Token.Ship)
-    };
+    private Player[] players;
  
 
     Initializer init = new Initializer();
     Field prop[] = init.InitFields();
+
+    private MonopolyGUI monoGUI;
 
     public GameController(){
 
     }
 
     public void play(){
-        Language.SetLanguage("da");
-        playRound(1);
+        monoGUI = new MonopolyGUI();
+        monoGUI.initGUI(prop, this);
+        setup();
     }
 
+
+
     private void setup(){
-        players[0].setAge(10);
-        players[1].setAge(12);
-        players[2].setAge(14);
-        players[3].setAge(9);
+       Language.SetLanguage(monoGUI.chooseLanguage());
+       monoGUI.SetupPlayers();
+    }
+
+    public void createPlayers(int[] ages){
+        players = new Player[ages.length];
+        Token[] tokens = new Token[]{Token.Cat,Token.Car,Token.Dog,Token.Ship};
+        for(int i = 0; i < ages.length; i++){
+            players[i] = new Player(tokens[i]);
+            players[i].setAge(ages[i]);
+            players[i].setID(i);
+        }
+
+        //Start with the youngest lad
+        playRound(1);
     }
     private void playRound(int pt) {
+        int playerIndex = pt-1;
         Player currentPlayer = null;
-        currentPlayer = players[pt-1];
+        currentPlayer = players[playerIndex];
 
         checkJail(currentPlayer);
 
+        monoGUI.PromptThrowDice(playerIndex);
         int roll = Die.throwDie();
+        monoGUI.DrawDie(roll);
         movePlayer(currentPlayer,roll);
+
 
         checkPassStart(currentPlayer);
         landOnField(currentPlayer);
@@ -59,12 +76,18 @@ public class GameController {
                 checkBankrupt(currentPlayer);
                // System.out.println("You pay " + property.getPrice());
                 property.setOwner(currentPlayer);
+                monoGUI.updateOwner(currentPlayer.getID(), currentPlayer.getPlayerPosition());
                 System.out.println(property.getOwner());
+                monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
+
             } else {
                 currentPlayer.AddBalance(-1 * property.getPrice());
                 checkBankrupt(currentPlayer);
                 property.getOwner().AddBalance(property.getPrice());
-              //  System.out.println("You pay " + property.getPrice() + "to" + property.getOwner());
+                monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
+                monoGUI.SetPlayerBalance(property.getOwner().getID(), property.getOwner().getPlayerBalance());
+
+                //  System.out.println("You pay " + property.getPrice() + "to" + property.getOwner());
             }
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof VisitorField visitor) {
             System.out.println("visit");
@@ -78,9 +101,10 @@ public class GameController {
         }
     }
 
-    private static void checkPassStart(Player currentPlayer) {
+    private void checkPassStart(Player currentPlayer) {
         if (currentPlayer.getPlayerPosition() < currentPlayer.getPrevPlayerPosition()){
             currentPlayer.AddBalance(2);
+            monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
             System.out.println("Passed start");
         }
     }
@@ -95,6 +119,7 @@ public class GameController {
                 currentPlayer.AddBalance(-1);
                 checkBankrupt(currentPlayer);
                 currentPlayer.setJailed(false);
+                monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
             }
         }
     }
@@ -111,6 +136,7 @@ public class GameController {
                 newPos = (newPos % 23) + 1;
             }
         }
+        monoGUI.DrawPlayerPosition(player.getID(),newPos);
         player.setPlayerPosition(newPos);
     }
     private void checkBankrupt(Player player){

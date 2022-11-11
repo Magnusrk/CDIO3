@@ -2,11 +2,9 @@ package org.g16.GUI;
 import gui_fields.*;
 import org.g16.MonopolyJR.*;
 import gui_main.GUI;
-import java.awt.*;
+
 import java.awt.Color;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class MonopolyGUI {
 
@@ -19,7 +17,10 @@ public class MonopolyGUI {
             Color.black
     };
     private GUI_Player[] guiPlayers = new GUI_Player[MAX_PLAYERS];
+    private int[] guiAges = new int[MAX_PLAYERS];
     private int playerCount = 0;
+
+    private GameController gameController;
 
     /**
      * Initialize monopoly GUI
@@ -28,7 +29,8 @@ public class MonopolyGUI {
      * which can be used to interact with the GUI.
      * @return GUI object.
      */
-    public GUI initGUI(Field[] startingFields){
+    public GUI initGUI(Field[] startingFields, GameController gameController){
+        this.gameController = gameController;
         GUI_Field[] guiFields = new GUI_Field[startingFields.length];
         for(int i = 0; i < startingFields.length; i++){
             switch (startingFields[i].getClass().getSimpleName()){
@@ -46,15 +48,47 @@ public class MonopolyGUI {
                     break;
                 case "PropertyField":
                     guiFields[i] = new GUI_Street();
+                    guiFields[i].setSubText("Ingen ejer");
+                    PropertyField property = (PropertyField)startingFields[i];
+                    guiFields[i].setDescription(String.valueOf(property.getPrice()));
+                    guiFields[i].setBackGroundColor(ConvertColor(property.getColor()));
                     //COlor
                     //Price/subtitle
                     break;
             }
-            //guiFields[i].setTitle(startingFields[i].getName());
+            guiFields[i].setTitle(startingFields[i].getName());
         }
 
         gui = new GUI(guiFields);
         return gui;
+    }
+
+    private java.awt.Color ConvertColor(org.g16.MonopolyJR.Color col){
+        if(org.g16.MonopolyJR.Color.DarkBlue == col){
+         return Color.BLUE;
+        }
+        if(org.g16.MonopolyJR.Color.Blue == col){
+            return Color.CYAN;
+        }
+        if(org.g16.MonopolyJR.Color.Brown == col){
+            return Color.getHSBColor(0.063f,0.69f,0.65f);
+        }
+        if(org.g16.MonopolyJR.Color.Red == col){
+            return Color.RED;
+        }
+        if(org.g16.MonopolyJR.Color.Pink == col){
+            return Color.pink;
+        }
+        if(org.g16.MonopolyJR.Color.Green == col){
+            return Color.green;
+        }
+        if(org.g16.MonopolyJR.Color.Orange == col){
+            return Color.orange;
+        }
+        if(org.g16.MonopolyJR.Color.Yellow == col){
+            return Color.YELLOW;
+        }
+        return Color.MAGENTA;
     }
 
     /**
@@ -73,7 +107,7 @@ public class MonopolyGUI {
      * The method will return a string with the selected languagepack name
      * @return String object.
      */
-    public String ChooseLanguage(){
+    public String chooseLanguage(){
         String chosenLanguage = gui.getUserSelection(
                 "Choose game language",
                 "Dansk",
@@ -105,12 +139,12 @@ public class MonopolyGUI {
     /**
      * Draw dies
      * @param faceValue1
-     * @param faceValue2
-     * This will draw the dies at a random position with random rotation
+     *
+     * This will draw the die at a random position with random rotation
      * with the given face values.
      */
-    public void DrawDie(int faceValue1, int faceValue2){
-        gui.setDice(faceValue1, faceValue2);
+    public void DrawDie(int faceValue1){
+        gui.setDie(faceValue1);
     }
 
     /**
@@ -141,21 +175,31 @@ public class MonopolyGUI {
      * the amount of players is already at it's maximum
      */
     public void SetupPlayers(){
-        GUI_Player newPlayer = AddPlayerPrompt();
-        guiPlayers[playerCount] = newPlayer;
-        DrawPlayerPosition(playerCount,0);
-        //Tell GameController to add player
-        //GameController.AddPlayer()...
-        playerCount++;
-        if(playerCount < MAX_PLAYERS){
-            String addAnotherPlayerRequest = gui.getUserButtonPressed(
-                    "Do you want to add another player?",
-                    "Yes", "No"
-            );
-            if(Objects.equals(addAnotherPlayerRequest, "Yes")){
-                SetupPlayers();
+        boolean addMorePlayers = true;
+
+
+        while (addMorePlayers){
+            GUI_Player newPlayer = AddPlayerPrompt();
+            guiPlayers[playerCount] = newPlayer;
+            guiAges[playerCount] = gui.getUserInteger("Enter age");
+            DrawPlayerPosition(playerCount,0);
+
+            if(playerCount < MAX_PLAYERS-1){
+                String addAnotherPlayerRequest = gui.getUserButtonPressed(
+                        "Do you want to add another player?",
+                        "Yes", "No"
+                );
+                if(!Objects.equals(addAnotherPlayerRequest, "Yes")){
+                    addMorePlayers = false;
+                }
+            } else {
+                addMorePlayers = false;
             }
+            playerCount++;
         }
+        gameController.createPlayers(guiAges);
+
+
     }
 
     /**
@@ -170,4 +214,11 @@ public class MonopolyGUI {
         return guiPlayer;
     }
 
+    public void updateOwner(int playerID, int field) {
+        if (playerID == -1) {
+            gui.getFields()[field].setSubText("Ingen ejer");
+        } else {
+            gui.getFields()[field].setSubText(guiPlayers[playerID].getName());
+        }
+    }
 }
