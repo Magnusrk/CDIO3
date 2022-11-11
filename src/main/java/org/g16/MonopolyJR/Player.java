@@ -3,20 +3,20 @@ package org.g16.MonopolyJR;
 public class Player {
     MoneyBalance balance = new MoneyBalance();
     private int playerPosition = 0;
-    String name;
-    public Player(String name){
-        this.name = name;
+    Token playerToken;
+
+    public Player(Token playerToken) {
+        this.playerToken = playerToken;
 
     }
-
     public int getPlayerBalance(){
         return balance.getBalance();
     }
     public int getPlayerPosition(){
         return playerPosition;
     }
-    public String getName(){
-        return name;
+    public Token getPlayerToken(){
+        return playerToken;
     }
 
     public void AddBalance(int add){

@@ -11,7 +11,7 @@ public class GameController {
         playRound();
     }
     private void playRound(){
-        Player player1 = new Player("cat");
+        Player player1 = new Player(Token.Cat);
         int roll = Die.throwDie();
         player1.setPlayerPosition(4);
         System.out.println(player1.getPlayerPosition());
@@ -21,7 +21,7 @@ public class GameController {
             System.out.println(Language.GetString("roll"));
             System.out.println(property.getName());
             property.setOwner(player1);
-            System.out.println(property.getOwner().getName());
+            System.out.println(property.getOwner().getPlayerToken());
         } else if (getField(player1.getPlayerPosition()) instanceof VisitorField visitor) {
             System.out.println(visitor.getName());
         } else if (getField(player1.getPlayerPosition()) instanceof  ChanceField chance) {
