@@ -4,7 +4,8 @@ public class Player {
     MoneyBalance balance = new MoneyBalance();
     private int playerPosition = 0;
     String name;
-    public Player(){
+    public Player(String name){
+        this.name = name;
 
     }
 
@@ -13,6 +14,9 @@ public class Player {
     }
     public int getPlayerPosition(){
         return playerPosition;
+    }
+    public String getName(){
+        return name;
     }
 
     public void AddBalance(int add){
