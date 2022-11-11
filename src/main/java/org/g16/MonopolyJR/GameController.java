@@ -2,50 +2,50 @@ package org.g16.MonopolyJR;
 
 public class GameController {
     private boolean winnerFound = false;
-    private Player player1 = new Player(Token.Cat);
-    private Player player2 = new Player(Token.Car);
-    private Player player3 = new Player(Token.Dog);
-    private Player player4 = new Player(Token.Ship);
+    private Player[] players = new Player[]{
+    new Player(Token.Cat),
+    new Player(Token.Car),
+    new Player(Token.Dog),
+    new Player(Token.Ship)
+    };
+ 
+
+    Initializer init = new Initializer();
+    Field prop[] = init.InitFields();
 
     public GameController(){
 
     }
 
     public void play(){
-        Language.SetLanguage("dansk");
+        Language.SetLanguage("da");
         playRound(1);
     }
 
     private void setup(){
-        player1.setAge(10);
-        player2.setAge(12);
-        player3.setAge(14);
-        player4.setAge(9);
+        players[0].setAge(10);
+        players[1].setAge(12);
+        players[2].setAge(14);
+        players[3].setAge(9);
     }
     private void playRound(int pt) {
         Player currentPlayer = null;
-        switch (pt){
-            case 1:
-                currentPlayer = player1;
-                break;
-            case 2:
-                currentPlayer = player2;
-                break;
-            case 3:
-                currentPlayer = player3;
-                break;
-            case 4:
-                currentPlayer = player4;
-                break;
-        }
+        currentPlayer = players[pt-1];
+
         if (currentPlayer.getJailed()){
+            if (currentPlayer.getOutOfJailCards() > 0){
+                currentPlayer.addOutOfJailCard(-1);
+                currentPlayer.setJailed(false);
+            }
             if (currentPlayer.getPlayerBalance() > 1){
                 currentPlayer.AddBalance(-1);
+                checkBankrupt(currentPlayer);
+                currentPlayer.setJailed(false);
             }
         }
 
         int roll = Die.throwDie();
-        currentPlayer.setPlayerPosition(1);
+        movePlayer(currentPlayer,roll);
         System.out.println(currentPlayer.getPlayerPosition());
 
         if (currentPlayer.getPlayerPosition() < currentPlayer.getPrevPlayerPosition()){
@@ -53,16 +53,18 @@ public class GameController {
             System.out.println("Passed start");
         }
         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-            System.out.println(property);
+            System.out.println(property.getName());
             if (property.getOwner() == null) {
                 currentPlayer.AddBalance(-1 * property.getPrice());
-                System.out.println("You pay " + property.getPrice());
-                getField(1).getOwner(currentPlayer);
+                checkBankrupt(currentPlayer);
+               // System.out.println("You pay " + property.getPrice());
+                property.setOwner(currentPlayer);
                 System.out.println(property.getOwner());
-            }else {
-                currentPlayer.AddBalance(-1*property.getPrice());
+            } else {
+                currentPlayer.AddBalance(-1 * property.getPrice());
+                checkBankrupt(currentPlayer);
                 property.getOwner().AddBalance(property.getPrice());
-                System.out.println("You pay " + property.getPrice() + "to" + property.getOwner());
+              //  System.out.println("You pay " + property.getPrice() + "to" + property.getOwner());
             }
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof VisitorField visitor) {
             System.out.println("visit");
@@ -71,7 +73,7 @@ public class GameController {
             System.out.println("Chance");
 
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof  GoToJailField goToJail){
-            currentPlayer.setJailed();
+            currentPlayer.setJailed(true);
             System.out.println("You're jailed");
         }
         if (!winnerFound){
@@ -86,8 +88,33 @@ public class GameController {
     }
 
     private Field getField(int dieCount){
-        Initializer init = new Initializer();
-        Field prop[] = init.InitFields();
         return prop[dieCount];
+    }
+    private void movePlayer(Player player, int moves){
+        int newPos = player.getPlayerPosition()+moves;
+        if (newPos >23) {
+            if (newPos % 23 == 0){
+                newPos = 23;
+            } else {
+                newPos = (newPos % 23) + 1;
+            }
+        }
+        player.setPlayerPosition(newPos);
+    }
+    private void checkBankrupt(Player player){
+        System.out.println(player.getPlayerBalance());
+        if (player.getBankrupt() == true){
+            int max = 0;
+            int playerNum = 0;
+            for (int i = 0; i<players.length; i++){
+                int balance = players[i].getPlayerBalance();
+                if (balance > max){
+                    max = balance;
+                    playerNum = i;
+                }
+            }
+            System.out.println("Player " + (playerNum+1) + " won");
+            winnerFound = true;
+        }
     }
 }

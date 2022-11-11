@@ -7,6 +7,8 @@ public class Player {
     Token playerToken;
     private int age;
     private boolean jailed = false;
+    private boolean bankrupt = false;
+    private int outOfJailCards = 0;
 
     public Player(Token playerToken) {
         this.playerToken = playerToken;
@@ -27,8 +29,17 @@ public class Player {
     public int getAge(){
         return age;
     }
+    public boolean getBankrupt(){
+        return bankrupt;
+    }
     public boolean getJailed(){
         return jailed;
+    }
+    public void addOutOfJailCard(int card){
+        outOfJailCards = outOfJailCards + card;
+    }
+    public int getOutOfJailCards(){
+        return outOfJailCards;
     }
     public void setAge(int age){
         this.age = age;
@@ -36,14 +47,17 @@ public class Player {
 
     public void AddBalance(int add){
         balance.addmoney(add);
+        if (balance.getBalance() < 0){
+            bankrupt = true;
+        }
     }
 
     public void setPlayerPosition(int position){
         prevPlayerPosition = playerPosition;
         playerPosition = position;
     }
-    public void setJailed(){
-        jailed = true;
+    public void setJailed(boolean jail){
+        jailed = jail;
     }
     public void reset(){
         balance.reset();
