@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class GUITest {
 
-
+/*
     public static void main(String[] args) {
 
 
@@ -31,4 +31,6 @@ public class GUITest {
         }
 
 }
+
+ */
 }

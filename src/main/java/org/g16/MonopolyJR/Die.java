@@ -6,6 +6,9 @@ public class Die {
     public Die(){
 
     }
+    public static int throwDie(){
+        return (int) ((Math.random() * (DIESIDE)) + 1);
+    }
 
     public static int[] throwDice(){
         int die1 = (int) ((Math.random() * (DIESIDE)) + 1);
