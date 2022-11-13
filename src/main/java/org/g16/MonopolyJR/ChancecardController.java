@@ -1,8 +1,6 @@
 package org.g16.MonopolyJR;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -26,12 +24,21 @@ public class ChancecardController {
         System.out.println(Arrays.toString(numchance));
     }
 
-    public void leftshiftarray(){
+    public int[] leftshiftarray(){
         int[] proxy = new int[numchance.length];
         for (int i = 0; i < numchance.length-1; i++) {
             proxy[i] = numchance[i + 1];
         }
         proxy[numchance.length-1] = numchance[0];
+        return proxy;
+    }
+
+    public int[] getNumchance(){
+        return numchance;
+    }
+
+    public void setNumchance(int[] proxy){
+        numchance=proxy;
     }
     }
 
