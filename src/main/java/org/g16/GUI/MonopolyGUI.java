@@ -39,6 +39,7 @@ public class MonopolyGUI {
                     //If i == 0, it's the start field
                     if(i == 0){
                         guiFields[i] = new GUI_Start();
+                        guiFields[i].setSubText(Language.GetString("startsub"));
 
                     } else {
                         guiFields[i] = new GUI_Refuge();
@@ -46,10 +47,11 @@ public class MonopolyGUI {
                     break;
                 case "ChanceField":
                     guiFields[i] = new GUI_Chance();
+                    guiFields[i].setSubText(Language.GetString("tryluck"));
                     break;
                 case "PropertyField":
                     guiFields[i] = new GUI_Street();
-                    guiFields[i].setSubText("Ingen ejer");
+                    guiFields[i].setSubText(Language.GetString("noowner"));
                     PropertyField property = (PropertyField)startingFields[i];
                     guiFields[i].setDescription(String.valueOf(property.getPrice()));
                     guiFields[i].setBackGroundColor(ConvertColor(property.getColor()));
@@ -213,7 +215,7 @@ public class MonopolyGUI {
 
     public void updateOwner(int playerID, int field) {
         if (playerID == -1) {
-            gui.getFields()[field].setSubText("Ingen ejer");
+            gui.getFields()[field].setSubText(Language.GetString("noowner"));
         } else {
             gui.getFields()[field].setSubText(guiPlayers[playerID].getName());
         }
