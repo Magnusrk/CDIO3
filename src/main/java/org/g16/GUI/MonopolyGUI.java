@@ -53,7 +53,7 @@ public class MonopolyGUI {
                     guiFields[i] = new GUI_Street();
                     guiFields[i].setSubText(Language.GetString("noowner"));
                     PropertyField property = (PropertyField)startingFields[i];
-                    guiFields[i].setDescription(String.valueOf(property.getPrice()));
+                    guiFields[i].setDescription( Language.GetString("price") + " " + String.valueOf(property.getPrice()));
                     guiFields[i].setBackGroundColor(ConvertColor(property.getColor()));
                     //COlor
                     //Price/subtitle

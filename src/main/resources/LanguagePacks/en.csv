@@ -9,4 +9,27 @@ test4;+-.,123test EN 4
 #e.g.
 #throwDiceText;You rolled the die!
 
-burger;McD
+start;Go
+startsub; ← Collect 2$
+chance;Chance
+
+noowner;No owner
+tryluck;Try your luck
+price;Price:
+
+burger;Burger Joint
+pizza;Pizza House
+candy;Candy Store
+ice;Ice Cream Parlour
+museum;Museum
+library;Library
+skate;Skatepark
+pool;Swimming Pool
+arcade;Video Game Arcade
+cinema;Movie Theater
+toystore;Toy Store
+petstore;Pet Store
+bowling;Bowling Alley
+zoo;The Zoo
+waterpark;Park Place
+beach;Boardwalk
