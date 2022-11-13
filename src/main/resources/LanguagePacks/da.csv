@@ -9,4 +9,26 @@ test4;+-.,123test DA 4
 #e.g.
 #throwDiceText;Du kastede med terningerne!
 
-candy;Slik Butiken
+start;Start
+startsub; ← Modtag 2€
+chance;Chance
+
+noowner;Ingen ejer
+tryluck;Prøv lykken
+
+burger;Burgerbaren
+pizza;Pizzeriaet
+candy;Slikbutiken
+ice;Iskiosken
+museum;Museet
+library;Bibloteket
+skate;Skaterparken
+pool;Swimmingpoolen
+arcade;Spillehallen
+cinema;Biografen
+toystore;Legetøjsbutikken
+petstore;Dyrehandlen
+bowling;Bowlinghallen
+zoo;Zoo
+waterpark;Vandlandet
+beach;Strandpromenaden
