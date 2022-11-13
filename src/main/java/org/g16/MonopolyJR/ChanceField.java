@@ -1,7 +1,14 @@
 package org.g16.MonopolyJR;
 
-public class ChanceField extends Field{
+import java.util.Arrays;
 
-    public void drawChancecard(){
+public class ChanceField extends Field {
+
+    public int[] drawChancecard() {
+        ChancecardController chancecardController = new ChancecardController();
+        chancecardController.getNumchance();
+        chancecardController.leftshiftarray();
+        chancecardController.setNumchance(chancecardController.leftshiftarray());
+        return chancecardController.getNumchance();
     }
 }
