@@ -34,8 +34,13 @@ public class GameController {
 
 
     private void setup(){
-       Language.SetLanguage(monoGUI.chooseLanguage());
-       monoGUI.SetupPlayers();
+        String chosenLanguage = monoGUI.chooseLanguage();
+        Language.SetLanguage(chosenLanguage);
+
+        System.out.println(Language.GetString("noowner"));
+        System.out.println(chosenLanguage);
+        monoGUI.UpdateFields();
+        monoGUI.SetupPlayers();
     }
 
     public void createPlayers(int[] ages){
