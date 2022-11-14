@@ -19,6 +19,7 @@ public class MonopolyGUI {
     };
     private GUI_Player[] guiPlayers;
     private int[] guiAges;
+    private String[] unavailablePlayerNames;
     private int playerCount = 0;
 
     private GameController gameController;
@@ -77,9 +78,7 @@ public class MonopolyGUI {
                 default:
                     //If i == 0, it's the start field
                     if (i == 0) {
-
                         gui.getFields()[i].setSubText(Language.GetString("startsub"));
-
                     }
                     break;
                 case "ChanceField":
@@ -90,13 +89,9 @@ public class MonopolyGUI {
                     gui.getFields()[i].setSubText(Language.GetString("noowner"));
                     PropertyField property = (PropertyField) startingFields[i];
                     gui.getFields()[i].setDescription(Language.GetString("price") + " " + String.valueOf(property.getPrice()));
-                    //COlor
-                    //Price/subtitle
                     break;
             }
             gui.getFields()[i].setTitle(Language.GetString(startingFields[i].getName()));
-
-
 
         }
     }
@@ -221,11 +216,13 @@ public class MonopolyGUI {
 
         guiPlayers = new GUI_Player[desiredPlayers];
         guiAges = new int[desiredPlayers];
+        unavailablePlayerNames = new String[desiredPlayers];
 
 
         while (playerCount < desiredPlayers){
             GUI_Player newPlayer = AddPlayerPrompt();
             guiPlayers[playerCount] = newPlayer;
+            unavailablePlayerNames[playerCount] = newPlayer.getName();
             guiAges[playerCount] = gui.getUserInteger("Enter age");
             DrawPlayerPosition(playerCount,0);
             playerCount++;
@@ -239,13 +236,30 @@ public class MonopolyGUI {
      * Prompts the user to enter a player name.
      */
     private GUI_Player AddPlayerPrompt(){
-        String player = gui.getUserString("Enter player name. ");
+        String player;
+        player = gui.getUserString("Enter player name. ");
+        /*
+        do {
+            player = gui.getUserString("Enter player name. ");
+        } while (playerNameTaken(player));
+        /*
+         */
         GUI_Player guiPlayer = new GUI_Player(player);
         guiPlayer.setBalance(startingBalance);
         guiPlayer.getCar().setPrimaryColor(playerCarColors[playerCount]);
         gui.addPlayer(guiPlayer);
         gui.showMessage("Added player " + player);
         return guiPlayer;
+    }
+
+    private boolean playerNameTaken(String player){
+        for (String name:
+             unavailablePlayerNames) {
+            if(name.equals(player)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void updateOwner(int playerID, int field) {
