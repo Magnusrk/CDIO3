@@ -36,3 +36,11 @@ beach;Strandpromenaden
 prison;Fængsel
 parking;Parkering
 gotojail;Gå i fængsel
+throwDice;slå med terningen!
+chooseLanguage;Choose game language
+howManyPlayers;Hvor mange spillere er i?
+tooManyOrFew;For mange eller for få spillere..
+enterAge;Indtast alder
+enterPlayerName;Indtast navn
+playerNameTaken;Navnet er allerede taget. Vælg et unikt navn.
+addedPlayer;Tilføjede spiller

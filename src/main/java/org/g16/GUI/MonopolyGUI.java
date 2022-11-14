@@ -142,7 +142,7 @@ public class MonopolyGUI {
      */
     public String chooseLanguage(){
         String chosenLanguage = gui.getUserSelection(
-                "Choose game language",
+                Language.GetString("chooseLanguage"),
                 "Dansk",
                         "English",
                         "Test"
@@ -188,7 +188,7 @@ public class MonopolyGUI {
      * with the given face values.
      */
     public void PromptThrowDice(int playerID){
-        gui.showMessage(guiPlayers[playerID].getName() + " throw the dice!");
+        gui.showMessage(guiPlayers[playerID].getName() + " "+ Language.GetString("throwDice"));
     }
 
     /**
@@ -208,10 +208,10 @@ public class MonopolyGUI {
      * the amount of players is already at it's maximum
      */
     public void SetupPlayers(){
-        int desiredPlayers = gui.getUserInteger("How many players are you? " + "(2-4)");
+        int desiredPlayers = gui.getUserInteger( Language.GetString("howManyPlayers")+ " (2-4)");
         while(desiredPlayers < 2 || desiredPlayers > 4){
-            gui.showMessage("Too many or too few players.. ");
-            desiredPlayers = gui.getUserInteger("How many players are you? " + "(2-4)");
+            gui.showMessage(Language.GetString("tooManyOrFew"));
+            desiredPlayers = gui.getUserInteger( Language.GetString("howManyPlayers")+ " (2-4)");
         }
 
         guiPlayers = new GUI_Player[desiredPlayers];
@@ -223,7 +223,7 @@ public class MonopolyGUI {
             GUI_Player newPlayer = AddPlayerPrompt();
             guiPlayers[playerCount] = newPlayer;
             unavailablePlayerNames[playerCount] = newPlayer.getName();
-            guiAges[playerCount] = gui.getUserInteger("Enter age");
+            guiAges[playerCount] = gui.getUserInteger(Language.GetString("enterAge"));
             DrawPlayerPosition(playerCount,0);
             playerCount++;
         }
@@ -237,27 +237,32 @@ public class MonopolyGUI {
      */
     private GUI_Player AddPlayerPrompt(){
         String player;
-        player = gui.getUserString("Enter player name. ");
-        /*
-        do {
-            player = gui.getUserString("Enter player name. ");
-        } while (playerNameTaken(player));
-        /*
-         */
+        player = gui.getUserString(Language.GetString("enterPlayerName"));
+        boolean isTaken = playerNameTaken(player);
+
+        while (isTaken){
+            gui.showMessage(Language.GetString("playerNameTaken"));
+            player = gui.getUserString(Language.GetString("enterPlayerName"));
+            isTaken = playerNameTaken(player);
+        }
+
         GUI_Player guiPlayer = new GUI_Player(player);
         guiPlayer.setBalance(startingBalance);
         guiPlayer.getCar().setPrimaryColor(playerCarColors[playerCount]);
         gui.addPlayer(guiPlayer);
-        gui.showMessage("Added player " + player);
+        gui.showMessage(Language.GetString("addedPlayer") +" "+ player);
         return guiPlayer;
     }
 
     private boolean playerNameTaken(String player){
         for (String name:
              unavailablePlayerNames) {
-            if(name.equals(player)){
-                return true;
+            if(name != null){
+                if(name.equals(player)){
+                    return true;
+                }
             }
+
         }
         return false;
     }
