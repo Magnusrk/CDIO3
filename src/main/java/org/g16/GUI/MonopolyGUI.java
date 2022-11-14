@@ -145,14 +145,15 @@ public class MonopolyGUI {
                 Language.GetString("chooseLanguage"),
                 "Dansk",
                         "English",
-                        "Thai"
+                        "Thai",
+                        "Japanese"
         );
 
         return switch (chosenLanguage) {
             default -> "da";
             case "English" -> "en";
             case "Thai" -> "th";
-            case "JP" -> "jp";
+            case "Japanese" -> "jp";
         };
     }
 
