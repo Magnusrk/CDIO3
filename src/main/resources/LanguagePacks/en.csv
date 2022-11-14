@@ -9,8 +9,8 @@ test4;+-.,123test EN 4
 #e.g.
 #throwDiceText;You rolled the die!
 
-start;เริ่ม
-startsub; ← ได้รับ 2$
+start;Go
+startsub; ← Collect 2$
 chance;Chance
 
 noowner;No owner
