@@ -4,7 +4,11 @@ import org.g16.MonopolyJR.*;
 import gui_main.GUI;
 
 import java.awt.Color;
+import java.lang.reflect.Type;
 import java.util.Objects;
+
+import static gui_fields.GUI_Car.Pattern.ZEBRA;
+import static gui_fields.GUI_Car.Type.UFO;
 
 public class MonopolyGUI {
 
@@ -47,9 +51,15 @@ public class MonopolyGUI {
                         guiFields[i].setSubText(Language.GetString("startsub"));
 
                     } else {
-                        guiFields[i] = new GUI_Refuge();
+                        guiFields[i] = new GUI_Refuge("src/main/resources/parkering.jpg",Language.GetString("parkering"),Language.GetString("parking"),"",Color.lightGray,Color.black);
                     }
                     break;
+                case  "Jail":
+                        guiFields[i] = new GUI_Jail("src/main/resources/test.png", Language.GetString("prison"), Language.GetString("prison"), "", Color.lightGray, Color.black);
+                    break;
+                case "GoToJailField":
+                        guiFields[i] = new GUI_Jail("src/main/resources/GoTo.jpg", Language.GetString("prison"), Language.GetString("prison"), "", Color.lightGray, Color.black);
+                        break;
                 case "ChanceField":
                     guiFields[i] = new GUI_Chance();
                     guiFields[i].setSubText(Language.GetString("tryluck"));
@@ -247,7 +257,17 @@ public class MonopolyGUI {
             isTaken = playerNameTaken(player);
         }
 
-        GUI_Player guiPlayer = new GUI_Player(player);
+        GUI_Car te;
+       // GUI_Player es = new GUI_Player("tets",20, te);
+        GUI_Car lol = new GUI_Car(java.awt.Color.black, Color.lightGray, UFO,ZEBRA);
+       // GUI_Player oo = new GUI_Player("lol",20, te);
+        if (playerCount == 0){
+            te = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, UFO,ZEBRA);
+        } else{
+            te = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, UFO,ZEBRA);
+        }
+
+        GUI_Player guiPlayer = new GUI_Player(player, startingBalance, te);
         guiPlayer.setBalance(startingBalance);
         guiPlayer.getCar().setPrimaryColor(playerCarColors[playerCount]);
         gui.addPlayer(guiPlayer);

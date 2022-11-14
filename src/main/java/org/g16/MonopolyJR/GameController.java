@@ -1,6 +1,13 @@
 package org.g16.MonopolyJR;
 
+import gui_fields.GUI_Car;
+import gui_fields.GUI_Player;
 import org.g16.GUI.MonopolyGUI;
+
+import java.awt.Color;
+
+import static gui_fields.GUI_Car.Pattern.ZEBRA;
+import static gui_fields.GUI_Car.Type.UFO;
 
 public class GameController {
     private boolean winnerFound = false;

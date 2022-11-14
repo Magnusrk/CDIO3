@@ -23,7 +23,7 @@ public class Initializer {
         PropertyField isButik = new PropertyField("ice",Color.Blue,1 );
         fields[5] = isButik;
         //field 6
-        VisitorField fængsel = new VisitorField("prison");
+        Jail fængsel = new Jail("prison");
         fields[6] = fængsel;
         //field 7
         PropertyField museum = new PropertyField("museum",Color.Pink, 2);
