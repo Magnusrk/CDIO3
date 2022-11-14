@@ -7,8 +7,9 @@ import java.awt.Color;
 import java.lang.reflect.Type;
 import java.util.Objects;
 
+import static gui_fields.GUI_Car.Pattern.HORIZONTAL_GRADIANT;
 import static gui_fields.GUI_Car.Pattern.ZEBRA;
-import static gui_fields.GUI_Car.Type.UFO;
+import static gui_fields.GUI_Car.Type.*;
 
 public class MonopolyGUI {
 
@@ -55,10 +56,10 @@ public class MonopolyGUI {
                     }
                     break;
                 case  "Jail":
-                        guiFields[i] = new GUI_Jail("src/main/resources/test.png", Language.GetString("prison"), Language.GetString("prison"), "", Color.lightGray, Color.black);
+                        guiFields[i] = new GUI_Jail("src/main/resources/jail.jpg", Language.GetString("prison"), Language.GetString("prison"), "", Color.lightGray, Color.black);
                     break;
                 case "GoToJailField":
-                        guiFields[i] = new GUI_Jail("src/main/resources/GoTo.jpg", Language.GetString("prison"), Language.GetString("prison"), "", Color.lightGray, Color.black);
+                        guiFields[i] = new GUI_Jail("src/main/resources/GoTo.jpg", Language.GetString("gotojail"), Language.GetString("gotojail"), "", Color.lightGray, Color.black);
                         break;
                 case "ChanceField":
                     guiFields[i] = new GUI_Chance();
@@ -255,18 +256,36 @@ public class MonopolyGUI {
             player = gui.getUserString(Language.GetString("enterPlayerName"));
             isTaken = playerNameTaken(player);
         }
+        GUI_Car car;
+        GUI_Car tractor;
+        GUI_Car racer;
+        GUI_Car ufo;
 
-        GUI_Car te;
-       // GUI_Player es = new GUI_Player("tets",20, te);
-        GUI_Car lol = new GUI_Car(java.awt.Color.black, Color.lightGray, UFO,ZEBRA);
-       // GUI_Player oo = new GUI_Player("lol",20, te);
-        if (playerCount == 0){
-            te = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, UFO,ZEBRA);
-        } else{
-            te = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, UFO,ZEBRA);
+        GUI_Player guiPlayer;
+
+        switch (playerCount){
+            case 0:
+                car = new GUI_Car(java.awt.Color.black, Color.red, CAR,HORIZONTAL_GRADIANT);
+                guiPlayer = new GUI_Player(player, startingBalance, car);
+                break;
+            case 1:
+                tractor = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, TRACTOR,ZEBRA);
+                guiPlayer = new GUI_Player(player, startingBalance, tractor);
+                break;
+            case 2:
+                racer = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, RACECAR,ZEBRA);
+                guiPlayer = new GUI_Player(player, startingBalance, racer);
+                break;
+            case 3:
+                ufo = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, UFO,ZEBRA);
+                guiPlayer = new GUI_Player(player, startingBalance, ufo);
+                break;
+            default:
+                car = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, CAR,ZEBRA);
+                guiPlayer = new GUI_Player(player, startingBalance, car);
         }
 
-        GUI_Player guiPlayer = new GUI_Player(player, startingBalance, te);
+
         guiPlayer.setBalance(startingBalance);
         guiPlayer.getCar().setPrimaryColor(playerCarColors[playerCount]);
         gui.addPlayer(guiPlayer);
