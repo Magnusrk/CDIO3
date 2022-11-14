@@ -9,8 +9,8 @@ test4;+-.,123test TH 4
 #e.g.
 #throwDiceText;คุณโยนลูกเต๋าแล้ว!
 
-start;Start
-startsub; ← Modtag 2€
+start;เริ่ม
+startsub; ← ได้รับ 2€
 chance;โอกาส
 
 noowner;ว่าง
