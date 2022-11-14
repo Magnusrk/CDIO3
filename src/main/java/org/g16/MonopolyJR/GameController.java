@@ -134,6 +134,14 @@ public class GameController {
     }
     private void movePlayer(Player player, int moves){
         int newPos = player.getPlayerPosition()+moves;
+
+        //If the new position is out of bounds. Loop around until the index in within
+        //The bounds of the array
+        while(newPos >= prop.length){
+            newPos -= prop.length;
+        }
+
+        /*
         if (newPos >23) {
             if (newPos % 23 == 0){
                 newPos = 23;
@@ -141,6 +149,8 @@ public class GameController {
                 newPos = (newPos % 23) + 1;
             }
         }
+         */
+
         monoGUI.DrawPlayerPosition(player.getID(),newPos);
         player.setPlayerPosition(newPos);
     }
