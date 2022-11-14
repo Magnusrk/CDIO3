@@ -255,6 +255,7 @@ public class GameController {
                             property.setOwner(currentPlayer);
                             monoGUI.updateOwner(currentPlayer.getID(), 11);}}
                 }
+                landOnField(currentPlayer);
                 break;
             }
             case 5:{
@@ -319,6 +320,7 @@ public class GameController {
                         }
                     }
                 }
+                landOnField(currentPlayer);
                 break;
             }
             case 9: {
@@ -344,6 +346,7 @@ public class GameController {
                         }
                     }
                 }
+                landOnField(currentPlayer);
                 break;
             }
             case 10:{
@@ -353,6 +356,7 @@ public class GameController {
             case 11:{
                 currentPlayer.setPlayerPosition(23);
                 monoGUI.DrawPlayerPosition(currentPlayer.getID(),23);
+                landOnField(currentPlayer);
                 break;
             }
             case 12:{
@@ -413,6 +417,7 @@ public class GameController {
                             }
                         }
                     }
+                    landOnField(currentPlayer);
                     break;
                 }
                 case 16: {
@@ -443,6 +448,7 @@ public class GameController {
                             }
                         }
                     }
+                    landOnField(currentPlayer);
                     break;
                 }
                 case 18: {
@@ -455,6 +461,7 @@ public class GameController {
                             monoGUI.updateOwner(currentPlayer.getID(),10);
                         }
                     }
+                    landOnField(currentPlayer);
                     break;
                 }
                 case 19: {
@@ -501,6 +508,7 @@ public class GameController {
                             }
                         }
                     }
+                    landOnField(currentPlayer);
                     break;
                 }
                 case 20: {
@@ -547,6 +555,7 @@ public class GameController {
                             }
                         }
                     }
+                    landOnField(currentPlayer);
                     break;
                 }
             }
