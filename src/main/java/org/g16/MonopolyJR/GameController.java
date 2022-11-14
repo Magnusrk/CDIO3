@@ -136,7 +136,7 @@ public class GameController {
     }
 
     private boolean AllColorsOwned(PropertyField currentProperty){
-        Color propertyColor = currentProperty.getColor();
+        org.g16.MonopolyJR.Color propertyColor = currentProperty.getColor();
         Player propertyOwner = currentProperty.getOwner();
 
         if(currentProperty.getOwner() != null){
@@ -272,8 +272,8 @@ public class GameController {
                 break;
             }
             case 5:{
-                int action= monoGUI.Userselection2(Language.GetString("Case5"),
-                        Language.GetString("Case5opt1"),Language.GetString("Case5opt2"));
+                int action= monoGUI.Userselection2(Language.GetString("case5"),
+                        Language.GetString("case5opt1"),Language.GetString("case5opt2"));
                 if (action==1){
                     movePlayer(currentPlayer,1);
                     landOnField(currentPlayer);
@@ -604,6 +604,6 @@ public class GameController {
             return chanceArray=chanceField.drawChancecard();
     }
     public void TokenChanceCard(){
-
+        
     }
 }
