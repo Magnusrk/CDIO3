@@ -171,7 +171,6 @@ public class MonopolyGUI {
 
     /**
      * Draw dies
-     * @param faceValue1
      *
      * This will draw the die at a random position with random rotation
      * with the given face values.
@@ -193,9 +192,9 @@ public class MonopolyGUI {
 
     /**
      * Set a players balance
+     *
      * @param playerID
-     * @param balance
-     * Sets player with the corrosponding ID's balance
+     * @param balance  Sets player with the corrosponding ID's balance
      */
     public void SetPlayerBalance(int playerID, int balance){
         guiPlayers[playerID].setBalance(balance);
@@ -262,7 +261,6 @@ public class MonopolyGUI {
                     return true;
                 }
             }
-
         }
         return false;
     }
@@ -273,5 +271,36 @@ public class MonopolyGUI {
         } else {
             gui.getFields()[field].setSubText(guiPlayers[playerID].getName());
         }
+    }
+
+    public int getUserinterger5() {
+        return gui.getUserInteger("Move up to five spaces", 0, 5);
+    }
+
+
+
+    public int Userselection2(String msg, String opt1, String opt2){
+        String selection=gui.getUserSelection(msg,opt1,opt2);
+        if (selection==opt1){
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+    public int Userselection4(String msg, String opt1, String opt2,String opt3, String opt4){
+        String selection=gui.getUserSelection(msg,opt1,opt2,opt3,opt4);
+        if (selection==opt1){
+            return 1;
+        } else if (selection==opt2) {
+            return 2;
+        } else if (selection==opt3) {
+            return 3;
+        } else {
+            return 4;
+        }
+    }
+
+    public void Showmsg(String msg){
+        gui.showMessage(msg);
     }
 }
