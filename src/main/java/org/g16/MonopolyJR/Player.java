@@ -11,6 +11,8 @@ public class Player {
     private int outOfJailCards = 0;
     private int ID = -1;
 
+    private boolean tokenChancecard= false;
+
     public Player(Token playerToken) {
         this.playerToken = playerToken;
 
@@ -52,7 +54,12 @@ public class Player {
     public void setAge(int age){
         this.age = age;
     }
-
+    public void setTokenChancecard(){
+        this.tokenChancecard=true;
+    }
+    public boolean getTokenChancecard(){
+        return tokenChancecard;
+    }
     public void AddBalance(int add){
         balance.addmoney(add);
         if (balance.getBalance() < 0){

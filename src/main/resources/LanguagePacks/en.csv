@@ -35,7 +35,32 @@ waterpark;Park Place
 beach;Boardwalk
 
 
-can;Move to an orange field, if it's unowned get it for free, if not you pay rent
+
 prison;Prison
 parking;Parking
 gotojail;Go to jail
+
+
+
+case1;Give this card to the Car. On their next turn they can  move to any field and get it for free. If their aren't any unowned fields buy one from another player
+case2;Move to start
+case3; Move up to 5 spaces
+case4;Move to an orange field, if it's unowned get it for free, if not you pay rent
+case5;Move 1 or draw another chancecard
+case5opt1;Move 1
+case5opt2; Draw chancecard
+case6;Give this card to the Ship. On their next turn they can  move to any field and get it for free. If their aren't any unowned fields buy one from another player
+case7;You ate too much candy give the bank 2$
+case8;Move to an orange or green field, if it's unowned get it for free, if not you pay rent
+case9;Move to a blue field, if it's unowned get it for free, if not you pay rent
+case10;You got a "get out of jail free card" Use it when you get jailed.
+case11;Move to "Boardwalk"
+case12;Give this card to the Cat. On their next turn they can  move to any field and get it for free. If their aren't any unowned fields buy one from another player
+case13;Give this card to the Dog. On their next turn they can  move to any field and get it for free. If their aren't any unowned fields buy one from another player
+case14;It's your birthday get 1$ from everyone
+case15;Move to a pink or dark blue field, if it's unowned get it for free, if not you pay rent
+case16;You did all your homework get 2$ from the bank
+case17;Move to a red field, if it's unowned get it for free, if not you pay rent
+case18;Move to "Skatepark" If it's unowned get it for free, if not pay rent
+case19;Move to a blue or red field, if it's unowned get it for free, if not you pay rent
+case20;Move to a brown or yellow field, if it's unowned get it for free, if not you pay rent

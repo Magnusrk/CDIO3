@@ -173,15 +173,23 @@ public class GameController {
     public int[] DoChanceCard(Player currentPlayer ){
 
         chancecard.setNumchance(chanceArray);
-//chancecard.getNumchance()[0])
-        switch (4) {
+
+        //switch (chancecard.getNumchance()[0]) {
+        switch (1){
             case 1:{
+                for (int i=0;i<players.length;i++){
+                    if (players[i].playerToken==Token.Car){
+                        players[i].setTokenChancecard();
+                    }
+                }
+                monoGUI.Showmsg(Language.GetString("case1"));
                 break;
             }
 
             case 2:{
                 currentPlayer.setPlayerPosition(0);
                 monoGUI.DrawPlayerPosition(currentPlayer.getID(),0);
+                monoGUI.Showmsg(Language.GetString("case2"));
                 break;
             }
             case 3:{
@@ -202,8 +210,8 @@ public class GameController {
                 break;
             }
             case 4:{
-                int move=monoGUI.Userselection2(Language.GetString("can"),
-                        "Skatepark","Pool");
+                int move=monoGUI.Userselection2(Language.GetString("case4"),
+                        Language.GetString("skate"),Language.GetString("pool"));
                 if (move==1) {
                     currentPlayer.setPlayerPosition(10);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(),10);
@@ -225,8 +233,8 @@ public class GameController {
                 break;
             }
             case 5:{
-                int action= monoGUI.Userselection2("Move 1 or draw another chancecard",
-                        "Move 1","Draw chancecard");
+                int action= monoGUI.Userselection2(Language.GetString("Case5"),
+                        Language.GetString("Case5opt1"),Language.GetString("Case5opt2"));
                 if (action==1){
                     movePlayer(currentPlayer,1);
                     landOnField(currentPlayer);
@@ -236,6 +244,12 @@ public class GameController {
                 break;
             }
             case 6:{
+                for (int i=0;i<players.length;i++){
+                    if (players[i].playerToken==Token.Car){
+                        players[i].setTokenChancecard();
+                    }
+                }
+                monoGUI.Showmsg(Language.GetString("case6"));
                 break;
             }
             case 7:{
@@ -244,8 +258,8 @@ public class GameController {
                 break;
             }
             case 8:{
-                int move = monoGUI.Userselection4("Move to an orange or green field, if it's unowned get it for free, if not you pay rent"
-                ,"Skatepark","Pool","Bowling","Zoo");
+                int move = monoGUI.Userselection4(Language.GetString("Case8")
+                ,Language.GetString("skate"),Language.GetString("pool"),Language.GetString("bowling"),Language.GetString("zoo"));
                 if (move == 1) {
                     currentPlayer.setPlayerPosition(10);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(), 10);
@@ -292,8 +306,8 @@ public class GameController {
                 break;
             }
             case 9: {
-                int move = monoGUI.Userselection2("Move to a blue field, if it's unowned get it for free, if not you pay rent",
-                        "Candyshop","Icecreamkiosk");
+                int move = monoGUI.Userselection2(Language.GetString("case9"),
+                        Language.GetString("candy"),Language.GetString("ice"));
                 if (move == 1) {
                     currentPlayer.setPlayerPosition(4);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(), 4);
@@ -320,18 +334,32 @@ public class GameController {
             }
             case 10:{
                 currentPlayer.addOutOfJailCard(1);
+                monoGUI.Showmsg(Language.GetString("case10"));
                 break;
             }
             case 11:{
                 currentPlayer.setPlayerPosition(23);
                 monoGUI.DrawPlayerPosition(currentPlayer.getID(),23);
                 landOnField(currentPlayer);
+                monoGUI.Showmsg(Language.GetString("case11"));
                 break;
             }
             case 12:{
+                for (int i=0;i<players.length;i++){
+                    if (players[i].playerToken==Token.Car){
+                        players[i].setTokenChancecard();
+                    }
+                }
+                monoGUI.Showmsg(Language.GetString("case12"));
                 break;
                 }
             case 13:{
+                for (int i=0;i<players.length;i++){
+                    if (players[i].playerToken==Token.Car){
+                        players[i].setTokenChancecard();
+                    }
+                }
+                monoGUI.Showmsg(Language.GetString("case13"));
                 break;
             }
             case 14: {
@@ -339,12 +367,14 @@ public class GameController {
                 monoGUI.SetPlayerBalance(currentPlayer.getID(), 1 * players.length);
 
                 for (int i = 0; i < players.length; i++) {
+                    players[i].AddBalance(-1);
                 }
+                monoGUI.Showmsg(Language.GetString("case14"));
                 break;
                 }
                 case 15: {
-                    int move = monoGUI.Userselection4("Move to a pink or dark blue field, if it's unowned get it for free, if not you pay rent"
-                            ,"Musuem","Library","Waterpark","Beach promonade");
+                    int move = monoGUI.Userselection4(Language.GetString("case15")
+                            ,Language.GetString("museum"),Language.GetString("library"),Language.GetString("waterpark"),Language.GetString("beach"));
                         monoGUI.DrawPlayerPosition(currentPlayer.getID(), 7);
                         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
                             System.out.println(property.getName());
@@ -391,11 +421,12 @@ public class GameController {
                 case 16: {
                     currentPlayer.AddBalance(2);
                     monoGUI.SetPlayerBalance(currentPlayer.getID(), 2);
+                    monoGUI.Showmsg(Language.GetString("case16"));
                     break;
                 }
                 case 17: {
-                    int move =monoGUI.Userselection2("Move to a red field, if it's unowned get it for free, if not you pay rent",
-                            "Arcade","Cinema");
+                    int move =monoGUI.Userselection2(Language.GetString("case17"),
+                            Language.GetString("arcade"),Language.GetString("cinema"));
                     if (move == 1) {
                         currentPlayer.setPlayerPosition(13);
                         monoGUI.DrawPlayerPosition(currentPlayer.getID(), 13);
@@ -430,12 +461,13 @@ public class GameController {
                             monoGUI.updateOwner(currentPlayer.getID(),10);
                         }
                     }
+                    monoGUI.Showmsg(Language.GetString("case18"));
                     landOnField(currentPlayer);
                     break;
                 }
                 case 19: {
-                    int move = monoGUI.Userselection4("Move to a blue or red field, if it's unowned get it for free, if not you pay rent"
-                            ,"Candyshop","Icecream Kiosk","Arcade   ","Cinema");
+                    int move = monoGUI.Userselection4(Language.GetString("case19")
+                            ,Language.GetString("candy"),Language.GetString("ice"),Language.GetString("arcade"),Language.GetString("cinema"));
                     if (move == 1) {
                         currentPlayer.setPlayerPosition(4);
                         monoGUI.DrawPlayerPosition(currentPlayer.getID(), 4);
@@ -482,8 +514,8 @@ public class GameController {
                     break;
                 }
                 case 20: {
-                    int move = monoGUI.Userselection4("Move to a brown or yellow field, if it's unowned get it for free, if not you pay rent"
-                            ,"Burgerbar","Pizza","Toystore","Pet store");
+                    int move = monoGUI.Userselection4(Language.GetString("case20")
+                            ,Language.GetString("burger"),Language.GetString("pizza"),Language.GetString("toystore"),Language.GetString("petstore"));
                     if (move == 1) {
                         currentPlayer.setPlayerPosition(1);
                         monoGUI.DrawPlayerPosition(currentPlayer.getID(), 1);

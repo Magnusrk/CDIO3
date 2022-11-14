@@ -296,4 +296,8 @@ public class MonopolyGUI {
             return 4;
         }
     }
+
+    public void Showmsg(String msg){
+        gui.showMessage(msg);
+    }
 }
