@@ -36,6 +36,7 @@ public class MonopolyGUI {
      */
     public GUI initGUI(Field[] startingFields, GameController gameController){
         this.gameController = gameController;
+        this.startingFields= startingFields;
         GUI_Field[] guiFields = new GUI_Field[startingFields.length];
         for(int i = 0; i < startingFields.length; i++){
             switch (startingFields[i].getClass().getSimpleName()){
