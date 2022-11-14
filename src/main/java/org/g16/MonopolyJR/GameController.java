@@ -43,8 +43,18 @@ public class GameController {
             players[i].setID(i);
         }
 
+        int firstTurnIndex = 0;
+        int youngestAge = Integer.MAX_VALUE;
+        for(int n = 0; n < players.length; n++){
+            int playerAge = players[n].getAge();
+            if(playerAge < youngestAge){
+                firstTurnIndex = n;
+                youngestAge = playerAge;
+            }
+        }
+
         //Start with the youngest lad
-        playRound(1);
+        playRound(firstTurnIndex+1);
     }
     private void playRound(int pt) {
         int playerIndex = pt-1;
