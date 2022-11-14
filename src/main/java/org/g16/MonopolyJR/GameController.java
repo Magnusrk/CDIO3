@@ -184,8 +184,6 @@ public class GameController {
         while(newPos >= prop.length){
             newPos -= prop.length;
         }
-
-
         monoGUI.DrawPlayerPosition(player.getID(),newPos);
         player.setPlayerPosition(newPos);
     }
@@ -598,5 +596,8 @@ public class GameController {
                 }
             }
             return chanceArray=chanceField.drawChancecard();
+    }
+    public void TokenChanceCard(){
+
     }
 }
