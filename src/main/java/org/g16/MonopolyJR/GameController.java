@@ -207,9 +207,8 @@ public class GameController {
 
         chancecard.setNumchance(chanceArray);
 
-        //switch (chancecard.getNumchance()[0]) {
-        switch (1){
-            case 1:{
+        switch (chancecard.getNumchance()[0]) {
+                    case 1:{
                 for (int i=0;i<players.length;i++){
                     if (players[i].playerToken==Token.Car){
                         players[i].setTokenChancecard();
