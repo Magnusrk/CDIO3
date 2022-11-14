@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class ChanceField extends Field {
-    static Chancecard chancecard = new Chancecard(IntStream.range(1,21).toArray());
+    static ChanceCard chancecard = new ChanceCard(IntStream.range(1,21).toArray());
 
 
     public ChanceField(String name) {

@@ -4,9 +4,11 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class Chancecard {
+public class ChanceCard {
     static int[] numchance = IntStream.range(1,21).toArray();
 
+    public ChanceCard(int[] toArray) {
+    }
 
 
     /* shuffles the values in the array. Code found on https://www.digitalocean.com/community/tutorials/shuffle-array-java
