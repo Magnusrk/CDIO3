@@ -1,46 +1,57 @@
 package org.g16.MonopolyJR;
 
+import java.util.Arrays;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 public class ChanceCard {
+    static int[] numchance = IntStream.range(1,21).toArray();
 
-    public int Birthday(Player[] players,int playerturn){
-        int addcash= 1;
-        String string= "It's your birthday, everyone gives you one dollar";
-        return addcash;
+    public ChanceCard(int[] toArray) {
     }
 
-    public int movefive(){
-        return 5;
+
+    /* shuffles the values in the array. Code found on https://www.digitalocean.com/community/tutorials/shuffle-array-java
+
+     */
+    public int[] Shufflechancecard(){
+        Random rand = new Random();
+
+        for (int i = 0; i < numchance.length; i++) {
+            int randomIndexToSwap = rand.nextInt(numchance.length);
+            int temp = numchance[randomIndexToSwap];
+            numchance[randomIndexToSwap] = numchance[i];
+            numchance[i] = temp;
+        }
+        System.out.println(Arrays.toString(numchance));
+        return numchance;
     }
 
-    public int Toomuchcandy(){
-        int addcash =-2;
-        String candy= "You ate too much candy, pay the bank 2 dollars";
-        return addcash;
+    public int[] leftshiftarray(){
+        int[] proxy = new int[numchance.length];
+        for (int i = 0; i < numchance.length-1; i++) {
+            proxy[i] = numchance[i + 1];
+        }
+        proxy[numchance.length-1] = numchance[0];
+        return proxy;
     }
 
-    public int Homework(){
-        int addcash= 2;
-        return addcash;
+    public int[] getNumchance(){
+        return numchance;
     }
 
-    public void FreeField(){
-
+    public void setNumchance(int[] proxy){
+        numchance=proxy;
     }
 
-    public void GetOutOfJail(){
+    public static void main(String[] args) {
+        int[] proxy = new int[numchance.length];
+        for (int i = 0; i < numchance.length-1; i++) {
+            proxy[i] = numchance[i + 1];
+        }
+        proxy[numchance.length-1] = numchance[0];
+        System.out.println(Arrays.toString(proxy));
 
     }
-
-    public void TokenCard(){
-
     }
-
-    public void MoveTo(){
-
-    }
-
-}
-
 
