@@ -2,9 +2,18 @@ package org.g16.MonopolyJR;
 
 import org.g16.GUI.MonopolyGUI;
 
+import java.util.stream.IntStream;
+
+
 public class GameController {
     private boolean winnerFound = false;
     private Player[] players;
+
+    Chancecard chancecard =new Chancecard(IntStream.range(1,21).toArray());
+    int[] chanceArray=chancecard.Shufflechancecard();
+    ChanceField chanceField= new ChanceField("chancefield");
+
+
  
 
     Initializer init = new Initializer();
@@ -110,6 +119,7 @@ public class GameController {
             System.out.println("visit");
 
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof ChanceField chance) {
+            DoChanceCard(currentPlayer);
             System.out.println("Chance");
 
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof  GoToJailField goToJail){
@@ -194,5 +204,352 @@ public class GameController {
             System.out.println("Player " + (playerNum+1) + " won");
             winnerFound = true;
         }
+    }
+    public int[] DoChanceCard(Player currentPlayer ){
+
+        chancecard.setNumchance(chanceArray);
+
+        switch (chancecard.getNumchance()[0]) {
+            case 1:{
+                break;
+            }
+
+            case 2:{
+                currentPlayer.setPlayerPosition(0);
+                monoGUI.DrawPlayerPosition(currentPlayer.getID(),0);
+                break;
+            }
+            case 3:{
+                int move= monoGUI.getUserinterger5();
+                if (move==0){
+                } else if (move==1) {
+                    movePlayer(currentPlayer,1);
+                } else if (move==2) {
+                    movePlayer(currentPlayer,2);
+                } else if (move==3) {
+                    movePlayer(currentPlayer,3);
+                } else if (move==4) {
+                    movePlayer(currentPlayer,4);
+                } else if (move==5) {
+                    movePlayer(currentPlayer,5);
+                }
+                landOnField(currentPlayer);
+                break;
+            }
+            case 4:{
+                int move=monoGUI.getUserinterger2();
+                if (move==1) {
+                    currentPlayer.setPlayerPosition(10);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(),10);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner()==null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 10);}}
+                } else if (move==2) {
+                    currentPlayer.setPlayerPosition(11);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(),11);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner()==null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 11);}}
+                }
+                break;
+            }
+            case 5:{
+                int action= monoGUI.getUserinterger2();
+                if (action==1){
+                    movePlayer(currentPlayer,1);
+                    landOnField(currentPlayer);
+                } else if (action==2) {
+                    DoChanceCard(currentPlayer);
+                }
+                break;
+            }
+            case 6:{
+                break;
+            }
+            case 7:{
+                currentPlayer.AddBalance(-2);
+                monoGUI.SetPlayerBalance(currentPlayer.getID(),-2);
+                break;
+            }
+            case 8:{
+                int move = monoGUI.getUserinterger4();
+                if (move == 1) {
+                    currentPlayer.setPlayerPosition(10);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 10);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 10);
+                        }
+                    }
+                } else if (move == 2) {
+                    currentPlayer.setPlayerPosition(11);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 11);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 11);
+                        }
+                    }
+                }else if (move == 3) {
+                    currentPlayer.setPlayerPosition(19);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 19);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 19);
+                        }
+                    }
+                }
+                else if (move == 4) {
+                    currentPlayer.setPlayerPosition(20);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 20);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 20);
+                        }
+                    }
+                }
+                break;
+            }
+            case 9: {
+                int move = monoGUI.getUserinterger2();
+                if (move == 1) {
+                    currentPlayer.setPlayerPosition(4);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 4);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 4);
+                        }
+                    }
+                } else if (move == 2) {
+                    currentPlayer.setPlayerPosition(5);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 5);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 5);
+                        }
+                    }
+                }
+                break;
+            }
+            case 10:{
+                currentPlayer.addOutOfJailCard(1);
+                break;
+            }
+            case 11:{
+                currentPlayer.setPlayerPosition(23);
+                monoGUI.DrawPlayerPosition(currentPlayer.getID(),23);
+                break;
+            }
+            case 12:{
+                break;
+                }
+            case 13:{
+                break;
+            }
+            case 14: {
+                currentPlayer.AddBalance(1 * players.length);
+                monoGUI.SetPlayerBalance(currentPlayer.getID(), 1 * players.length);
+
+                for (int i = 0; i < players.length; i++) {
+                }
+                break;
+                }
+                case 15: {
+                    int move = monoGUI.getUserinterger4();
+                    if (move == 1) {
+                        currentPlayer.setPlayerPosition(7);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 7);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 7);
+                            }
+                        }
+                    } else if (move == 2) {
+                        currentPlayer.setPlayerPosition(8);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 8);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 8);
+                            }
+                        }
+                    }else if (move == 3) {
+                        currentPlayer.setPlayerPosition(22);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 22);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 22);
+                            }
+                        }
+                    }
+                    else if (move == 4) {
+                        currentPlayer.setPlayerPosition(23);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 23);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 23);
+                            }
+                        }
+                    }
+                    break;
+                }
+                case 16: {
+                    currentPlayer.AddBalance(2);
+                    monoGUI.SetPlayerBalance(currentPlayer.getID(), 2);
+                    break;
+                }
+                case 17: {
+                    int move = monoGUI.getUserinterger2();
+                    if (move == 1) {
+                        currentPlayer.setPlayerPosition(13);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 13);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 13);
+                            }
+                        }
+                    } else if (move == 2) {
+                        currentPlayer.setPlayerPosition(14);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 14);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 14);
+                            }
+                        }
+                    }
+                    break;
+                }
+                case 18: {
+                    currentPlayer.setPlayerPosition(10);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(),10);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner()==null){
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(),10);
+                        }
+                    }
+                    break;
+                }
+                case 19: {
+                    int move = monoGUI.getUserinterger4();
+                    if (move == 1) {
+                        currentPlayer.setPlayerPosition(4);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 4);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 4);
+                            }
+                        }
+                    } else if (move == 2) {
+                        currentPlayer.setPlayerPosition(5);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 5);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 5);
+                            }
+                        }
+                    }else if (move == 3) {
+                        currentPlayer.setPlayerPosition(13);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 13);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 13);
+                            }
+                        }
+                    }
+                    else if (move == 4) {
+                        currentPlayer.setPlayerPosition(14);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 14);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 14);
+                            }
+                        }
+                    }
+                    break;
+                }
+                case 20: {
+                    int move = monoGUI.getUserinterger4();
+                    if (move == 1) {
+                        currentPlayer.setPlayerPosition(1);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 1);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 1);
+                            }
+                        }
+                    } else if (move == 2) {
+                        currentPlayer.setPlayerPosition(2);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 2);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 2);
+                            }
+                        }
+                    }else if (move == 3) {
+                        currentPlayer.setPlayerPosition(16);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 16);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 16);
+                            }
+                        }
+                    }
+                    else if (move == 4) {
+                        currentPlayer.setPlayerPosition(17);
+                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 17);
+                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                            System.out.println(property.getName());
+                            if (property.getOwner() == null) {
+                                property.setOwner(currentPlayer);
+                                monoGUI.updateOwner(currentPlayer.getID(), 17);
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+            return chanceArray=chanceField.drawChancecard();
     }
 }
