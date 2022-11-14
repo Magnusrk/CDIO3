@@ -33,3 +33,14 @@ bowling;ลานโบว์ลิ่ง
 zoo;สวนสัตว์
 waterpark;สวนน้ำ
 beach;ชายหาด
+prison;ติดคุก
+parking;ลานจอดรถ
+gotojail;ต้องโทษจำคุก
+throwDice;โยนลูกเต๋า!
+chooseLanguage;เลือกภาษา
+howManyPlayers;มีผู้เล่นกี่คน?
+tooManyOrFew;มีผู้เล่นมากหรือน้อยเกินไป..
+enterAge;ระบุอายุผู้เล่น
+enterPlayerName;กรุณาระบุชื่อ
+playerNameTaken;ชื่อนี้ถูกใช้แล้ว กรุณาเลือกชิ่ออื่น
+addedPlayer;เพิ่มผู้เล่น
