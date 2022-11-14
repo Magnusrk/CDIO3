@@ -9,3 +9,27 @@ test4;+-.,123test TH 4
 #e.g.
 #throwDiceText;คุณโยนลูกเต๋าแล้ว!
 
+start;เริ่ม
+startsub;← ได้รับ 2฿
+chance;โอกาส
+
+noowner;ว่าง
+tryluck;เสี่ยงโชค
+price;ราคา:
+
+burger;ร้านเบอร์เกอร์
+pizza;ร้านพิซซ่า
+candy;ร้านขนมหวาน
+ice;ร้านไอติม
+museum;พิพิธภัณฑ์
+library;ห้องสมุด
+skate;ลานสเกต
+pool;สระว่ายน้ำ
+arcade;ร้านเกมส์
+cinema;โรงภาพยนต์
+toystore;ร้านขายของเล่น
+petstore;ร้านขายสัตว์เลี้ยง
+bowling;ลานโบว์ลิ่ง
+zoo;สวนสัตว์
+waterpark;สวนน้ำ
+beach;ชายหาด

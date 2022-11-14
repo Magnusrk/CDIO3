@@ -145,7 +145,7 @@ public class MonopolyGUI {
                 Language.GetString("chooseLanguage"),
                 "Dansk",
                         "English",
-                        "Test"
+                        "Thai"
         );
 
         return switch (chosenLanguage) {

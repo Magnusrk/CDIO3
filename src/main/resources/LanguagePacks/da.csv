@@ -10,7 +10,7 @@ test4;+-.,123test DA 4
 #throwDiceText;Du kastede med terningerne!
 
 start;Start
-startsub; ← Modtag 2€
+startsub;← Modtag 2Kr
 chance;Chance
 
 noowner;Ingen ejer
