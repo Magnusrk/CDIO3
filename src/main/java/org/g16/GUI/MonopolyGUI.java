@@ -145,7 +145,7 @@ public class MonopolyGUI {
                 "Choose game language",
                 "Dansk",
                         "English",
-                        "Test"
+                        "Thai"
         );
 
         return switch (chosenLanguage) {
