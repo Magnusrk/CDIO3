@@ -9,8 +9,8 @@ test4;+-.,123test EN 4
 #e.g.
 #throwDiceText;You rolled the die!
 
-start;เริ่ม
-startsub; ← ได้รับ 2$
+start;Go
+startsub; ← Collect 2$
 chance;Chance
 
 noowner;No owner
@@ -36,3 +36,11 @@ beach;Boardwalk
 prison;Prison
 parking;Parking
 gotojail;Go to jail
+throwDice;throw the dice!
+chooseLanguage;Choose game language
+howManyPlayers;How many players are you?
+tooManyOrFew;Too many or too few players..
+enterAge;Enter age
+enterPlayerName;Enter player name.
+playerNameTaken;The player name is already taken. Please choose a unique name.
+addedPlayer;Added player
