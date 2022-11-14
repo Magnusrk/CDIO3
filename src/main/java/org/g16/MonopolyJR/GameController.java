@@ -9,7 +9,7 @@ public class GameController {
     private boolean winnerFound = false;
     private Player[] players;
 
-    Chancecard chancecard =new Chancecard(IntStream.range(1,21).toArray());
+    ChanceCard chancecard =new ChanceCard(IntStream.range(1,21).toArray());
     int[] chanceArray=chancecard.Shufflechancecard();
     ChanceField chanceField= new ChanceField("chancefield");
 
