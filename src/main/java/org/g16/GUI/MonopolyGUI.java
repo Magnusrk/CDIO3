@@ -219,13 +219,29 @@ public class MonopolyGUI {
     }
 
     public int getUserinterger5() {
-        return gui.getUserInteger("How many spaces do you want to move?", 0, 5);
+        return gui.getUserInteger("Move up to five spaces", 0, 5);
     }
 
-    public int getUserinterger2() {
-        return gui.getUserInteger("How many spaces do you want to move?", 1, 2);
+
+
+    public int Userselection2(String msg, String opt1, String opt2){
+        String selection=gui.getUserSelection(msg,opt1,opt2);
+        if (selection==opt1){
+            return 1;
+        } else {
+            return 2;
+        }
     }
-    public int getUserinterger4() {
-        return gui.getUserInteger("How many spaces do you want to move?", 1, 4);
+    public int Userselection4(String msg, String opt1, String opt2,String opt3, String opt4){
+        String selection=gui.getUserSelection(msg,opt1,opt2,opt3,opt4);
+        if (selection==opt1){
+            return 1;
+        } else if (selection==opt2) {
+            return 2;
+        } else if (selection==opt3) {
+            return 3;
+        } else {
+            return 4;
+        }
     }
 }
