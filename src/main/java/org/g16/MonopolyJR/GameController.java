@@ -208,8 +208,8 @@ public class GameController {
     public int[] DoChanceCard(Player currentPlayer ){
 
         chancecard.setNumchance(chanceArray);
-
-        switch (chancecard.getNumchance()[0]) {
+//chancecard.getNumchance()[0])
+        switch (4) {
             case 1:{
                 break;
             }
@@ -237,7 +237,8 @@ public class GameController {
                 break;
             }
             case 4:{
-                int move=monoGUI.getUserinterger2();
+                int move=monoGUI.Userselection2(Language.GetString("can"),
+                        "Skatepark","Pool");
                 if (move==1) {
                     currentPlayer.setPlayerPosition(10);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(),10);
@@ -259,7 +260,8 @@ public class GameController {
                 break;
             }
             case 5:{
-                int action= monoGUI.getUserinterger2();
+                int action= monoGUI.Userselection2("Move 1 or draw another chancecard",
+                        "Move 1","Draw chancecard");
                 if (action==1){
                     movePlayer(currentPlayer,1);
                     landOnField(currentPlayer);
@@ -277,7 +279,8 @@ public class GameController {
                 break;
             }
             case 8:{
-                int move = monoGUI.getUserinterger4();
+                int move = monoGUI.Userselection4("Move to an orange or green field, if it's unowned get it for free, if not you pay rent"
+                ,"Skatepark","Pool","Bowling","Zoo");
                 if (move == 1) {
                     currentPlayer.setPlayerPosition(10);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(), 10);
@@ -324,7 +327,8 @@ public class GameController {
                 break;
             }
             case 9: {
-                int move = monoGUI.getUserinterger2();
+                int move = monoGUI.Userselection2("Move to a blue field, if it's unowned get it for free, if not you pay rent",
+                        "Candyshop","Icecreamkiosk");
                 if (move == 1) {
                     currentPlayer.setPlayerPosition(4);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(), 4);
@@ -374,9 +378,8 @@ public class GameController {
                 break;
                 }
                 case 15: {
-                    int move = monoGUI.getUserinterger4();
-                    if (move == 1) {
-                        currentPlayer.setPlayerPosition(7);
+                    int move = monoGUI.Userselection4("Move to a pink or dark blue field, if it's unowned get it for free, if not you pay rent"
+                            ,"Musuem","Library","Waterpark","Beach promonade");
                         monoGUI.DrawPlayerPosition(currentPlayer.getID(), 7);
                         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
                             System.out.println(property.getName());
@@ -385,7 +388,7 @@ public class GameController {
                                 monoGUI.updateOwner(currentPlayer.getID(), 7);
                             }
                         }
-                    } else if (move == 2) {
+                    else if (move == 2) {
                         currentPlayer.setPlayerPosition(8);
                         monoGUI.DrawPlayerPosition(currentPlayer.getID(), 8);
                         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
@@ -426,7 +429,8 @@ public class GameController {
                     break;
                 }
                 case 17: {
-                    int move = monoGUI.getUserinterger2();
+                    int move =monoGUI.Userselection2("Move to a red field, if it's unowned get it for free, if not you pay rent",
+                            "Arcade","Cinema");
                     if (move == 1) {
                         currentPlayer.setPlayerPosition(13);
                         monoGUI.DrawPlayerPosition(currentPlayer.getID(), 13);
@@ -465,7 +469,8 @@ public class GameController {
                     break;
                 }
                 case 19: {
-                    int move = monoGUI.getUserinterger4();
+                    int move = monoGUI.Userselection4("Move to a blue or red field, if it's unowned get it for free, if not you pay rent"
+                            ,"Candyshop","Icecream Kiosk","Arcade   ","Cinema");
                     if (move == 1) {
                         currentPlayer.setPlayerPosition(4);
                         monoGUI.DrawPlayerPosition(currentPlayer.getID(), 4);
@@ -512,7 +517,8 @@ public class GameController {
                     break;
                 }
                 case 20: {
-                    int move = monoGUI.getUserinterger4();
+                    int move = monoGUI.Userselection4("Move to a brown or yellow field, if it's unowned get it for free, if not you pay rent"
+                            ,"Burgerbar","Pizza","Toystore","Pet store");
                     if (move == 1) {
                         currentPlayer.setPlayerPosition(1);
                         monoGUI.DrawPlayerPosition(currentPlayer.getID(), 1);

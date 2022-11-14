@@ -33,6 +33,9 @@ bowling;Bowling Alley
 zoo;The Zoo
 waterpark;Park Place
 beach;Boardwalk
+
+
+can;Move to an orange field, if it's unowned get it for free, if not you pay rent
 prison;Prison
 parking;Parking
 gotojail;Go to jail
