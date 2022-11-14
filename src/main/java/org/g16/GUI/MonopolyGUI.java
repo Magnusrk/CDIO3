@@ -23,6 +23,9 @@ public class MonopolyGUI {
 
     private GameController gameController;
 
+    private Field[] startingFields;
+
+
     /**
      * Initialize monopoly GUI
      * @param startingFields
@@ -32,6 +35,7 @@ public class MonopolyGUI {
      */
     public GUI initGUI(Field[] startingFields, GameController gameController){
         this.gameController = gameController;
+        this.startingFields = startingFields;
         GUI_Field[] guiFields = new GUI_Field[startingFields.length];
         for(int i = 0; i < startingFields.length; i++){
             switch (startingFields[i].getClass().getSimpleName()){
@@ -59,11 +63,42 @@ public class MonopolyGUI {
                     //Price/subtitle
                     break;
             }
-            guiFields[i].setTitle(startingFields[i].getName());
+            guiFields[i].setTitle(Language.GetString(startingFields[i].getName()));
         }
 
         gui = new GUI(guiFields);
         return gui;
+    }
+
+    public void UpdateFields() {
+        GUI_Field[] currentFields = gui.getFields();
+        for (int i = 0; i < startingFields.length; i++) {
+            switch (startingFields[i].getClass().getSimpleName()) {
+                default:
+                    //If i == 0, it's the start field
+                    if (i == 0) {
+
+                        gui.getFields()[i].setSubText(Language.GetString("startsub"));
+
+                    }
+                    break;
+                case "ChanceField":
+                    gui.getFields()[i].setSubText(Language.GetString("tryluck"));
+                    break;
+                case "PropertyField":
+
+                    gui.getFields()[i].setSubText(Language.GetString("noowner"));
+                    PropertyField property = (PropertyField) startingFields[i];
+                    gui.getFields()[i].setDescription(Language.GetString("price") + " " + String.valueOf(property.getPrice()));
+                    //COlor
+                    //Price/subtitle
+                    break;
+            }
+            gui.getFields()[i].setTitle(Language.GetString(startingFields[i].getName()));
+
+
+
+        }
     }
 
     private java.awt.Color ConvertColor(org.g16.MonopolyJR.Color col){
@@ -120,7 +155,7 @@ public class MonopolyGUI {
 
         return switch (chosenLanguage) {
             default -> "da";
-            case "Engelsk" -> "en";
+            case "English" -> "en";
             case "Thai" -> "th";
             case "JP" -> "jp";
         };

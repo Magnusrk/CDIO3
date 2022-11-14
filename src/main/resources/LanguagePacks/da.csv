@@ -1,6 +1,6 @@
-#DONT REMOVE TESTS
-test1;-1 -      asd1 -test DA 1
-test2;-.,-:`?test DA 2
+prison;Prison
+parking;Parking
+gotojail;Go to jail
 test3;:::"""""""test DA 3
 test4;+-.,123test DA 4
 
@@ -33,3 +33,6 @@ bowling;Bowlinghallen
 zoo;Zoo
 waterpark;Vandlandet
 beach;Strandpromenaden
+prison;Fængsel
+parking;Parkering
+gotojail;Gå i fængsel
