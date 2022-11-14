@@ -324,4 +324,7 @@ public class MonopolyGUI {
     public void Showmsg(String msg){
         gui.showMessage(msg);
     }
+    public String Userselectionarray(String msg, String[] options){
+       return gui.getUserSelection(msg, options);
+    }
 }

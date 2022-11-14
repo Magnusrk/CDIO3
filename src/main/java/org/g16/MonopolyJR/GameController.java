@@ -9,6 +9,9 @@ import java.awt.Color;
 import static gui_fields.GUI_Car.Pattern.ZEBRA;
 import static gui_fields.GUI_Car.Type.UFO;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 
 
@@ -604,6 +607,18 @@ public class GameController {
             return chanceArray=chanceField.drawChancecard();
     }
     public void TokenChanceCard(){
-        
+        List<String> avbprops=new ArrayList<String>();
+        for (int i=0;i<prop.length;i++){
+            if (prop[i] instanceof PropertyField propertyField){
+                if (propertyField.getOwner()==null){
+                    avbprops.add(propertyField.getName());
+                }
+            }
+        }
+        if (avbprops.isEmpty()){
+
+        }else {
+            String selectedprop=monoGUI.Userselectionarray("dsfa", (String[]) avbprops.toArray());
+        }
     }
 }
