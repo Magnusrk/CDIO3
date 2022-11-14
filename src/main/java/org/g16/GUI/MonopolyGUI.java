@@ -19,9 +19,13 @@ public class MonopolyGUI {
     };
     private GUI_Player[] guiPlayers;
     private int[] guiAges;
+    private String[] unavailablePlayerNames;
     private int playerCount = 0;
 
     private GameController gameController;
+
+    private Field[] startingFields;
+
 
     /**
      * Initialize monopoly GUI
@@ -32,6 +36,7 @@ public class MonopolyGUI {
      */
     public GUI initGUI(Field[] startingFields, GameController gameController){
         this.gameController = gameController;
+        this.startingFields = startingFields;
         GUI_Field[] guiFields = new GUI_Field[startingFields.length];
         for(int i = 0; i < startingFields.length; i++){
             switch (startingFields[i].getClass().getSimpleName()){
@@ -59,11 +64,36 @@ public class MonopolyGUI {
                     //Price/subtitle
                     break;
             }
-            guiFields[i].setTitle(startingFields[i].getName());
+            guiFields[i].setTitle(Language.GetString(startingFields[i].getName()));
         }
 
         gui = new GUI(guiFields);
         return gui;
+    }
+
+    public void UpdateFields() {
+        GUI_Field[] currentFields = gui.getFields();
+        for (int i = 0; i < startingFields.length; i++) {
+            switch (startingFields[i].getClass().getSimpleName()) {
+                default:
+                    //If i == 0, it's the start field
+                    if (i == 0) {
+                        gui.getFields()[i].setSubText(Language.GetString("startsub"));
+                    }
+                    break;
+                case "ChanceField":
+                    gui.getFields()[i].setSubText(Language.GetString("tryluck"));
+                    break;
+                case "PropertyField":
+
+                    gui.getFields()[i].setSubText(Language.GetString("noowner"));
+                    PropertyField property = (PropertyField) startingFields[i];
+                    gui.getFields()[i].setDescription(Language.GetString("price") + " " + String.valueOf(property.getPrice()));
+                    break;
+            }
+            gui.getFields()[i].setTitle(Language.GetString(startingFields[i].getName()));
+
+        }
     }
 
     private java.awt.Color ConvertColor(org.g16.MonopolyJR.Color col){
@@ -120,7 +150,7 @@ public class MonopolyGUI {
 
         return switch (chosenLanguage) {
             default -> "da";
-            case "Engelsk" -> "en";
+            case "English" -> "en";
             case "Thai" -> "th";
             case "JP" -> "jp";
         };
@@ -186,11 +216,13 @@ public class MonopolyGUI {
 
         guiPlayers = new GUI_Player[desiredPlayers];
         guiAges = new int[desiredPlayers];
+        unavailablePlayerNames = new String[desiredPlayers];
 
 
         while (playerCount < desiredPlayers){
             GUI_Player newPlayer = AddPlayerPrompt();
             guiPlayers[playerCount] = newPlayer;
+            unavailablePlayerNames[playerCount] = newPlayer.getName();
             guiAges[playerCount] = gui.getUserInteger("Enter age");
             DrawPlayerPosition(playerCount,0);
             playerCount++;
@@ -204,13 +236,30 @@ public class MonopolyGUI {
      * Prompts the user to enter a player name.
      */
     private GUI_Player AddPlayerPrompt(){
-        String player = gui.getUserString("Enter player name. ");
+        String player;
+        player = gui.getUserString("Enter player name. ");
+        /*
+        do {
+            player = gui.getUserString("Enter player name. ");
+        } while (playerNameTaken(player));
+        /*
+         */
         GUI_Player guiPlayer = new GUI_Player(player);
         guiPlayer.setBalance(startingBalance);
         guiPlayer.getCar().setPrimaryColor(playerCarColors[playerCount]);
         gui.addPlayer(guiPlayer);
         gui.showMessage("Added player " + player);
         return guiPlayer;
+    }
+
+    private boolean playerNameTaken(String player){
+        for (String name:
+             unavailablePlayerNames) {
+            if(name.equals(player)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void updateOwner(int playerID, int field) {
