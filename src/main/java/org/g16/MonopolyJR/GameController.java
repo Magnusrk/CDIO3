@@ -96,9 +96,11 @@ public class GameController {
                 monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
 
             } else {
-                currentPlayer.AddBalance(-1 * property.getPrice());
+                int rentMultiplier = AllColorsOwned(property) ? 2 : 1;
+                currentPlayer.AddBalance(-1*rentMultiplier * property.getPrice());
                 checkBankrupt(currentPlayer);
-                property.getOwner().AddBalance(property.getPrice());
+                property.getOwner().AddBalance(rentMultiplier*property.getPrice());
+
                 monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
                 monoGUI.SetPlayerBalance(property.getOwner().getID(), property.getOwner().getPlayerBalance());
 
@@ -114,6 +116,28 @@ public class GameController {
             currentPlayer.setJailed(true);
             System.out.println("You're jailed");
         }
+    }
+
+    private boolean AllColorsOwned(PropertyField currentProperty){
+        Color propertyColor = currentProperty.getColor();
+        Player propertyOwner = currentProperty.getOwner();
+
+        if(currentProperty.getOwner() != null){
+            for (Field field: prop) {
+                if(field instanceof PropertyField property){
+                    if(propertyColor == property.getColor()){
+                        if(property.getOwner() == null) {
+                            return false;
+                        }
+                        if(property.getOwner().getID() != propertyOwner.getID()){
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+            }
+        return false;
     }
 
     private void checkPassStart(Player currentPlayer) {
@@ -151,15 +175,6 @@ public class GameController {
             newPos -= prop.length;
         }
 
-        /*
-        if (newPos >23) {
-            if (newPos % 23 == 0){
-                newPos = 23;
-            } else {
-                newPos = (newPos % 23) + 1;
-            }
-        }
-         */
 
         monoGUI.DrawPlayerPosition(player.getID(),newPos);
         player.setPlayerPosition(newPos);
