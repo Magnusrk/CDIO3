@@ -87,6 +87,7 @@ public class GameController {
     }
 
     private void landOnField(Player currentPlayer) {
+        int playerIndex;
         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
             System.out.println(property.getName());
             if (property.getOwner() == null) {
@@ -126,6 +127,7 @@ public class GameController {
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof GoToJailField){
             currentPlayer.setJailed(true);
             System.out.println("You're jailed");
+            monoGUI.PromptGotoJail(currentPlayer.getID());
             currentPlayer.setPlayerPosition(6);
             monoGUI.DrawPlayerPosition(currentPlayer.getID(), 6);
         }

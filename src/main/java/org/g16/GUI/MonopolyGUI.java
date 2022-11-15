@@ -361,10 +361,14 @@ public class MonopolyGUI {
 
     public void Showmsg(String msg){
         gui.showMessage(msg);
-        
+
     }
     public String Userselectionarray(String msg, String[] options){
        return gui.getUserSelection(msg, options);
+    }
+
+    public void PromptGotoJail(int playerID) {
+        gui.showMessage( guiPlayers[playerID].getName() + " "+ Language.GetString("gotojailprompt"));
     }
 
     /** Closes the monopoly GUI
