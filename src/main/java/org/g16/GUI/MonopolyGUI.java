@@ -270,26 +270,27 @@ public class MonopolyGUI {
         GUI_Player guiPlayer;
 
         int startingBalance = 20;
-        switch (playerCount){
-            case 0:
-                car = new GUI_Car(Color.black, Color.red, CAR,HORIZONTAL_GRADIANT);
+        switch (playerCount) {
+            case 0 -> {
+                car = new GUI_Car(Color.black, Color.red, CAR, HORIZONTAL_GRADIANT);
                 guiPlayer = new GUI_Player(player, startingBalance, car);
-                break;
-            case 1:
-                tractor = new GUI_Car(Color.blue, Color.green, TRACTOR,HORIZONTAL_DUAL_COLOR);
+            }
+            case 1 -> {
+                tractor = new GUI_Car(Color.blue, Color.green, TRACTOR, HORIZONTAL_DUAL_COLOR);
                 guiPlayer = new GUI_Player(player, startingBalance, tractor);
-                break;
-            case 2:
-                racer = new GUI_Car(Color.black, Color.red, RACECAR,HORIZONTAL_LINE);
+            }
+            case 2 -> {
+                racer = new GUI_Car(Color.black, Color.red, RACECAR, HORIZONTAL_LINE);
                 guiPlayer = new GUI_Player(player, startingBalance, racer);
-                break;
-            case 3:
-                ufo = new GUI_Car(Color.lightGray, Color.lightGray, UFO,HORIZONTAL_DUAL_COLOR);
+            }
+            case 3 -> {
+                ufo = new GUI_Car(Color.lightGray, Color.lightGray, UFO, HORIZONTAL_DUAL_COLOR);
                 guiPlayer = new GUI_Player(player, startingBalance, ufo);
-                break;
-            default:
-                car = new GUI_Car(Color.black, Color.lightGray, CAR,ZEBRA);
+            }
+            default -> {
+                car = new GUI_Car(Color.black, Color.lightGray, CAR, ZEBRA);
                 guiPlayer = new GUI_Player(player, startingBalance, car);
+            }
         }
 
 
