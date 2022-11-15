@@ -41,20 +41,20 @@ gotojail;Gå i fængsel
 
 
 
-case1;Giv dette kort til bilen. På deres næste tur, kan de flytte til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
+case1;Giv dette kort til Ufo'en. På deres næste tur, kan de flytte til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
 case2;Flyt til Start.
 case3; Flyt op til 5 felter frem.
 case4;Flyt til et orange felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
 case5;Flyt et felt frem eller træk et andet chancekort.
 case5opt1;Flyt et felt frem.
 case5opt2; Træk et chancekort.
-case6;Giv dette card kort til skibet. På deres næste tur, kan de flytte til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
+case6;Giv dette card kort til Racer bilen. På deres næste tur, kan de flytte til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
 case8;Flyt til et orange felt eller grønt felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
 case9;Flyt til et blåt felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
 case10;Du fik et "kom ud af fængsel kort". Brug det når de fængsles.
 case11;Flyt til "Strandpromenaden".
-case12;Giv dette card kort til katten. På deres næste tur, kan de flytte til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
-case13;Giv dette card kort til hunden. På deres næste tur, kan de flytte til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
+case12;Giv dette card kort til Bilen. På deres næste tur, kan de flytte til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
+case13;Giv dette card kort til Traktoren. På deres næste tur, kan de flytte til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
 case14;Det er din fødselsdag modtag 1$ fra alle spillere.
 case15;Flyt til et lyserødt felt eller mørkeblåt felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
 case16;Du er færdig med alle dine lektier få 2$ fra banken.
