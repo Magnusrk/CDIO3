@@ -358,5 +358,17 @@ public class MonopolyGUI {
        return gui.getUserSelection(msg, options);
     }
 
+    public void closeGUI(){
+        gui.close();
+    }
+
+    public boolean yesNoQuestion(String msg){
+        String yesString = Language.GetString("yesTxt");
+        String noString = Language.GetString("noTxt");
+        String input = gui.getUserSelection(msg, yesString, noString);
+        return input.equals(yesString);
+    }
+
+
 
 }

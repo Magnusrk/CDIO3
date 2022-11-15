@@ -76,3 +76,7 @@ BoughtField;bought the property
 YouPay;You pay
 PaysRent;pays rent to
 RentDoubled;Because all colors are owned, the rent was doubled!
+WonTheGame;won the game!
+yesTxt;Yes
+noTxt;No
+restartQuestion;Do you want to restart the game?
