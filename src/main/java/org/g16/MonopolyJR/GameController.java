@@ -1,15 +1,27 @@
 package org.g16.MonopolyJR;
 
+import gui_fields.GUI_Car;
+import gui_fields.GUI_Player;
 import org.g16.GUI.MonopolyGUI;
+
+<<<<<<<<< Temporary merge branch 1
+=========
+import java.awt.Color;
+
+import static gui_fields.GUI_Car.Pattern.ZEBRA;
+import static gui_fields.GUI_Car.Type.UFO;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+>>>>>>>>> Temporary merge branch 2
 import java.util.stream.IntStream;
 
 
 public class GameController {
     private boolean winnerFound = false;
     private Player[] players;
- 
+
 
     ChanceCard chancecard =new ChanceCard(IntStream.range(1,21).toArray());
     int[] chanceArray=chancecard.Shufflechancecard();
@@ -26,6 +38,8 @@ public class GameController {
         monoGUI.initGUI(prop, this);
         setup();
     }
+
+
 
     private void setup(){
         String chosenLanguage = monoGUI.chooseLanguage();
@@ -93,6 +107,7 @@ public class GameController {
             if (property.getOwner() == null) {
                 currentPlayer.AddBalance(-1 * property.getPrice());
                 checkBankrupt(currentPlayer);
+               // System.out.println("You pay " + property.getPrice());
                 property.setOwner(currentPlayer);
                 monoGUI.updateOwner(currentPlayer.getID(), currentPlayer.getPlayerPosition());
                 System.out.println(property.getOwner());
@@ -402,19 +417,51 @@ public class GameController {
         }
     }
 
-    public void TokenChanceCard(){
-        List<String> avbprops= new ArrayList<>();
-        for (Field field : prop) {
-            if (field instanceof PropertyField propertyField) {
-                if (propertyField.getOwner() == null) {
-                    avbprops.add(propertyField.getName());
+    public void TokenChanceCard(Player currentPlayer){
+        List<String> avbprops=new ArrayList<String>();
+        List<String> allprops=new ArrayList<String>();
+        for (int i=0;i<prop.length;i++){
+            if (prop[i] instanceof PropertyField propertyField){
+                if (propertyField.getOwner()==null){
+                    avbprops.add(Language.GetString(propertyField.getName()));
                 }
+                allprops.add(Language.GetString(propertyField.getName()));
             }
         }
         if (avbprops.isEmpty()){
+            String[] alloptions= new String[allprops.size()];
+            allprops.toArray(alloptions);
 
+            String selectedprop=monoGUI.Userselectionarray("dsfa", alloptions);
+            for (int i=0;i<prop.length;i++){
+
+                if (Language.GetString(prop[i].getName()).equals(selectedprop)){
+                    currentPlayer.setPlayerPosition(i);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(),i);
+                    PropertyField propertyField= (PropertyField) prop[i];
+                    propertyField.getOwner().AddBalance(propertyField.getPrice());
+                    monoGUI.SetPlayerBalance(propertyField.getOwner().getID(),propertyField.getOwner().getPlayerBalance());
+                    propertyField.setOwner(currentPlayer);
+                    monoGUI.updateOwner(currentPlayer.getID(),i);
+                    currentPlayer.AddBalance(propertyField.getPrice()*(-1));
+                    monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
+                }
+            }
         }else {
-            String selectedprop=monoGUI.Userselectionarray("dsfa", (String[]) avbprops.toArray());
+                    String[] options= new String[avbprops.size()];
+                    avbprops.toArray(options);
+            String selectedprop=monoGUI.Userselectionarray("dsfa", options);
+            for (int i=0;i<prop.length;i++){
+
+                  if (Language.GetString(prop[i].getName()).equals(selectedprop)){
+                      currentPlayer.setPlayerPosition(i);
+                      monoGUI.DrawPlayerPosition(currentPlayer.getID(),i);
+                      PropertyField propertyField= (PropertyField) prop[i];
+                      propertyField.setOwner(currentPlayer);
+                      monoGUI.updateOwner(currentPlayer.getID(),i);
+                  }
+                }
+
         }
     }
 
