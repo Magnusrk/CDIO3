@@ -1,16 +1,7 @@
 package org.g16.MonopolyJR;
 
-import gui_fields.GUI_Car;
-import gui_fields.GUI_Player;
 import org.g16.GUI.MonopolyGUI;
-
-import java.awt.Color;
-
-import static gui_fields.GUI_Car.Pattern.ZEBRA;
-import static gui_fields.GUI_Car.Type.UFO;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -440,7 +431,7 @@ public class GameController {
                 if (Language.GetString(prop[i].getName()).equals(selectedprop)){
                     currentPlayer.setPlayerPosition(i);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(),i);
-                    PropertyField propertyField= (PropertyField) prop[i];
+                    PropertyField propertyField = (PropertyField) prop[i];
                     propertyField.getOwner().AddBalance(propertyField.getPrice());
                     monoGUI.SetPlayerBalance(propertyField.getOwner().getID(),propertyField.getOwner().getPlayerBalance());
                     propertyField.setOwner(currentPlayer);
