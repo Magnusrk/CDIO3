@@ -42,30 +42,29 @@ gotojail;Gå i fængsel
 
 
 
-case1;Give this card to the Car. On their next turn they can  move to an unowned field and get it for free. If their aren't any unowned fields buy one from another player
-case2;Move to start
-case3; Move up to 5 spaces
-case4;Move to an orange field, if it's unowned get it for free, if not you pay rent
-case5;Move 1 or draw another chancecard
-case5opt1;Move 1
-case5opt2; Draw chancecard
-case6;Give this card to the Ship. On their next turn they can  move to an unowned field and get it for free. If their aren't any unowned fields buy one from another player
-case7;You ate too much candy give the bank 2$
-case8;Move to an orange or green field, if it's unowned get it for free, if not you pay rent
-case9;Move to a blue field, if it's unowned get it for free, if not you pay rent
-case10;You got a "get out of jail free card" Use it when you get jailed.
-case11;Move to "Boardwalk"
-case12;Give this card to the Cat. On their next turn they can  move to an unowned field and get it for free. If their aren't any unowned fields buy one from another player
-case13;Give this card to the Dog. On their next turn they can  move to an unowned field and get it for free. If their aren't any unowned fields buy one from another player
-case14;It's your birthday get 1$ from everyone
-case15;Move to a pink or dark blue field, if it's unowned get it for free, if not you pay rent
-case16;You did all your homework get 2$ from the bank
-case17;Move to a red field, if it's unowned get it for free, if not you pay rent
-case18;Move to "Skatepark" If it's unowned get it for free, if not pay rent
-case19;Move to a blue or red field, if it's unowned get it for free, if not you pay rent
-case20;Move to a brown or yellow field, if it's unowned get it for free, if not you pay rent
+case1;Giv dette card kort til bilen. På deres næste tur, kan de flytte til et feldt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal du købe et fra en anden spiller.
+case2;Fly til Start
+case3; Flyt frem op til 5 felter
+case4;Flyt til et orange feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
+case5;Flyt 1 eller træk et andet chancekort
+case5opt1;Flyt 1
+case5opt2; Træk chancekort
+case6;Giv dette card kort til skibet. På deres næste tur, kan de flytte til et feldt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal du købe et fra en anden spiller.
+case8;Flyt til et orange feldt eller grønt feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
+case9;Flyt til et blåt feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
+case10;Du fik et "get out of jail free card" Use it when you get jailed.
+case11;Flyt til "Strandpromenaden"
+case12;Giv dette card kort til katten. På deres næste tur, kan de flytte til et feldt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal du købe et fra en anden spiller.
+case13;Giv dette card kort til hunden. På deres næste tur, kan de flytte til et feldt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal du købe et fra en anden spiller.
+case14;Det er din fødselsdag få 1$ fra allesammen.
+case15;Flyt til et lyserød feldt eller mørkblåt feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
+case16;Du er færdig med alle dine lektier få 2$ fra banken.
+case17;Flyt til et rødt feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
+case18;Flyt til "Skaterparken", Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
+case19;Flyt til et blåt feldt eller rødt feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
+case20;Flyt til et brunt feldt eller gult feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
 throwDice;slå med terningen!
-chooseLanguage;Choose game language
+chooseLanguage;Vælg sporget.
 howManyPlayers;Hvor mange spillere er i?
 tooManyOrFew;For mange eller for få spillere..
 enterAge;Indtast alder
@@ -73,11 +72,11 @@ enterPlayerName;Indtast navn
 playerNameTaken;Navnet er allerede taget. Vælg et unikt navn.
 addedPlayer;Tilføjede spiller
 gotojailprompt;bliver sat i fængsel.
-BoughtField;bought the property
-YouPay;You pay
-PaysRent;pays rent to
+BoughtField;Købt ejendommen
+YouPay; Du betale
+PaysRent; Betal rante til
 RentDoubled;Because all colors are owned, the rent was doubled!
-WonTheGame;won the game!
-yesTxt;Yes
-noTxt;No
-restartQuestion;Do you want to restart the game?
+WonTheGame;Vandt spillet!
+yesTxt;Ja
+noTxt;Nej
+restartQuestion; Vil du gerne genstart spillet?
