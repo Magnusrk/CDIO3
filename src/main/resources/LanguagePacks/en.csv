@@ -72,3 +72,7 @@ enterAge;Enter age
 enterPlayerName;Enter player name.
 playerNameTaken;The player name is already taken. Please choose a unique name.
 addedPlayer;Added player
+BoughtField;bought the property
+YouPay;You pay
+PaysRent;pays rent to
+RentDoubled;Because all colors are owned, the rent was doubled!

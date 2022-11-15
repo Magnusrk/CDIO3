@@ -23,6 +23,7 @@ public class MonopolyGUI {
     };
     private GUI_Player[] guiPlayers;
     private int[] guiAges;
+    private String[] guiNames;
     private String[] unavailablePlayerNames;
     private int playerCount = 0;
 
@@ -234,6 +235,7 @@ public class MonopolyGUI {
 
         guiPlayers = new GUI_Player[desiredPlayers];
         guiAges = new int[desiredPlayers];
+        guiNames = new String[desiredPlayers];
         unavailablePlayerNames = new String[desiredPlayers];
 
 
@@ -245,7 +247,7 @@ public class MonopolyGUI {
             DrawPlayerPosition(playerCount,0);
             playerCount++;
         }
-        gameController.createPlayers(guiAges);
+        gameController.createPlayers(guiAges, guiNames);
 
 
     }
@@ -263,6 +265,7 @@ public class MonopolyGUI {
             player = gui.getUserString(Language.GetString("enterPlayerName"));
             isTaken = playerNameTaken(player);
         }
+        guiNames[playerCount] = player;
         GUI_Car car;
         GUI_Car tractor;
         GUI_Car racer;
@@ -349,8 +352,11 @@ public class MonopolyGUI {
 
     public void Showmsg(String msg){
         gui.showMessage(msg);
+        
     }
     public String Userselectionarray(String msg, String[] options){
        return gui.getUserSelection(msg, options);
     }
+
+
 }
