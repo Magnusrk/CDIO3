@@ -1,7 +1,5 @@
 package org.g16.MonopolyJR;
 
-import gui_fields.GUI_Street;
-
 public class PropertyField extends Field {
     protected int price;
     protected Color color;

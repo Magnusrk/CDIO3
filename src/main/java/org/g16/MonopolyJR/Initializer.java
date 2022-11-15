@@ -29,8 +29,8 @@ public class Initializer {
         PropertyField museum = new PropertyField("museum",Color.Pink, 2);
         fields[7] = museum;
         //field 8
-        PropertyField biblotek = new PropertyField("library",Color.Pink,2 );
-        fields[8] = biblotek;
+        PropertyField bibliotek = new PropertyField("library",Color.Pink,2 );
+        fields[8] = bibliotek;
         //field 9
         ChanceField chance2 = new ChanceField("chance");
         fields[9] = chance2;
@@ -71,11 +71,11 @@ public class Initializer {
         ChanceField chance4 = new ChanceField("chance");
         fields[21] = chance4;
         //field 22
-        PropertyField strandpromenade = new PropertyField("beach",Color.DarkBlue, 5);
-        fields[22] = strandpromenade;
-        //field 23
         PropertyField vandpark = new PropertyField("waterpark",Color.DarkBlue, 5);
-        fields[23] = vandpark;
+        fields[22] = vandpark;
+        //field 23
+        PropertyField strandpromenade = new PropertyField("beach",Color.DarkBlue, 5);
+        fields[23] = strandpromenade;
         return fields;
     }
 }

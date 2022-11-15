@@ -7,8 +7,7 @@ import java.awt.Color;
 import java.lang.reflect.Type;
 import java.util.Objects;
 
-import static gui_fields.GUI_Car.Pattern.HORIZONTAL_GRADIANT;
-import static gui_fields.GUI_Car.Pattern.ZEBRA;
+import static gui_fields.GUI_Car.Pattern.*;
 import static gui_fields.GUI_Car.Type.*;
 
 public class MonopolyGUI {
@@ -24,6 +23,7 @@ public class MonopolyGUI {
     };
     private GUI_Player[] guiPlayers;
     private int[] guiAges;
+    private String[] guiNames;
     private String[] unavailablePlayerNames;
     private int playerCount = 0;
 
@@ -90,10 +90,18 @@ public class MonopolyGUI {
                     //If i == 0, it's the start field
                     if (i == 0) {
                         gui.getFields()[i].setSubText(Language.GetString("startsub"));
+                    } else {
+                        gui.getFields()[i].setSubText(Language.GetString("parking"));
                     }
                     break;
                 case "ChanceField":
                     gui.getFields()[i].setSubText(Language.GetString("tryluck"));
+                    break;
+                case "Jail":
+                    gui.getFields()[i].setSubText(Language.GetString("prison"));
+                    break;
+                case "GoToJailField":
+                    gui.getFields()[i].setSubText(Language.GetString("gotojail"));
                     break;
                 case "PropertyField":
 
@@ -227,6 +235,7 @@ public class MonopolyGUI {
 
         guiPlayers = new GUI_Player[desiredPlayers];
         guiAges = new int[desiredPlayers];
+        guiNames = new String[desiredPlayers];
         unavailablePlayerNames = new String[desiredPlayers];
 
 
@@ -238,7 +247,7 @@ public class MonopolyGUI {
             DrawPlayerPosition(playerCount,0);
             playerCount++;
         }
-        gameController.createPlayers(guiAges);
+        gameController.createPlayers(guiAges, guiNames);
 
 
     }
@@ -256,6 +265,7 @@ public class MonopolyGUI {
             player = gui.getUserString(Language.GetString("enterPlayerName"));
             isTaken = playerNameTaken(player);
         }
+        guiNames[playerCount] = player;
         GUI_Car car;
         GUI_Car tractor;
         GUI_Car racer;
@@ -269,7 +279,7 @@ public class MonopolyGUI {
                 guiPlayer = new GUI_Player(player, startingBalance, car);
                 break;
             case 1:
-                tractor = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, TRACTOR,ZEBRA);
+                tractor = new GUI_Car(Color.blue, Color.yellow, TRACTOR,HORIZONTAL_DUAL_COLOR);
                 guiPlayer = new GUI_Player(player, startingBalance, tractor);
                 break;
             case 2:
@@ -342,8 +352,11 @@ public class MonopolyGUI {
 
     public void Showmsg(String msg){
         gui.showMessage(msg);
+        
     }
     public String Userselectionarray(String msg, String[] options){
        return gui.getUserSelection(msg, options);
     }
+
+
 }

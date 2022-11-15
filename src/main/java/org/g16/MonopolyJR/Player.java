@@ -2,6 +2,8 @@ package org.g16.MonopolyJR;
 
 public class Player {
     MoneyBalance balance = new MoneyBalance();
+
+    private String name;
     private int playerPosition = 0;
     private int prevPlayerPosition = 0;
     Token playerToken;
@@ -16,6 +18,14 @@ public class Player {
     public Player(Token playerToken) {
         this.playerToken = playerToken;
 
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public void setID(int ID){
