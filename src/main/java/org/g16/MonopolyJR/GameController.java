@@ -14,7 +14,7 @@ public class GameController {
     int[] chanceArray=chancecard.Shufflechancecard();
     ChanceField chanceField= new ChanceField("chancefield");
     Initializer init = new Initializer();
-    Field prop[] = init.InitFields();
+    Field[] prop = init.InitFields();
     private MonopolyGUI monoGUI;
     public GameController(){
 
@@ -60,7 +60,7 @@ public class GameController {
     }
     private void playRound(int pt) {
         int playerIndex = pt-1;
-        Player currentPlayer = null;
+        Player currentPlayer;
         currentPlayer = players[playerIndex];
 
         checkJail(currentPlayer);
@@ -91,7 +91,6 @@ public class GameController {
             if (property.getOwner() == null) {
                 currentPlayer.AddBalance(-1 * property.getPrice());
                 checkBankrupt(currentPlayer);
-               // System.out.println("You pay " + property.getPrice());
                 property.setOwner(currentPlayer);
                 monoGUI.updateOwner(currentPlayer.getID(), currentPlayer.getPlayerPosition());
                 System.out.println(property.getOwner());
@@ -106,16 +105,15 @@ public class GameController {
                 monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
                 monoGUI.SetPlayerBalance(property.getOwner().getID(), property.getOwner().getPlayerBalance());
 
-                //  System.out.println("You pay " + property.getPrice() + "to" + property.getOwner());
             }
-        } else if (getField(currentPlayer.getPlayerPosition()) instanceof VisitorField visitor) {
+        } else if (getField(currentPlayer.getPlayerPosition()) instanceof VisitorField) {
             System.out.println("visit");
 
-        } else if (getField(currentPlayer.getPlayerPosition()) instanceof ChanceField chance) {
+        } else if (getField(currentPlayer.getPlayerPosition()) instanceof ChanceField) {
             DoChanceCard(currentPlayer);
             System.out.println("Chance");
 
-        } else if (getField(currentPlayer.getPlayerPosition()) instanceof  GoToJailField goToJail){
+        } else if (getField(currentPlayer.getPlayerPosition()) instanceof GoToJailField){
             currentPlayer.setJailed(true);
             System.out.println("You're jailed");
             currentPlayer.setPlayerPosition(6);
@@ -184,7 +182,7 @@ public class GameController {
     }
     private void checkBankrupt(Player player){
         System.out.println(player.getPlayerBalance());
-        if (player.getBankrupt() == true){
+        if (player.getBankrupt()){
             int max = 0;
             int playerNum = 0;
             for (int i = 0; i<players.length; i++){
@@ -198,95 +196,32 @@ public class GameController {
             winnerFound = true;
         }
     }
-    public int[] DoChanceCard(Player currentPlayer ){
+    public void DoChanceCard(Player currentPlayer ){
 
         chancecard.setNumchance(chanceArray);
 
         switch (chancecard.getNumchance()[0]) {
-                    case 1:{
-                for (int i=0;i<players.length;i++){
-                    if (players[i].playerToken==Token.Car){
-                        players[i].setTokenChancecard();
+            case 1 -> {
+                for (Player player : players) {
+                    if (player.playerToken == Token.Car) {
+                        player.setTokenChancecard();
                     }
                 }
                 monoGUI.Showmsg(Language.GetString("case1"));
-                break;
             }
-
-            case 2:{
+            case 2 -> {
                 currentPlayer.setPlayerPosition(0);
-                monoGUI.DrawPlayerPosition(currentPlayer.getID(),0);
+                monoGUI.DrawPlayerPosition(currentPlayer.getID(), 0);
                 monoGUI.Showmsg(Language.GetString("case2"));
-                break;
             }
-            case 3:{
-                int move= monoGUI.getUserinterger5();
-                if (move==0){
-                } else if (move==1) {
-                    movePlayer(currentPlayer,1);
-                } else if (move==2) {
-                    movePlayer(currentPlayer,2);
-                } else if (move==3) {
-                    movePlayer(currentPlayer,3);
-                } else if (move==4) {
-                    movePlayer(currentPlayer,4);
-                } else if (move==5) {
-                    movePlayer(currentPlayer,5);
-                }
+            case 3 -> {
+                int move = monoGUI.getUserinterger5();
+                movePlayer(currentPlayer,move);
                 landOnField(currentPlayer);
-                break;
             }
-            case 4:{
-                int move=monoGUI.Userselection2(Language.GetString("case4"),
-                        Language.GetString("skate"),Language.GetString("pool"));
-                if (move==1) {
-                    currentPlayer.setPlayerPosition(10);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(),10);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner()==null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 10);}}
-                } else if (move==2) {
-                    currentPlayer.setPlayerPosition(11);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(),11);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner()==null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 11);}}
-                }
-                landOnField(currentPlayer);
-                break;
-            }
-            case 5:{
-                int action= monoGUI.Userselection2(Language.GetString("case5"),
-                        Language.GetString("case5opt1"),Language.GetString("case5opt2"));
-                if (action==1){
-                    movePlayer(currentPlayer,1);
-                    landOnField(currentPlayer);
-                } else if (action==2) {
-                    DoChanceCard(currentPlayer);
-                }
-                break;
-            }
-            case 6:{
-                for (int i=0;i<players.length;i++){
-                    if (players[i].playerToken==Token.Car){
-                        players[i].setTokenChancecard();
-                    }
-                }
-                monoGUI.Showmsg(Language.GetString("case6"));
-                break;
-            }
-            case 7:{
-                currentPlayer.AddBalance(-2);
-                monoGUI.SetPlayerBalance(currentPlayer.getID(),-2);
-                break;
-            }
-            case 8:{
-                int move = monoGUI.Userselection4(Language.GetString("Case8")
-                ,Language.GetString("skate"),Language.GetString("pool"),Language.GetString("bowling"),Language.GetString("zoo"));
+            case 4 -> {
+                int move = monoGUI.Userselection2(Language.GetString("case4"),
+                        Language.GetString("skate"), Language.GetString("pool"));
                 if (move == 1) {
                     currentPlayer.setPlayerPosition(10);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(), 10);
@@ -307,7 +242,55 @@ public class GameController {
                             monoGUI.updateOwner(currentPlayer.getID(), 11);
                         }
                     }
-                }else if (move == 3) {
+                }
+                landOnField(currentPlayer);
+            }
+            case 5 -> {
+                int action = monoGUI.Userselection2(Language.GetString("case5"),
+                        Language.GetString("case5opt1"), Language.GetString("case5opt2"));
+                if (action == 1) {
+                    movePlayer(currentPlayer, 1);
+                    landOnField(currentPlayer);
+                } else if (action == 2) {
+                    DoChanceCard(currentPlayer);
+                }
+            }
+            case 6 -> {
+                for (Player player : players) {
+                    if (player.playerToken == Token.Car) {
+                        player.setTokenChancecard();
+                    }
+                }
+                monoGUI.Showmsg(Language.GetString("case6"));
+            }
+            case 7 -> {
+                currentPlayer.AddBalance(-2);
+                monoGUI.SetPlayerBalance(currentPlayer.getID(), -2);
+            }
+            case 8 -> {
+                int move = monoGUI.Userselection4(Language.GetString("Case8")
+                        , Language.GetString("skate"), Language.GetString("pool"), Language.GetString("bowling"), Language.GetString("zoo"));
+                if (move == 1) {
+                    currentPlayer.setPlayerPosition(10);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 10);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 10);
+                        }
+                    }
+                } else if (move == 2) {
+                    currentPlayer.setPlayerPosition(11);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 11);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 11);
+                        }
+                    }
+                } else if (move == 3) {
                     currentPlayer.setPlayerPosition(19);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(), 19);
                     if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
@@ -317,8 +300,7 @@ public class GameController {
                             monoGUI.updateOwner(currentPlayer.getID(), 19);
                         }
                     }
-                }
-                else if (move == 4) {
+                } else if (move == 4) {
                     currentPlayer.setPlayerPosition(20);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(), 20);
                     if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
@@ -330,11 +312,10 @@ public class GameController {
                     }
                 }
                 landOnField(currentPlayer);
-                break;
             }
-            case 9: {
+            case 9 -> {
                 int move = monoGUI.Userselection2(Language.GetString("case9"),
-                        Language.GetString("candy"),Language.GetString("ice"));
+                        Language.GetString("candy"), Language.GetString("ice"));
                 if (move == 1) {
                     currentPlayer.setPlayerPosition(4);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(), 4);
@@ -357,245 +338,229 @@ public class GameController {
                     }
                 }
                 landOnField(currentPlayer);
-                break;
             }
-            case 10:{
+            case 10 -> {
                 currentPlayer.addOutOfJailCard(1);
                 monoGUI.Showmsg(Language.GetString("case10"));
-                break;
             }
-            case 11:{
+            case 11 -> {
                 currentPlayer.setPlayerPosition(23);
-                monoGUI.DrawPlayerPosition(currentPlayer.getID(),23);
+                monoGUI.DrawPlayerPosition(currentPlayer.getID(), 23);
                 landOnField(currentPlayer);
                 monoGUI.Showmsg(Language.GetString("case11"));
-                break;
             }
-            case 12:{
-                for (int i=0;i<players.length;i++){
-                    if (players[i].playerToken==Token.Car){
-                        players[i].setTokenChancecard();
+            case 12 -> {
+                for (Player player : players) {
+                    if (player.playerToken == Token.Car) {
+                        player.setTokenChancecard();
                     }
                 }
                 monoGUI.Showmsg(Language.GetString("case12"));
-                break;
-                }
-            case 13:{
-                for (int i=0;i<players.length;i++){
-                    if (players[i].playerToken==Token.Car){
-                        players[i].setTokenChancecard();
+            }
+            case 13 -> {
+                for (Player player : players) {
+                    if (player.playerToken == Token.Car) {
+                        player.setTokenChancecard();
                     }
                 }
                 monoGUI.Showmsg(Language.GetString("case13"));
-                break;
             }
-            case 14: {
-                currentPlayer.AddBalance(1 * players.length);
-                monoGUI.SetPlayerBalance(currentPlayer.getID(), 1 * players.length);
+            case 14 -> {
+                currentPlayer.AddBalance(players.length);
+                monoGUI.SetPlayerBalance(currentPlayer.getID(), players.length);
 
-                for (int i = 0; i < players.length; i++) {
-                    players[i].AddBalance(-1);
+                for (Player player : players) {
+                    player.AddBalance(-1);
                 }
                 monoGUI.Showmsg(Language.GetString("case14"));
-                break;
-                }
-                case 15: {
-                    int move = monoGUI.Userselection4(Language.GetString("case15")
-                            ,Language.GetString("museum"),Language.GetString("library"),Language.GetString("waterpark"),Language.GetString("beach"));
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 7);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 7);
-                            }
-                        }
-                    else if (move == 2) {
-                        currentPlayer.setPlayerPosition(8);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 8);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 8);
-                            }
-                        }
-                    }else if (move == 3) {
-                        currentPlayer.setPlayerPosition(22);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 22);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 22);
-                            }
-                        }
+            }
+            case 15 -> {
+                int move = monoGUI.Userselection4(Language.GetString("case15")
+                        , Language.GetString("museum"), Language.GetString("library"), Language.GetString("waterpark"), Language.GetString("beach"));
+                monoGUI.DrawPlayerPosition(currentPlayer.getID(), 7);
+                if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                    System.out.println(property.getName());
+                    if (property.getOwner() == null) {
+                        property.setOwner(currentPlayer);
+                        monoGUI.updateOwner(currentPlayer.getID(), 7);
                     }
-                    else if (move == 4) {
-                        currentPlayer.setPlayerPosition(23);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 23);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 23);
-                            }
-                        }
-                    }
-                    landOnField(currentPlayer);
-                    break;
-                }
-                case 16: {
-                    currentPlayer.AddBalance(2);
-                    monoGUI.SetPlayerBalance(currentPlayer.getID(), 2);
-                    monoGUI.Showmsg(Language.GetString("case16"));
-                    break;
-                }
-                case 17: {
-                    int move =monoGUI.Userselection2(Language.GetString("case17"),
-                            Language.GetString("arcade"),Language.GetString("cinema"));
-                    if (move == 1) {
-                        currentPlayer.setPlayerPosition(13);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 13);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 13);
-                            }
-                        }
-                    } else if (move == 2) {
-                        currentPlayer.setPlayerPosition(14);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 14);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 14);
-                            }
-                        }
-                    }
-                    landOnField(currentPlayer);
-                    break;
-                }
-                case 18: {
-                    currentPlayer.setPlayerPosition(10);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(),10);
+                } else if (move == 2) {
+                    currentPlayer.setPlayerPosition(8);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 8);
                     if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
                         System.out.println(property.getName());
-                        if (property.getOwner()==null){
+                        if (property.getOwner() == null) {
                             property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(),10);
+                            monoGUI.updateOwner(currentPlayer.getID(), 8);
                         }
                     }
-                    monoGUI.Showmsg(Language.GetString("case18"));
-                    landOnField(currentPlayer);
-                    break;
+                } else if (move == 3) {
+                    currentPlayer.setPlayerPosition(22);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 22);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 22);
+                        }
+                    }
+                } else if (move == 4) {
+                    currentPlayer.setPlayerPosition(23);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 23);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 23);
+                        }
+                    }
                 }
-                case 19: {
-                    int move = monoGUI.Userselection4(Language.GetString("case19")
-                            ,Language.GetString("candy"),Language.GetString("ice"),Language.GetString("arcade"),Language.GetString("cinema"));
-                    if (move == 1) {
-                        currentPlayer.setPlayerPosition(4);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 4);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 4);
-                            }
-                        }
-                    } else if (move == 2) {
-                        currentPlayer.setPlayerPosition(5);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 5);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 5);
-                            }
-                        }
-                    }else if (move == 3) {
-                        currentPlayer.setPlayerPosition(13);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 13);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 13);
-                            }
-                        }
-                    }
-                    else if (move == 4) {
-                        currentPlayer.setPlayerPosition(14);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 14);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 14);
-                            }
-                        }
-                    }
-                    landOnField(currentPlayer);
-                    break;
-                }
-                case 20: {
-                    int move = monoGUI.Userselection4(Language.GetString("case20")
-                            ,Language.GetString("burger"),Language.GetString("pizza"),Language.GetString("toystore"),Language.GetString("petstore"));
-                    if (move == 1) {
-                        currentPlayer.setPlayerPosition(1);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 1);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 1);
-                            }
-                        }
-                    } else if (move == 2) {
-                        currentPlayer.setPlayerPosition(2);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 2);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 2);
-                            }
-                        }
-                    }else if (move == 3) {
-                        currentPlayer.setPlayerPosition(16);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 16);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 16);
-                            }
-                        }
-                    }
-                    else if (move == 4) {
-                        currentPlayer.setPlayerPosition(17);
-                        monoGUI.DrawPlayerPosition(currentPlayer.getID(), 17);
-                        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                            System.out.println(property.getName());
-                            if (property.getOwner() == null) {
-                                property.setOwner(currentPlayer);
-                                monoGUI.updateOwner(currentPlayer.getID(), 17);
-                            }
-                        }
-                    }
-                    landOnField(currentPlayer);
-                    break;
-                }
+                landOnField(currentPlayer);
             }
-            return chanceArray=chanceField.drawChancecard();
+            case 16 -> {
+                currentPlayer.AddBalance(2);
+                monoGUI.SetPlayerBalance(currentPlayer.getID(), 2);
+                monoGUI.Showmsg(Language.GetString("case16"));
+            }
+            case 17 -> {
+                int move = monoGUI.Userselection2(Language.GetString("case17"),
+                        Language.GetString("arcade"), Language.GetString("cinema"));
+                if (move == 1) {
+                    currentPlayer.setPlayerPosition(13);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 13);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 13);
+                        }
+                    }
+                } else if (move == 2) {
+                    currentPlayer.setPlayerPosition(14);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 14);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 14);
+                        }
+                    }
+                }
+                landOnField(currentPlayer);
+            }
+            case 18 -> {
+                currentPlayer.setPlayerPosition(10);
+                monoGUI.DrawPlayerPosition(currentPlayer.getID(), 10);
+                if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                    System.out.println(property.getName());
+                    if (property.getOwner() == null) {
+                        property.setOwner(currentPlayer);
+                        monoGUI.updateOwner(currentPlayer.getID(), 10);
+                    }
+                }
+                monoGUI.Showmsg(Language.GetString("case18"));
+                landOnField(currentPlayer);
+            }
+            case 19 -> {
+                int move = monoGUI.Userselection4(Language.GetString("case19")
+                        , Language.GetString("candy"), Language.GetString("ice"), Language.GetString("arcade"), Language.GetString("cinema"));
+                if (move == 1) {
+                    currentPlayer.setPlayerPosition(4);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 4);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 4);
+                        }
+                    }
+                } else if (move == 2) {
+                    currentPlayer.setPlayerPosition(5);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 5);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 5);
+                        }
+                    }
+                } else if (move == 3) {
+                    currentPlayer.setPlayerPosition(13);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 13);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 13);
+                        }
+                    }
+                } else if (move == 4) {
+                    currentPlayer.setPlayerPosition(14);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 14);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 14);
+                        }
+                    }
+                }
+                landOnField(currentPlayer);
+            }
+            case 20 -> {
+                int move = monoGUI.Userselection4(Language.GetString("case20")
+                        , Language.GetString("burger"), Language.GetString("pizza"), Language.GetString("toystore"), Language.GetString("petstore"));
+                if (move == 1) {
+                    currentPlayer.setPlayerPosition(1);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 1);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 1);
+                        }
+                    }
+                } else if (move == 2) {
+                    currentPlayer.setPlayerPosition(2);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 2);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 2);
+                        }
+                    }
+                } else if (move == 3) {
+                    currentPlayer.setPlayerPosition(16);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 16);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 16);
+                        }
+                    }
+                } else if (move == 4) {
+                    currentPlayer.setPlayerPosition(17);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 17);
+                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+                        System.out.println(property.getName());
+                        if (property.getOwner() == null) {
+                            property.setOwner(currentPlayer);
+                            monoGUI.updateOwner(currentPlayer.getID(), 17);
+                        }
+                    }
+                }
+                landOnField(currentPlayer);
+            }
+        }
+        chanceArray = chanceField.drawChancecard();
     }
     public void TokenChanceCard(){
-        List<String> avbprops=new ArrayList<String>();
-        for (int i=0;i<prop.length;i++){
-            if (prop[i] instanceof PropertyField propertyField){
-                if (propertyField.getOwner()==null){
+        List<String> avbprops= new ArrayList<>();
+        for (Field field : prop) {
+            if (field instanceof PropertyField propertyField) {
+                if (propertyField.getOwner() == null) {
                     avbprops.add(propertyField.getName());
                 }
             }
