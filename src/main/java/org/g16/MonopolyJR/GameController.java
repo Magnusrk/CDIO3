@@ -1,16 +1,7 @@
 package org.g16.MonopolyJR;
 
-import gui_fields.GUI_Car;
-import gui_fields.GUI_Player;
 import org.g16.GUI.MonopolyGUI;
-
-import java.awt.Color;
-
-import static gui_fields.GUI_Car.Pattern.ZEBRA;
-import static gui_fields.GUI_Car.Type.UFO;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -22,15 +13,9 @@ public class GameController {
     ChanceCard chancecard =new ChanceCard(IntStream.range(1,21).toArray());
     int[] chanceArray=chancecard.Shufflechancecard();
     ChanceField chanceField= new ChanceField("chancefield");
-
-
-
-
     Initializer init = new Initializer();
     Field prop[] = init.InitFields();
-
     private MonopolyGUI monoGUI;
-
     public GameController(){
 
     }
@@ -40,8 +25,6 @@ public class GameController {
         monoGUI.initGUI(prop, this);
         setup();
     }
-
-
 
     private void setup(){
         String chosenLanguage = monoGUI.chooseLanguage();
