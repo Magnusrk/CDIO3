@@ -91,6 +91,7 @@ public class GameController {
         checkPassStart(currentPlayer);
         landOnField(currentPlayer);
 
+
         if (!winnerFound){
             if (pt == players.length){
                 pt = 1;
@@ -216,15 +217,19 @@ public class GameController {
     public int[] DoChanceCard(Player currentPlayer ){
 
         chancecard.setNumchance(chanceArray);
-
-        switch (chancecard.getNumchance()[0]) {
+//chancecard.getNumchance()[0]
+        switch (1) {
                     case 1:{
+                        /*
                 for (int i=0;i<players.length;i++){
                     if (players[i].playerToken==Token.Car){
                         players[i].setTokenChancecard();
                     }
                 }
                 monoGUI.Showmsg(Language.GetString("case1"));
+
+                         */
+                        TokenChanceCard(currentPlayer);
                 break;
             }
 
@@ -604,21 +609,60 @@ public class GameController {
                     break;
                 }
             }
+            checkPassStart(currentPlayer);
             return chanceArray=chanceField.drawChancecard();
     }
-    public void TokenChanceCard(){
+
+    public void TokenChanceCard(Player currentPlayer){
         List<String> avbprops=new ArrayList<String>();
+        List<String> allprops=new ArrayList<String>();
         for (int i=0;i<prop.length;i++){
             if (prop[i] instanceof PropertyField propertyField){
                 if (propertyField.getOwner()==null){
-                    avbprops.add(propertyField.getName());
+                    avbprops.add(Language.GetString(propertyField.getName()));
                 }
+                allprops.add(Language.GetString(propertyField.getName()));
             }
         }
         if (avbprops.isEmpty()){
+            String[] alloptions= new String[allprops.size()];
+            allprops.toArray(alloptions);
 
+            String selectedprop=monoGUI.Userselectionarray("dsfa", alloptions);
+            for (int i=0;i<prop.length;i++){
+
+                if (Language.GetString(prop[i].getName()).equals(selectedprop)){
+                    currentPlayer.setPlayerPosition(i);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(),i);
+                    PropertyField propertyField= (PropertyField) prop[i];
+                    propertyField.getOwner().AddBalance(propertyField.getPrice());
+                    monoGUI.SetPlayerBalance(propertyField.getOwner().getID(),propertyField.getOwner().getPlayerBalance());
+                    propertyField.setOwner(currentPlayer);
+                    monoGUI.updateOwner(currentPlayer.getID(),i);
+                    currentPlayer.AddBalance(propertyField.getPrice()*(-1));
+                    monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
+                }
+            }
         }else {
-            String selectedprop=monoGUI.Userselectionarray("dsfa", (String[]) avbprops.toArray());
+                    String[] options= new String[avbprops.size()];
+                    avbprops.toArray(options);
+            String selectedprop=monoGUI.Userselectionarray("dsfa", options);
+            for (int i=0;i<prop.length;i++){
+
+                  if (Language.GetString(prop[i].getName()).equals(selectedprop)){
+                      currentPlayer.setPlayerPosition(i);
+                      monoGUI.DrawPlayerPosition(currentPlayer.getID(),i);
+                      PropertyField propertyField= (PropertyField) prop[i];
+                      propertyField.setOwner(currentPlayer);
+                      monoGUI.updateOwner(currentPlayer.getID(),i);
+                  }
+                }
+
         }
     }
+
+
+
+
+
 }
