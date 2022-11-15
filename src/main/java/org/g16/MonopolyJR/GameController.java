@@ -38,7 +38,7 @@ public class GameController {
 
     public void createPlayers(int[] ages, String[] names){
         players = new Player[ages.length];
-        Token[] tokens = new Token[]{Token.Cat,Token.Car,Token.Dog,Token.Ship};
+        Token[] tokens = new Token[]{Token.Car,Token.Tractor,Token.Racecar,Token.Ufo};
         for(int i = 0; i < ages.length; i++){
             players[i] = new Player(tokens[i]);
             players[i].setAge(ages[i]);
@@ -98,24 +98,20 @@ public class GameController {
                 System.out.println(property.getOwner());
                 monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
                 monoGUI.Showmsg(currentPlayer.getName() +" "  + Language.GetString("BoughtField") + " " + Language.GetString(property.getName())  +  ". " + Language.GetString("YouPay") + " "+ property.getPrice() );
-
-
             } else {
-                int rentMultiplier = AllColorsOwned(property) ? 2 : 1;
-                currentPlayer.AddBalance(-1*rentMultiplier * property.getPrice());
-                checkBankrupt(currentPlayer);
-                property.getOwner().AddBalance(rentMultiplier*property.getPrice());
-
-                monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
-                monoGUI.SetPlayerBalance(property.getOwner().getID(), property.getOwner().getPlayerBalance());
-                String notificationText = currentPlayer.getName() +" "  + Language.GetString("PaysRent")  +  " " + property.getOwner().getName()+ "." + Language.GetString("YouPay") + " "+ (property.getPrice() * rentMultiplier) +". ";
-                if(rentMultiplier == 2){
-                 notificationText+= "Because all colors are owned, the rent was doubled!";
+                if (property.getOwner() != currentPlayer) {
+                    int rentMultiplier = AllColorsOwned(property) ? 2 : 1;
+                    currentPlayer.AddBalance(-1 * rentMultiplier * property.getPrice());
+                    checkBankrupt(currentPlayer);
+                    property.getOwner().AddBalance(rentMultiplier * property.getPrice());
+                    monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
+                    monoGUI.SetPlayerBalance(property.getOwner().getID(), property.getOwner().getPlayerBalance());
+                    String notificationText = currentPlayer.getName() + " " + Language.GetString("PaysRent") + " " + property.getOwner().getName() + "." + Language.GetString("YouPay") + " " + (property.getPrice() * rentMultiplier) + ". ";
+                    if (rentMultiplier == 2) {
+                        notificationText += "Because all colors are owned, the rent was doubled!";
+                    }
+                    monoGUI.Showmsg(notificationText);
                 }
-
-                monoGUI.Showmsg(notificationText);
-
-
             }
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof VisitorField) {
             System.out.println("visit");
@@ -159,7 +155,6 @@ public class GameController {
         if (currentPlayer.getPlayerPosition() < currentPlayer.getPrevPlayerPosition()){
             currentPlayer.AddBalance(2);
             monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
-            System.out.println("Passed start");
         }
     }
 

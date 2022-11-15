@@ -62,8 +62,6 @@ public class MonopolyGUI {
                     PropertyField property = (PropertyField)startingFields[i];
                     guiFields[i].setDescription( Language.GetString("price") + " " + property.getPrice());
                     guiFields[i].setBackGroundColor(ConvertColor(property.getColor()));
-                    //Color
-                    //Price/subtitle
                     break;
             }
             guiFields[i].setTitle(startingFields[i].getName());
@@ -278,15 +276,15 @@ public class MonopolyGUI {
                 guiPlayer = new GUI_Player(player, startingBalance, car);
             }
             case 1 -> {
-                tractor = new GUI_Car(Color.blue, Color.yellow, TRACTOR, HORIZONTAL_DUAL_COLOR);
+                tractor = new GUI_Car(Color.blue, Color.green, TRACTOR, HORIZONTAL_DUAL_COLOR);
                 guiPlayer = new GUI_Player(player, startingBalance, tractor);
             }
             case 2 -> {
-                racer = new GUI_Car(Color.black, Color.lightGray, RACECAR, ZEBRA);
+                racer = new GUI_Car(Color.black, Color.red, RACECAR, HORIZONTAL_LINE);
                 guiPlayer = new GUI_Player(player, startingBalance, racer);
             }
             case 3 -> {
-                ufo = new GUI_Car(Color.black, Color.lightGray, UFO, ZEBRA);
+                ufo = new GUI_Car(Color.lightGray, Color.lightGray, UFO, HORIZONTAL_DUAL_COLOR);
                 guiPlayer = new GUI_Player(player, startingBalance, ufo);
             }
             default -> {
