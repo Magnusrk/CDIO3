@@ -68,6 +68,9 @@ public class GameController {
         currentPlayer = players[playerIndex];
 
         checkJail(currentPlayer);
+        if (currentPlayer.getTokenChancecard()==true){
+            TokenChanceCard(currentPlayer);
+        }
 
         monoGUI.PromptThrowDice(playerIndex);
         int roll = Die.throwDie();
@@ -211,6 +214,7 @@ public class GameController {
 
         chancecard.setNumchance(chanceArray);
 
+
         switch (chancecard.getNumchance()[0]) {
             case 1 -> {
                 for (Player player : players) {
@@ -261,7 +265,7 @@ public class GameController {
             }
             case 7 -> {
                 currentPlayer.AddBalance(-2);
-                monoGUI.SetPlayerBalance(currentPlayer.getID(), -2);
+                monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
             }
             case 8 -> {
                 int move = monoGUI.Userselection4(Language.GetString("case8")
@@ -315,10 +319,11 @@ public class GameController {
             }
             case 14 -> {
                 currentPlayer.AddBalance(players.length);
-                monoGUI.SetPlayerBalance(currentPlayer.getID(), players.length);
+                ;
 
                 for (Player player : players) {
                     player.AddBalance(-1);
+                    monoGUI.SetPlayerBalance(player.getID(), player.getPlayerBalance());
                 }
                 monoGUI.Showmsg(Language.GetString("case14"));
             }
@@ -343,7 +348,7 @@ public class GameController {
             }
             case 16 -> {
                 currentPlayer.AddBalance(2);
-                monoGUI.SetPlayerBalance(currentPlayer.getID(), 2);
+                monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
                 monoGUI.Showmsg(Language.GetString("case16"));
             }
             case 17 -> {
