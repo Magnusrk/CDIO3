@@ -198,6 +198,7 @@ public class GameController {
                 }
             }
             System.out.println("Player " + (playerNum+1) + " won");
+            monoGUI.Showmsg(players[playerNum].getName() + " won the game!");
             winnerFound = true;
         }
     }
@@ -257,7 +258,7 @@ public class GameController {
                 monoGUI.SetPlayerBalance(currentPlayer.getID(), -2);
             }
             case 8 -> {
-                int move = monoGUI.Userselection4(Language.GetString("Case8")
+                int move = monoGUI.Userselection4(Language.GetString("case8")
                         , Language.GetString("skate"), Language.GetString("pool"), Language.GetString("bowling"), Language.GetString("zoo"));
                 if (move == 1) {
                     moveAndBuy(currentPlayer, 10);
@@ -412,5 +413,13 @@ public class GameController {
         }else {
             String selectedprop=monoGUI.Userselectionarray("dsfa", (String[]) avbprops.toArray());
         }
+    }
+
+    public void exitGame(){
+        monoGUI.closeGUI();
+    }
+
+    public boolean askRestart(){
+        return monoGUI.yesNoQuestion(Language.GetString("restartQuestion"));
     }
 }
