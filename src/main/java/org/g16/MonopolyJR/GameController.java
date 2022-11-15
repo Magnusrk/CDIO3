@@ -421,7 +421,7 @@ public class GameController {
     }
 
     public void exitGame(){
-
+        monoGUI.closeGUI();
     }
 
     public boolean askRestart(){
