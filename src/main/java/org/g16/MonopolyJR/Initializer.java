@@ -71,11 +71,11 @@ public class Initializer {
         ChanceField chance4 = new ChanceField("chance");
         fields[21] = chance4;
         //field 22
-        PropertyField strandpromenade = new PropertyField("beach",Color.DarkBlue, 5);
-        fields[22] = strandpromenade;
-        //field 23
         PropertyField vandpark = new PropertyField("waterpark",Color.DarkBlue, 5);
-        fields[23] = vandpark;
+        fields[22] = vandpark;
+        //field 23
+        PropertyField strandpromenade = new PropertyField("beach",Color.DarkBlue, 5);
+        fields[23] = strandpromenade;
         return fields;
     }
 }
