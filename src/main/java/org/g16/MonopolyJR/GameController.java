@@ -4,8 +4,6 @@ import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 import org.g16.GUI.MonopolyGUI;
 
-<<<<<<<<< Temporary merge branch 1
-=========
 import java.awt.Color;
 
 import static gui_fields.GUI_Car.Pattern.ZEBRA;
@@ -14,7 +12,6 @@ import static gui_fields.GUI_Car.Type.UFO;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
->>>>>>>>> Temporary merge branch 2
 import java.util.stream.IntStream;
 
 
