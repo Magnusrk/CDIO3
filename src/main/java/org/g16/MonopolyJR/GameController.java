@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 public class GameController {
     private boolean winnerFound = false;
     private Player[] players;
+ 
 
     ChanceCard chancecard =new ChanceCard(IntStream.range(1,21).toArray());
     int[] chanceArray=chancecard.Shufflechancecard();
