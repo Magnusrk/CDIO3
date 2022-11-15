@@ -87,7 +87,6 @@ public class GameController {
     }
 
     private void landOnField(Player currentPlayer) {
-        int playerIndex;
         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
             System.out.println(property.getName());
             if (property.getOwner() == null) {
