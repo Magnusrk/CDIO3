@@ -4,7 +4,11 @@ import org.g16.MonopolyJR.*;
 import gui_main.GUI;
 
 import java.awt.Color;
+import java.lang.reflect.Type;
 import java.util.Objects;
+
+import static gui_fields.GUI_Car.Pattern.*;
+import static gui_fields.GUI_Car.Type.*;
 
 public class MonopolyGUI {
 
@@ -36,7 +40,7 @@ public class MonopolyGUI {
      */
     public GUI initGUI(Field[] startingFields, GameController gameController){
         this.gameController = gameController;
-        this.startingFields = startingFields;
+        this.startingFields= startingFields;
         GUI_Field[] guiFields = new GUI_Field[startingFields.length];
         for(int i = 0; i < startingFields.length; i++){
             switch (startingFields[i].getClass().getSimpleName()){
@@ -47,9 +51,15 @@ public class MonopolyGUI {
                         guiFields[i].setSubText(Language.GetString("startsub"));
 
                     } else {
-                        guiFields[i] = new GUI_Refuge();
+                        guiFields[i] = new GUI_Refuge("src/main/resources/parkering.jpg",Language.GetString("parkering"),Language.GetString("parking"),"",Color.lightGray,Color.black);
                     }
                     break;
+                case  "Jail":
+                        guiFields[i] = new GUI_Jail("src/main/resources/jail.jpg", Language.GetString("prison"), Language.GetString("prison"), "", Color.lightGray, Color.black);
+                    break;
+                case "GoToJailField":
+                        guiFields[i] = new GUI_Jail("src/main/resources/GoTo.jpg", Language.GetString("gotojail"), Language.GetString("gotojail"), "", Color.lightGray, Color.black);
+                        break;
                 case "ChanceField":
                     guiFields[i] = new GUI_Chance();
                     guiFields[i].setSubText(Language.GetString("tryluck"));
@@ -79,10 +89,18 @@ public class MonopolyGUI {
                     //If i == 0, it's the start field
                     if (i == 0) {
                         gui.getFields()[i].setSubText(Language.GetString("startsub"));
+                    } else {
+                        gui.getFields()[i].setSubText(Language.GetString("parking"));
                     }
                     break;
                 case "ChanceField":
                     gui.getFields()[i].setSubText(Language.GetString("tryluck"));
+                    break;
+                case "Jail":
+                    gui.getFields()[i].setSubText(Language.GetString("prison"));
+                    break;
+                case "GoToJailField":
+                    gui.getFields()[i].setSubText(Language.GetString("gotojail"));
                     break;
                 case "PropertyField":
 
@@ -96,9 +114,9 @@ public class MonopolyGUI {
         }
     }
 
-    private java.awt.Color ConvertColor(org.g16.MonopolyJR.Color col) {
-        if (org.g16.MonopolyJR.Color.DarkBlue == col) {
-            return Color.BLUE;
+    private java.awt.Color ConvertColor(org.g16.MonopolyJR.Color col){
+        if(org.g16.MonopolyJR.Color.DarkBlue == col){
+         return Color.BLUE;
         }
         if(org.g16.MonopolyJR.Color.Blue == col){
             return Color.CYAN;
@@ -142,17 +160,18 @@ public class MonopolyGUI {
      */
     public String chooseLanguage(){
         String chosenLanguage = gui.getUserSelection(
-                "Choose game language",
+                Language.GetString("chooseLanguage"),
                 "Dansk",
                         "English",
-                        "Test"
+                        "Thai",
+                        "Japanese"
         );
 
         return switch (chosenLanguage) {
             default -> "da";
             case "English" -> "en";
             case "Thai" -> "th";
-            case "JP" -> "jp";
+            case "Japanese" -> "jp";
         };
     }
 
@@ -171,7 +190,6 @@ public class MonopolyGUI {
 
     /**
      * Draw dies
-     * @param faceValue1
      *
      * This will draw the die at a random position with random rotation
      * with the given face values.
@@ -188,14 +206,14 @@ public class MonopolyGUI {
      * with the given face values.
      */
     public void PromptThrowDice(int playerID){
-        gui.showMessage(guiPlayers[playerID].getName() + " throw the dice!");
+        gui.showMessage(guiPlayers[playerID].getName() + " "+ Language.GetString("throwDice"));
     }
 
     /**
      * Set a players balance
+     *
      * @param playerID
-     * @param balance
-     * Sets player with the corrosponding ID's balance
+     * @param balance  Sets player with the corrosponding ID's balance
      */
     public void SetPlayerBalance(int playerID, int balance){
         guiPlayers[playerID].setBalance(balance);
@@ -208,10 +226,10 @@ public class MonopolyGUI {
      * the amount of players is already at it's maximum
      */
     public void SetupPlayers(){
-        int desiredPlayers = gui.getUserInteger("How many players are you? " + "(2-4)");
+        int desiredPlayers = gui.getUserInteger( Language.GetString("howManyPlayers")+ " (2-4)");
         while(desiredPlayers < 2 || desiredPlayers > 4){
-            gui.showMessage("Too many or too few players.. ");
-            desiredPlayers = gui.getUserInteger("How many players are you? " + "(2-4)");
+            gui.showMessage(Language.GetString("tooManyOrFew"));
+            desiredPlayers = gui.getUserInteger( Language.GetString("howManyPlayers")+ " (2-4)");
         }
 
         guiPlayers = new GUI_Player[desiredPlayers];
@@ -223,7 +241,7 @@ public class MonopolyGUI {
             GUI_Player newPlayer = AddPlayerPrompt();
             guiPlayers[playerCount] = newPlayer;
             unavailablePlayerNames[playerCount] = newPlayer.getName();
-            guiAges[playerCount] = gui.getUserInteger("Enter age");
+            guiAges[playerCount] = gui.getUserInteger(Language.GetString("enterAge"));
             DrawPlayerPosition(playerCount,0);
             playerCount++;
         }
@@ -237,26 +255,58 @@ public class MonopolyGUI {
      */
     private GUI_Player AddPlayerPrompt(){
         String player;
-        player = gui.getUserString("Enter player name. ");
-        /*
-        do {
-            player = gui.getUserString("Enter player name. ");
-        } while (playerNameTaken(player));
-        /*
-         */
-        GUI_Player guiPlayer = new GUI_Player(player);
+        player = gui.getUserString(Language.GetString("enterPlayerName"));
+        boolean isTaken = playerNameTaken(player);
+
+        while (isTaken){
+            gui.showMessage(Language.GetString("playerNameTaken"));
+            player = gui.getUserString(Language.GetString("enterPlayerName"));
+            isTaken = playerNameTaken(player);
+        }
+        GUI_Car car;
+        GUI_Car tractor;
+        GUI_Car racer;
+        GUI_Car ufo;
+
+        GUI_Player guiPlayer;
+
+        switch (playerCount){
+            case 0:
+                car = new GUI_Car(java.awt.Color.black, Color.red, CAR,HORIZONTAL_GRADIANT);
+                guiPlayer = new GUI_Player(player, startingBalance, car);
+                break;
+            case 1:
+                tractor = new GUI_Car(Color.blue, Color.yellow, TRACTOR,HORIZONTAL_DUAL_COLOR);
+                guiPlayer = new GUI_Player(player, startingBalance, tractor);
+                break;
+            case 2:
+                racer = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, RACECAR,ZEBRA);
+                guiPlayer = new GUI_Player(player, startingBalance, racer);
+                break;
+            case 3:
+                ufo = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, UFO,ZEBRA);
+                guiPlayer = new GUI_Player(player, startingBalance, ufo);
+                break;
+            default:
+                car = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, CAR,ZEBRA);
+                guiPlayer = new GUI_Player(player, startingBalance, car);
+        }
+
+
         guiPlayer.setBalance(startingBalance);
         guiPlayer.getCar().setPrimaryColor(playerCarColors[playerCount]);
         gui.addPlayer(guiPlayer);
-        gui.showMessage("Added player " + player);
+        gui.showMessage(Language.GetString("addedPlayer") +" "+ player);
         return guiPlayer;
     }
 
     private boolean playerNameTaken(String player){
         for (String name:
              unavailablePlayerNames) {
-            if(name.equals(player)){
-                return true;
+            if(name != null){
+                if(name.equals(player)){
+                    return true;
+                }
             }
         }
         return false;
@@ -299,5 +349,8 @@ public class MonopolyGUI {
 
     public void Showmsg(String msg){
         gui.showMessage(msg);
+    }
+    public String Userselectionarray(String msg, String[] options){
+       return gui.getUserSelection(msg, options);
     }
 }

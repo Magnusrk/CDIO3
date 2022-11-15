@@ -1,7 +1,17 @@
 package org.g16.MonopolyJR;
 
+import gui_fields.GUI_Car;
+import gui_fields.GUI_Player;
 import org.g16.GUI.MonopolyGUI;
 
+import java.awt.Color;
+
+import static gui_fields.GUI_Car.Pattern.ZEBRA;
+import static gui_fields.GUI_Car.Type.UFO;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 
 
@@ -14,7 +24,7 @@ public class GameController {
     ChanceField chanceField= new ChanceField("chancefield");
 
 
- 
+
 
     Initializer init = new Initializer();
     Field prop[] = init.InitFields();
@@ -52,8 +62,18 @@ public class GameController {
             players[i].setID(i);
         }
 
+        int firstTurnIndex = 0;
+        int youngestAge = Integer.MAX_VALUE;
+        for(int n = 0; n < players.length; n++){
+            int playerAge = players[n].getAge();
+            if(playerAge < youngestAge){
+                firstTurnIndex = n;
+                youngestAge = playerAge;
+            }
+        }
+
         //Start with the youngest lad
-        playRound(1);
+        playRound(firstTurnIndex+1);
     }
     private void playRound(int pt) {
         int playerIndex = pt-1;
@@ -95,9 +115,11 @@ public class GameController {
                 monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
 
             } else {
-                currentPlayer.AddBalance(-1 * property.getPrice());
+                int rentMultiplier = AllColorsOwned(property) ? 2 : 1;
+                currentPlayer.AddBalance(-1*rentMultiplier * property.getPrice());
                 checkBankrupt(currentPlayer);
-                property.getOwner().AddBalance(property.getPrice());
+                property.getOwner().AddBalance(rentMultiplier*property.getPrice());
+
                 monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
                 monoGUI.SetPlayerBalance(property.getOwner().getID(), property.getOwner().getPlayerBalance());
 
@@ -114,6 +136,28 @@ public class GameController {
             currentPlayer.setJailed(true);
             System.out.println("You're jailed");
         }
+    }
+
+    private boolean AllColorsOwned(PropertyField currentProperty){
+        org.g16.MonopolyJR.Color propertyColor = currentProperty.getColor();
+        Player propertyOwner = currentProperty.getOwner();
+
+        if(currentProperty.getOwner() != null){
+            for (Field field: prop) {
+                if(field instanceof PropertyField property){
+                    if(propertyColor == property.getColor()){
+                        if(property.getOwner() == null) {
+                            return false;
+                        }
+                        if(property.getOwner().getID() != propertyOwner.getID()){
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+            }
+        return false;
     }
 
     private void checkPassStart(Player currentPlayer) {
@@ -144,12 +188,11 @@ public class GameController {
     }
     private void movePlayer(Player player, int moves){
         int newPos = player.getPlayerPosition()+moves;
-        if (newPos >23) {
-            if (newPos % 23 == 0){
-                newPos = 23;
-            } else {
-                newPos = (newPos % 23) + 1;
-            }
+
+        //If the new position is out of bounds. Loop around until the index in within
+        //The bounds of the array
+        while(newPos >= prop.length){
+            newPos -= prop.length;
         }
         monoGUI.DrawPlayerPosition(player.getID(),newPos);
         player.setPlayerPosition(newPos);
@@ -174,9 +217,8 @@ public class GameController {
 
         chancecard.setNumchance(chanceArray);
 
-        //switch (chancecard.getNumchance()[0]) {
-        switch (1){
-            case 1:{
+        switch (chancecard.getNumchance()[0]) {
+                    case 1:{
                 for (int i=0;i<players.length;i++){
                     if (players[i].playerToken==Token.Car){
                         players[i].setTokenChancecard();
@@ -233,8 +275,8 @@ public class GameController {
                 break;
             }
             case 5:{
-                int action= monoGUI.Userselection2(Language.GetString("Case5"),
-                        Language.GetString("Case5opt1"),Language.GetString("Case5opt2"));
+                int action= monoGUI.Userselection2(Language.GetString("case5"),
+                        Language.GetString("case5opt1"),Language.GetString("case5opt2"));
                 if (action==1){
                     movePlayer(currentPlayer,1);
                     landOnField(currentPlayer);
@@ -563,5 +605,20 @@ public class GameController {
                 }
             }
             return chanceArray=chanceField.drawChancecard();
+    }
+    public void TokenChanceCard(){
+        List<String> avbprops=new ArrayList<String>();
+        for (int i=0;i<prop.length;i++){
+            if (prop[i] instanceof PropertyField propertyField){
+                if (propertyField.getOwner()==null){
+                    avbprops.add(propertyField.getName());
+                }
+            }
+        }
+        if (avbprops.isEmpty()){
+
+        }else {
+            String selectedprop=monoGUI.Userselectionarray("dsfa", (String[]) avbprops.toArray());
+        }
     }
 }
