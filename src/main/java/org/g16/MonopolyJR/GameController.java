@@ -227,8 +227,8 @@ public class GameController {
         switch (chancecard.getNumchance()[0]) {
             case 1 -> {
                 for (Player player : players) {
-                    if (player.playerToken == Token.Car) {
-                        player.setTokenChancecard();
+                    if (player.playerToken == Token.Ufo) {
+                        player.setTokenChancecard(true);
                     }
                 }
                 monoGUI.Showmsg(Language.GetString("case1"));
@@ -266,8 +266,8 @@ public class GameController {
             }
             case 6 -> {
                 for (Player player : players) {
-                    if (player.playerToken == Token.Car) {
-                        player.setTokenChancecard();
+                    if (player.playerToken == Token.Racecar) {
+                        player.setTokenChancecard(true);
                     }
                 }
                 monoGUI.Showmsg(Language.GetString("case6"));
@@ -313,15 +313,15 @@ public class GameController {
             case 12 -> {
                 for (Player player : players) {
                     if (player.playerToken == Token.Car) {
-                        player.setTokenChancecard();
+                        player.setTokenChancecard(true);
                     }
                 }
                 monoGUI.Showmsg(Language.GetString("case12"));
             }
             case 13 -> {
                 for (Player player : players) {
-                    if (player.playerToken == Token.Car) {
-                        player.setTokenChancecard();
+                    if (player.playerToken == Token.Tractor) {
+                        player.setTokenChancecard(true);
                     }
                 }
                 monoGUI.Showmsg(Language.GetString("case13"));
@@ -463,7 +463,7 @@ public class GameController {
                       monoGUI.updateOwner(currentPlayer.getID(),i);
                   }
                 }
-
+            currentPlayer.setTokenChancecard(false);
         }
     }
 
