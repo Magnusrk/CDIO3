@@ -154,7 +154,7 @@ public class GameController {
     private void checkPassStart(Player currentPlayer) {
         if (currentPlayer.getPlayerPosition() < currentPlayer.getPrevPlayerPosition()){
             currentPlayer.AddBalance(2);
-            monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
+            monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance()+2);
         }
     }
 
@@ -244,6 +244,7 @@ public class GameController {
                     movePlayer(currentPlayer, 1);
                     landOnField(currentPlayer);
                 } else if (action == 2) {
+                    chanceArray = chanceField.drawChancecard();
                     DoChanceCard(currentPlayer);
                 }
             }
