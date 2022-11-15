@@ -77,6 +77,9 @@ public class GameController {
         currentPlayer = players[playerIndex];
 
         checkJail(currentPlayer);
+        if (currentPlayer.getTokenChancecard()==true){
+            TokenChanceCard(currentPlayer);
+        }
 
         monoGUI.PromptThrowDice(playerIndex);
         int roll = Die.throwDie();
@@ -219,10 +222,9 @@ public class GameController {
     public void DoChanceCard(Player currentPlayer ){
 
         chancecard.setNumchance(chanceArray);
-/*chancecard.getNumchance()[0]
 
- */
-        switch (14) {
+
+        switch (chancecard.getNumchance()[0]) {
             case 1 -> {
                 for (Player player : players) {
                     if (player.playerToken == Token.Car) {
