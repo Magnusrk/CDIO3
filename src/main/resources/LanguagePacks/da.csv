@@ -71,6 +71,10 @@ enterAge;Indtast alder
 enterPlayerName;Indtast navn
 playerNameTaken;Navnet er allerede taget. Vælg et unikt navn.
 addedPlayer;Tilføjede spiller
+gotojailprompt;bliver sat i fængsel.
+BoughtField;bought the property
+YouPay;You pay
+PaysRent;pays rent to
 BoughtField;Købt ejendommen
 YouPay; Du betale
 PaysRent; Betal rante til

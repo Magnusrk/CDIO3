@@ -4,8 +4,6 @@ import org.g16.MonopolyJR.*;
 import gui_main.GUI;
 
 import java.awt.Color;
-import java.lang.reflect.Type;
-import java.util.Objects;
 
 import static gui_fields.GUI_Car.Pattern.*;
 import static gui_fields.GUI_Car.Type.*;
@@ -13,8 +11,6 @@ import static gui_fields.GUI_Car.Type.*;
 public class MonopolyGUI {
 
     private GUI gui;
-    private final int MAX_PLAYERS = 4;
-    private final int startingBalance = 20;
     private final java.awt.Color[] playerCarColors = new java.awt.Color[]{
             Color.orange,
             Color.green,
@@ -22,24 +18,19 @@ public class MonopolyGUI {
             Color.black
     };
     private GUI_Player[] guiPlayers;
-    private int[] guiAges;
     private String[] guiNames;
     private String[] unavailablePlayerNames;
     private int playerCount = 0;
-
     private GameController gameController;
-
     private Field[] startingFields;
-
 
     /**
      * Initialize monopoly GUI
-     * @param startingFields
-     * The method will draw the playing board and return a GUI object,
-     * which can be used to interact with the GUI.
-     * @return GUI object.
+     *
+     * @param startingFields The method will draw the playing board and return a GUI object,
+     *                       which can be used to interact with the GUI.
      */
-    public GUI initGUI(Field[] startingFields, GameController gameController){
+    public void initGUI(Field[] startingFields, GameController gameController){
         this.gameController = gameController;
         this.startingFields= startingFields;
         GUI_Field[] guiFields = new GUI_Field[startingFields.length];
@@ -69,9 +60,9 @@ public class MonopolyGUI {
                     guiFields[i] = new GUI_Street();
                     guiFields[i].setSubText(Language.GetString("noowner"));
                     PropertyField property = (PropertyField)startingFields[i];
-                    guiFields[i].setDescription( Language.GetString("price") + " " + String.valueOf(property.getPrice()));
+                    guiFields[i].setDescription( Language.GetString("price") + " " + property.getPrice());
                     guiFields[i].setBackGroundColor(ConvertColor(property.getColor()));
-                    //COlor
+                    //Color
                     //Price/subtitle
                     break;
             }
@@ -79,11 +70,14 @@ public class MonopolyGUI {
         }
 
         gui = new GUI(guiFields);
-        return gui;
     }
 
+
+    /**
+     * Update fields text and descriptions
+     *If the language is changed, this method can be called to change and re-render all fields on the board.
+     */
     public void UpdateFields() {
-        GUI_Field[] currentFields = gui.getFields();
         for (int i = 0; i < startingFields.length; i++) {
             switch (startingFields[i].getClass().getSimpleName()) {
                 default:
@@ -107,7 +101,7 @@ public class MonopolyGUI {
 
                     gui.getFields()[i].setSubText(Language.GetString("noowner"));
                     PropertyField property = (PropertyField) startingFields[i];
-                    gui.getFields()[i].setDescription(Language.GetString("price") + " " + String.valueOf(property.getPrice()));
+                    gui.getFields()[i].setDescription(Language.GetString("price") + " " + property.getPrice());
                     break;
             }
             gui.getFields()[i].setTitle(Language.GetString(startingFields[i].getName()));
@@ -115,6 +109,10 @@ public class MonopolyGUI {
         }
     }
 
+    /** Used to convert from MonopolyJR.color to java.awt.color
+     * @param col the color from the MonopolyJR class.
+     *@return java.awt.Color
+     */
     private java.awt.Color ConvertColor(org.g16.MonopolyJR.Color col){
         if(org.g16.MonopolyJR.Color.DarkBlue == col){
          return Color.BLUE;
@@ -191,7 +189,6 @@ public class MonopolyGUI {
 
     /**
      * Draw dies
-     *
      * This will draw the die at a random position with random rotation
      * with the given face values.
      */
@@ -213,7 +210,7 @@ public class MonopolyGUI {
     /**
      * Set a players balance
      *
-     * @param playerID
+     * @param playerID ID of the player
      * @param balance  Sets player with the corrosponding ID's balance
      */
     public void SetPlayerBalance(int playerID, int balance){
@@ -228,13 +225,14 @@ public class MonopolyGUI {
      */
     public void SetupPlayers(){
         int desiredPlayers = gui.getUserInteger( Language.GetString("howManyPlayers")+ " (2-4)");
-        while(desiredPlayers < 2 || desiredPlayers > 4){
+        int MAX_PLAYERS = 4;
+        while(desiredPlayers < 2 || desiredPlayers > MAX_PLAYERS){
             gui.showMessage(Language.GetString("tooManyOrFew"));
             desiredPlayers = gui.getUserInteger( Language.GetString("howManyPlayers")+ " (2-4)");
         }
 
         guiPlayers = new GUI_Player[desiredPlayers];
-        guiAges = new int[desiredPlayers];
+        int[] guiAges = new int[desiredPlayers];
         guiNames = new String[desiredPlayers];
         unavailablePlayerNames = new String[desiredPlayers];
 
@@ -273,26 +271,28 @@ public class MonopolyGUI {
 
         GUI_Player guiPlayer;
 
-        switch (playerCount){
-            case 0:
-                car = new GUI_Car(java.awt.Color.black, Color.red, CAR,HORIZONTAL_GRADIANT);
+        int startingBalance = 20;
+        switch (playerCount) {
+            case 0 -> {
+                car = new GUI_Car(Color.black, Color.red, CAR, HORIZONTAL_GRADIANT);
                 guiPlayer = new GUI_Player(player, startingBalance, car);
-                break;
-            case 1:
-                tractor = new GUI_Car(Color.blue, Color.yellow, TRACTOR,HORIZONTAL_DUAL_COLOR);
+            }
+            case 1 -> {
+                tractor = new GUI_Car(Color.blue, Color.yellow, TRACTOR, HORIZONTAL_DUAL_COLOR);
                 guiPlayer = new GUI_Player(player, startingBalance, tractor);
-                break;
-            case 2:
-                racer = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, RACECAR,ZEBRA);
+            }
+            case 2 -> {
+                racer = new GUI_Car(Color.black, Color.lightGray, RACECAR, ZEBRA);
                 guiPlayer = new GUI_Player(player, startingBalance, racer);
-                break;
-            case 3:
-                ufo = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, UFO,ZEBRA);
+            }
+            case 3 -> {
+                ufo = new GUI_Car(Color.black, Color.lightGray, UFO, ZEBRA);
                 guiPlayer = new GUI_Player(player, startingBalance, ufo);
-                break;
-            default:
-                car = new GUI_Car(java.awt.Color.black, java.awt.Color.lightGray, CAR,ZEBRA);
+            }
+            default -> {
+                car = new GUI_Car(Color.black, Color.lightGray, CAR, ZEBRA);
                 guiPlayer = new GUI_Player(player, startingBalance, car);
+            }
         }
 
 
@@ -303,6 +303,10 @@ public class MonopolyGUI {
         return guiPlayer;
     }
 
+    /** Checks if the player name is already taken
+     * @param player the player name that is wanted to be used
+     *@return boolean
+     */
     private boolean playerNameTaken(String player){
         for (String name:
              unavailablePlayerNames) {
@@ -315,6 +319,10 @@ public class MonopolyGUI {
         return false;
     }
 
+    /** Updates the displayed owner of a field.
+     *@param playerID the ID of the new owner
+     *@param field the index of the field, which the player is to be the owner of
+     */
     public void updateOwner(int playerID, int field) {
         if (playerID == -1) {
             gui.getFields()[field].setSubText(Language.GetString("noowner"));
@@ -322,6 +330,7 @@ public class MonopolyGUI {
             gui.getFields()[field].setSubText(guiPlayers[playerID].getName());
         }
     }
+
 
     public int getUserinterger5() {
         return gui.getUserInteger("Move up to five spaces", 0, 5);
@@ -331,7 +340,7 @@ public class MonopolyGUI {
 
     public int Userselection2(String msg, String opt1, String opt2){
         String selection=gui.getUserSelection(msg,opt1,opt2);
-        if (selection==opt1){
+        if (selection.equals(opt1)){
             return 1;
         } else {
             return 2;
@@ -339,11 +348,11 @@ public class MonopolyGUI {
     }
     public int Userselection4(String msg, String opt1, String opt2,String opt3, String opt4){
         String selection=gui.getUserSelection(msg,opt1,opt2,opt3,opt4);
-        if (selection==opt1){
+        if (selection.equals(opt1)){
             return 1;
-        } else if (selection==opt2) {
+        } else if (selection.equals(opt2)) {
             return 2;
-        } else if (selection==opt3) {
+        } else if (selection.equals(opt3)) {
             return 3;
         } else {
             return 4;
@@ -352,16 +361,26 @@ public class MonopolyGUI {
 
     public void Showmsg(String msg){
         gui.showMessage(msg);
-        
+
     }
     public String Userselectionarray(String msg, String[] options){
        return gui.getUserSelection(msg, options);
     }
 
+    public void PromptGotoJail(int playerID) {
+        gui.showMessage( guiPlayers[playerID].getName() + " "+ Language.GetString("gotojailprompt"));
+    }
+
+    /** Closes the monopoly GUI
+     */
     public void closeGUI(){
         gui.close();
     }
 
+    /** Askes the use a question which can be answered with a 'yes' or 'no'
+     * @param msg The question of which will be asked
+     * @return boolean True if the answer was 'yes', otherwise 'no'
+     */
     public boolean yesNoQuestion(String msg){
         String yesString = Language.GetString("yesTxt");
         String noString = Language.GetString("noTxt");

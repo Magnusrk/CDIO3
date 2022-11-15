@@ -72,6 +72,7 @@ enterAge;ระบุอายุผู้เล่น
 enterPlayerName;กรุณาระบุชื่อ
 playerNameTaken;ชื่อนี้ถูกใช้แล้ว กรุณาเลือกชิ่ออื่น
 addedPlayer;เพิ่มผู้เล่น
+gotojailprompt;is sent to jail.
 BoughtField;ซื้อที่ดิน
 YouPay;คุณต้องจ่าย
 PaysRent;จ่ายค่าเช่าที่ดินให้กับ
