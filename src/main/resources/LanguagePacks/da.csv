@@ -64,7 +64,7 @@ case18;Flyt til "Skaterparken", Hvis det ikke har en ejer så får du det gratis
 case19;Flyt til et blåt feldt eller rødt feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
 case20;Flyt til et brunt feldt eller gult feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
 throwDice;slå med terningen!
-chooseLanguage;Vælg sporget.
+chooseLanguage;Vælg sproget
 howManyPlayers;Hvor mange spillere er i?
 tooManyOrFew;For mange eller for få spillere..
 enterAge;Indtast alder
@@ -80,3 +80,4 @@ WonTheGame;Vandt spillet!
 yesTxt;Ja
 noTxt;Nej
 restartQuestion; Vil du gerne genstart spillet?
+;

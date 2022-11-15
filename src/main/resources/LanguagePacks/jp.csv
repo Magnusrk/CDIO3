@@ -8,4 +8,75 @@ test4;+-.,123test JP 4
 #key;value
 #e.g.
 #throwDiceText;サイコロを振った！
+start;行け！
+startsub; ← ２＄をもらって
+chance;機会
 
+noowner;所有者はいない
+tryluck;あなたの運を試験して！
+price;価格
+
+burger;バーガージョイント
+pizza;ピザハウス
+candy;お菓子屋
+ice;アイスクリーム屋
+museum;美術館
+library;図書館
+skate;スケート公園
+pool;プール
+arcade;ゲームアケーど
+cinema;映画館
+toystore;おもちゃ屋
+petstore;ペット屋
+bowling;ボウリングアリー
+zoo;動物園
+waterpark;公園
+beach;ビーチ
+
+
+can;オレンジ色フィールドに行って。もう所有者がいたら、レントを支払う。所有者がいなければ、無料でフィールドをもらって。
+prison;刑務所
+parking;パーキング
+gotojail;刑務所に行って
+
+
+
+case1;Give this card to the Ufo. On their next turn they can move to an unowned field and get it for free. If no unowned fields exist, buy one from another player.
+case2;刑務所に行って
+case3; Move up to 5 spaces
+case4;オレンジ色フィールドに行って。もう所有者がいたら、レントを支払う。所有者がいなければ、無料でフィールドをもらって。
+case5;Move 1 or draw another chancecard
+case5opt1;Move 1
+case5opt2; Draw chancecard
+case6;Give this card to the Race car. On their next turn they can  move to an unowned field and get it for free. If no unowned fields exist, buy one from another player.
+case7;You ate too much candy give the bank 2$
+case8;オレンジ色か緑色フィールドに行って。もう所有者がいたら、レントを支払う。所有者がいなければ、無料でフィールドをもらって。
+case9;Move to a blue field, if it's unowned get it for free, if not you pay rent
+case10;You got a "get out of jail free card" Use it when you get jailed.
+case11;Move to "Boardwalk"
+case12;Give this card to the Car. On their next turn they can  move to an unowned field and get it for free. If no unowned fields exist, buy one from another player.
+case13;Give this card to the Tractor. On their next turn they can  move to an unowned field and get it for free. If no unowned fields exist, buy one from another player.
+case14;It's your birthday get 1$ from everyone
+case15;Move to a pink or dark blue field, if it's unowned get it for free, if not you pay rent
+case16;You did all your homework get 2$ from the bank
+case17;赤いフィールドに行って。もう所有者がいたら、レントを支払う。所有者がいなければ、無料でフィールドをもらって。
+case18;Move to "Skatepark" If it's unowned get it for free, if not pay rent
+case19;赤いか青いフィールドに行って。もう所有者がいたら、レントを支払う。所有者がいなければ、無料でフィールドをもらって。
+case20;Move to a brown or yellow field, if it's unowned get it for free, if not you pay rent
+throwDice;サイコロを振って！
+chooseLanguage;Choose game language
+howManyPlayers;何人がゲームをしたいか？
+tooManyOrFew;プレーヤーは多すぎか少しすぎ
+enterAge;歳を入力して
+enterPlayerName;名前を入力して
+playerNameTaken;名前がもう使用したから、別の名前を選んで！
+addedPlayer;プレーヤーを作った
+gotojailprompt;is sent to jail.
+BoughtField;bought the property
+YouPay;You pay
+PaysRent;pays rent to
+RentDoubled;Because all colors are owned, the rent was doubled!
+WonTheGame;won the game!
+yesTxt;はい
+noTxt;いいえ
+restartQuestion;Do you want to restart the game?
