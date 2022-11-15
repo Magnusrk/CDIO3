@@ -234,25 +234,9 @@ public class GameController {
                 int move = monoGUI.Userselection2(Language.GetString("case4"),
                         Language.GetString("skate"), Language.GetString("pool"));
                 if (move == 1) {
-                    currentPlayer.setPlayerPosition(10);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 10);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 10);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 10);
                 } else if (move == 2) {
-                    currentPlayer.setPlayerPosition(11);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 11);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 11);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 11);
                 }
                 landOnField(currentPlayer);
             }
@@ -282,45 +266,13 @@ public class GameController {
                 int move = monoGUI.Userselection4(Language.GetString("case8")
                         , Language.GetString("skate"), Language.GetString("pool"), Language.GetString("bowling"), Language.GetString("zoo"));
                 if (move == 1) {
-                    currentPlayer.setPlayerPosition(10);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 10);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 10);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 10);
                 } else if (move == 2) {
-                    currentPlayer.setPlayerPosition(11);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 11);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 11);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 11);
                 } else if (move == 3) {
-                    currentPlayer.setPlayerPosition(19);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 19);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 19);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 19);
                 } else if (move == 4) {
-                    currentPlayer.setPlayerPosition(20);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 20);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 20);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 20);
                 }
                 landOnField(currentPlayer);
             }
@@ -328,25 +280,9 @@ public class GameController {
                 int move = monoGUI.Userselection2(Language.GetString("case9"),
                         Language.GetString("candy"), Language.GetString("ice"));
                 if (move == 1) {
-                    currentPlayer.setPlayerPosition(4);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 4);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 4);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 4);
                 } else if (move == 2) {
-                    currentPlayer.setPlayerPosition(5);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 5);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 5);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 5);
                 }
                 landOnField(currentPlayer);
             }
@@ -396,35 +332,11 @@ public class GameController {
                         monoGUI.updateOwner(currentPlayer.getID(), 7);
                     }
                 } else if (move == 2) {
-                    currentPlayer.setPlayerPosition(8);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 8);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 8);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 8);
                 } else if (move == 3) {
-                    currentPlayer.setPlayerPosition(22);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 22);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 22);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 22);
                 } else if (move == 4) {
-                    currentPlayer.setPlayerPosition(23);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 23);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 23);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 23);
                 }
                 landOnField(currentPlayer);
             }
@@ -437,38 +349,14 @@ public class GameController {
                 int move = monoGUI.Userselection2(Language.GetString("case17"),
                         Language.GetString("arcade"), Language.GetString("cinema"));
                 if (move == 1) {
-                    currentPlayer.setPlayerPosition(13);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 13);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 13);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 13);
                 } else if (move == 2) {
-                    currentPlayer.setPlayerPosition(14);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 14);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 14);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 14);
                 }
                 landOnField(currentPlayer);
             }
             case 18 -> {
-                currentPlayer.setPlayerPosition(10);
-                monoGUI.DrawPlayerPosition(currentPlayer.getID(), 10);
-                if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                    System.out.println(property.getName());
-                    if (property.getOwner() == null) {
-                        property.setOwner(currentPlayer);
-                        monoGUI.updateOwner(currentPlayer.getID(), 10);
-                    }
-                }
+                moveAndBuy(currentPlayer, 10);
                 monoGUI.Showmsg(Language.GetString("case18"));
                 landOnField(currentPlayer);
             }
@@ -476,45 +364,13 @@ public class GameController {
                 int move = monoGUI.Userselection4(Language.GetString("case19")
                         , Language.GetString("candy"), Language.GetString("ice"), Language.GetString("arcade"), Language.GetString("cinema"));
                 if (move == 1) {
-                    currentPlayer.setPlayerPosition(4);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 4);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 4);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 4);
                 } else if (move == 2) {
-                    currentPlayer.setPlayerPosition(5);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 5);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 5);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 5);
                 } else if (move == 3) {
-                    currentPlayer.setPlayerPosition(13);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 13);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 13);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 13);
                 } else if (move == 4) {
-                    currentPlayer.setPlayerPosition(14);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 14);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 14);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 14);
                 }
                 landOnField(currentPlayer);
             }
@@ -522,51 +378,32 @@ public class GameController {
                 int move = monoGUI.Userselection4(Language.GetString("case20")
                         , Language.GetString("burger"), Language.GetString("pizza"), Language.GetString("toystore"), Language.GetString("petstore"));
                 if (move == 1) {
-                    currentPlayer.setPlayerPosition(1);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 1);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 1);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 1);
                 } else if (move == 2) {
-                    currentPlayer.setPlayerPosition(2);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 2);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 2);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 2);
                 } else if (move == 3) {
-                    currentPlayer.setPlayerPosition(16);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 16);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 16);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 16);
                 } else if (move == 4) {
-                    currentPlayer.setPlayerPosition(17);
-                    monoGUI.DrawPlayerPosition(currentPlayer.getID(), 17);
-                    if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                        System.out.println(property.getName());
-                        if (property.getOwner() == null) {
-                            property.setOwner(currentPlayer);
-                            monoGUI.updateOwner(currentPlayer.getID(), 17);
-                        }
-                    }
+                    moveAndBuy(currentPlayer, 17);
                 }
                 landOnField(currentPlayer);
             }
         }
         chanceArray = chanceField.drawChancecard();
     }
+
+    private void moveAndBuy(Player currentPlayer, int position) {
+        currentPlayer.setPlayerPosition(position);
+        monoGUI.DrawPlayerPosition(currentPlayer.getID(), position);
+        if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
+            System.out.println(property.getName());
+            if (property.getOwner() == null) {
+                property.setOwner(currentPlayer);
+                monoGUI.updateOwner(currentPlayer.getID(), position);
+            }
+        }
+    }
+
     public void TokenChanceCard(){
         List<String> avbprops= new ArrayList<>();
         for (Field field : prop) {
