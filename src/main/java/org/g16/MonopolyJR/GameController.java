@@ -219,8 +219,10 @@ public class GameController {
     public void DoChanceCard(Player currentPlayer ){
 
         chancecard.setNumchance(chanceArray);
+/*chancecard.getNumchance()[0]
 
-        switch (chancecard.getNumchance()[0]) {
+ */
+        switch (14) {
             case 1 -> {
                 for (Player player : players) {
                     if (player.playerToken == Token.Car) {
@@ -328,7 +330,7 @@ public class GameController {
 
                 for (Player player : players) {
                     player.AddBalance(-1);
-                    monoGUI.SetPlayerBalance(currentPlayer.getID(), player.getPlayerBalance());
+                    monoGUI.SetPlayerBalance(player.getID(), player.getPlayerBalance());
                 }
                 monoGUI.Showmsg(Language.GetString("case14"));
             }
