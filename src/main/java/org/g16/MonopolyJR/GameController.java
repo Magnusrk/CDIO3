@@ -118,6 +118,8 @@ public class GameController {
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof  GoToJailField goToJail){
             currentPlayer.setJailed(true);
             System.out.println("You're jailed");
+            currentPlayer.setPlayerPosition(6);
+            monoGUI.DrawPlayerPosition(currentPlayer.getID(), 6);
         }
     }
 
