@@ -157,7 +157,7 @@ public class GameController {
     private void checkPassStart(Player currentPlayer) {
         if (currentPlayer.getPlayerPosition() < currentPlayer.getPrevPlayerPosition()){
             currentPlayer.AddBalance(2);
-            monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance()+2);
+            monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
         }
     }
 
