@@ -11,18 +11,16 @@ public class ChanceField extends Field {
         super(name);
     }
 
+    /**
+     * Puts the chancecard you've drawn on the bottom pile
+     * @return The array that contains the order of chancecards
+     */
     public int[] drawChancecard() {
         chancecard.getNumchance();
         chancecard.setNumchance(chancecard.leftshiftarray());
         return chancecard.getNumchance();
     }
 
-    public static  void main(String[] args) {
-        for (int i=0;i<20;i++){
-            chancecard.getNumchance();
-            chancecard.setNumchance(chancecard.leftshiftarray());
-            System.out.println(Arrays.toString(chancecard.getNumchance()));
-        }
 
     }
-}
+
