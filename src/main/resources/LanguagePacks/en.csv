@@ -49,7 +49,7 @@ case4;Move to an orange field, if it's unowned get it for free, if not you pay r
 case5;Move 1 or draw another chancecard
 case5opt1;Move 1
 case5opt2; Draw chancecard
-case6;Give this card to the Race car. On their next turn they can  move to an unowned field and get it for free. If no unowned fields exist, buy one from another player.
+case6;Give this card to the Race car. On their next turn they can move to an unowned field and get it for free. If no unowned fields exist, buy one from another player.
 case7;You ate too much candy give the bank 2$
 case8;Move to an orange or green field, if it's unowned get it for free, if not you pay rent
 case9;Move to a blue field, if it's unowned get it for free, if not you pay rent
@@ -76,6 +76,7 @@ enterAge;Enter age
 enterPlayerName;Enter player name.
 playerNameTaken;The player name is already taken. Please choose a unique name.
 addedPlayer;Added player
+UsedJailCard;You used your "get out of jail" card
 gotojailprompt;is sent to jail.
 BoughtField;bought the property
 YouPay;You pay

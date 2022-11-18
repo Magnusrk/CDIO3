@@ -74,6 +74,7 @@ enterAge;Indtast alder
 enterPlayerName;Indtast navn
 playerNameTaken;Navnet er allerede taget. Vælg et unikt navn.
 addedPlayer;Tilføjede spiller
+UsedJailCard;Du brugte dit "kom ud af fængsel" kort
 gotojailprompt;bliver sat i fængsel.
 BoughtField;Købte ejendommen
 YouPay; Du betalte
