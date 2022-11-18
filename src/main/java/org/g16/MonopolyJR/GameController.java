@@ -9,8 +9,6 @@ import java.util.stream.IntStream;
 public class GameController {
     private boolean winnerFound = false;
     private Player[] players;
-
-
     ChanceCard chancecard =new ChanceCard(IntStream.range(1,21).toArray());
     int[] chanceArray=chancecard.Shufflechancecard();
     ChanceField chanceField= new ChanceField("chancefield");
@@ -70,17 +68,16 @@ public class GameController {
         checkJail(currentPlayer);
         if (currentPlayer.getTokenChancecard()==true){
             TokenChanceCard(currentPlayer);
+        } else {
+
+            monoGUI.PromptThrowDice(playerIndex);
+            int roll = Die.throwDie();
+            monoGUI.DrawDie(roll);
+            movePlayer(currentPlayer, roll);
+
+            checkPassStart(currentPlayer);
+            landOnField(currentPlayer);
         }
-
-        monoGUI.PromptThrowDice(playerIndex);
-        int roll = Die.throwDie();
-        monoGUI.DrawDie(roll);
-        movePlayer(currentPlayer,roll);
-
-
-        checkPassStart(currentPlayer);
-        landOnField(currentPlayer);
-
         if (!winnerFound){
             if (pt == players.length){
                 pt = 1;
@@ -94,21 +91,19 @@ public class GameController {
 
     private void landOnField(Player currentPlayer) {
         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-            System.out.println(property.getName());
             if (property.getOwner() == null) {
                 currentPlayer.AddBalance(-1 * property.getPrice());
-                checkBankrupt(currentPlayer);
                // System.out.println("You pay " + property.getPrice());
                 property.setOwner(currentPlayer);
                 monoGUI.updateOwner(currentPlayer.getID(), currentPlayer.getPlayerPosition());
                 System.out.println(property.getOwner());
                 monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
                 monoGUI.Showmsg(currentPlayer.getName() +" "  + Language.GetString("BoughtField") + " " + Language.GetString(property.getName())  +  ". " + Language.GetString("YouPay") + " "+ property.getPrice() );
+                checkBankrupt(currentPlayer);
             } else {
                 if (property.getOwner() != currentPlayer) {
                     int rentMultiplier = AllColorsOwned(property) ? 2 : 1;
                     currentPlayer.AddBalance(-1 * rentMultiplier * property.getPrice());
-                    checkBankrupt(currentPlayer);
                     property.getOwner().AddBalance(rentMultiplier * property.getPrice());
                     monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
                     monoGUI.SetPlayerBalance(property.getOwner().getID(), property.getOwner().getPlayerBalance());
@@ -117,6 +112,7 @@ public class GameController {
                         notificationText += "Because all colors are owned, the rent was doubled!";
                     }
                     monoGUI.Showmsg(notificationText);
+                    checkBankrupt(currentPlayer);
                 }
             }
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof VisitorField) {
@@ -194,7 +190,6 @@ public class GameController {
         player.setPlayerPosition(newPos);
     }
     private void checkBankrupt(Player player){
-        System.out.println(player.getPlayerBalance());
         if (player.getBankrupt()){
             int max = 0;
             int playerNum = 0;
@@ -319,8 +314,6 @@ public class GameController {
             }
             case 14 -> {
                 currentPlayer.AddBalance(players.length);
-                ;
-
                 for (Player player : players) {
                     player.AddBalance(-1);
                     monoGUI.SetPlayerBalance(player.getID(), player.getPlayerBalance());
@@ -443,7 +436,7 @@ public class GameController {
         }else {
                     String[] options= new String[avbprops.size()];
                     avbprops.toArray(options);
-            String selectedprop=monoGUI.Userselectionarray("dsfa", options);
+            String selectedprop=monoGUI.Userselectionarray(Language.GetString("tokenChance"), options);
             for (int i=0;i<prop.length;i++){
 
                   if (Language.GetString(prop[i].getName()).equals(selectedprop)){

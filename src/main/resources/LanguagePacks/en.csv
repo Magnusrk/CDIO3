@@ -55,7 +55,7 @@ case8;Move to an orange or green field, if it's unowned get it for free, if not 
 case9;Move to a blue field, if it's unowned get it for free, if not you pay rent
 case10;You got a "get out of jail free card" Use it when you get jailed.
 case11;Move to "Boardwalk"
-case12;Give this card to the Car. On their next turn they can  move to an unowned field and get it for free. If no unowned fields exist, buy one from another player.
+case12;Give this card to the Car. On their next turn they can move to an unowned field and get it for free. If no unowned fields exist, buy one from another player.
 case13;Give this card to the Tractor. On their next turn they can  move to an unowned field and get it for free. If no unowned fields exist, buy one from another player.
 case14;It's your birthday get 1$ from everyone
 case15;Move to a pink or dark blue field, if it's unowned get it for free, if not you pay rent
@@ -64,6 +64,9 @@ case17;Move to a red field, if it's unowned get it for free, if not you pay rent
 case18;Move to "Skatepark" If it's unowned get it for free, if not pay rent
 case19;Move to a blue or red field, if it's unowned get it for free, if not you pay rent
 case20;Move to a brown or yellow field, if it's unowned get it for free, if not you pay rent
+
+tokenChance;Move to an unowned field and get it for free. If no unowned fields exist, buy one from another player.
+
 throwDice;throw the dice!
 chooseLanguage;Choose game language
 howManyPlayers;How many players are you?
