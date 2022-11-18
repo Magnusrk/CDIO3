@@ -211,16 +211,17 @@ public class GameController {
 
         chancecard.setNumchance(chanceArray);
 
-
         switch (chancecard.getNumchance()[0]) {
             case 1 -> {
-
                 for (Player player : players) {
                     if (player.playerToken == Token.Ufo) {
+                        monoGUI.Showmsg(Language.GetString("case1"));
                         player.setTokenChancecard(true);
+                    } else {
+                        chanceArray = chanceField.drawChancecard();
+                        DoChanceCard(currentPlayer);
                     }
                 }
-                monoGUI.Showmsg(Language.GetString("case1"));
             }
             case 2 -> {
                 currentPlayer.setPlayerPosition(0);
@@ -258,10 +259,14 @@ public class GameController {
             case 6 -> {
                 for (Player player : players) {
                     if (player.playerToken == Token.Racecar) {
+                        monoGUI.Showmsg(Language.GetString("case6"));
                         player.setTokenChancecard(true);
+                    } else {
+                        chanceArray = chanceField.drawChancecard();
+                        DoChanceCard(currentPlayer);
                     }
                 }
-                monoGUI.Showmsg(Language.GetString("case6"));
+
             }
             case 7 -> {
                 currentPlayer.AddBalance(-2);
