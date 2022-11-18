@@ -77,6 +77,7 @@ public class GameController {
 
             checkPassStart(currentPlayer);
             landOnField(currentPlayer);
+
         }
         if (!winnerFound){
             if (pt == players.length){
@@ -109,7 +110,7 @@ public class GameController {
                     monoGUI.SetPlayerBalance(property.getOwner().getID(), property.getOwner().getPlayerBalance());
                     String notificationText = currentPlayer.getName() + " " + Language.GetString("PaysRent") + " " + property.getOwner().getName() + "." + Language.GetString("YouPay") + " " + (property.getPrice() * rentMultiplier) + ". ";
                     if (rentMultiplier == 2) {
-                        notificationText += "Because all colors are owned, the rent was doubled!";
+                        notificationText += Language.GetString("RentDoubled");
                     }
                     monoGUI.Showmsg(notificationText);
                     checkBankrupt(currentPlayer);
@@ -227,6 +228,7 @@ public class GameController {
             case 3 -> {
                 int move = monoGUI.getUserinterger5();
                 movePlayer(currentPlayer,move);
+                checkPassStart(currentPlayer);
                 landOnField(currentPlayer);
             }
             case 4 -> {
@@ -244,6 +246,7 @@ public class GameController {
                         Language.GetString("case5opt1"), Language.GetString("case5opt2"));
                 if (action == 1) {
                     movePlayer(currentPlayer, 1);
+                    checkPassStart(currentPlayer);
                     landOnField(currentPlayer);
                 } else if (action == 2) {
                     chanceArray = chanceField.drawChancecard();
@@ -291,10 +294,10 @@ public class GameController {
                 monoGUI.Showmsg(Language.GetString("case10"));
             }
             case 11 -> {
+                monoGUI.Showmsg(Language.GetString("case11"));
                 currentPlayer.setPlayerPosition(23);
                 monoGUI.DrawPlayerPosition(currentPlayer.getID(), 23);
                 landOnField(currentPlayer);
-                monoGUI.Showmsg(Language.GetString("case11"));
             }
             case 12 -> {
                 for (Player player : players) {
@@ -393,6 +396,7 @@ public class GameController {
 
     private void moveAndBuy(Player currentPlayer, int position) {
         currentPlayer.setPlayerPosition(position);
+        checkPassStart(currentPlayer);
         monoGUI.DrawPlayerPosition(currentPlayer.getID(), position);
         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
             System.out.println(property.getName());
@@ -424,6 +428,7 @@ public class GameController {
                 if (Language.GetString(prop[i].getName()).equals(selectedprop)){
                     currentPlayer.setPlayerPosition(i);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(),i);
+                    checkPassStart(currentPlayer);
                     PropertyField propertyField = (PropertyField) prop[i];
                     propertyField.getOwner().AddBalance(propertyField.getPrice());
                     monoGUI.SetPlayerBalance(propertyField.getOwner().getID(),propertyField.getOwner().getPlayerBalance());
@@ -442,6 +447,7 @@ public class GameController {
                   if (Language.GetString(prop[i].getName()).equals(selectedprop)){
                       currentPlayer.setPlayerPosition(i);
                       monoGUI.DrawPlayerPosition(currentPlayer.getID(),i);
+                      checkPassStart(currentPlayer);
                       PropertyField propertyField= (PropertyField) prop[i];
                       propertyField.setOwner(currentPlayer);
                       monoGUI.updateOwner(currentPlayer.getID(),i);
