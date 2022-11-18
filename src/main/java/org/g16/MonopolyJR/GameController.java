@@ -166,6 +166,7 @@ public class GameController {
             if (currentPlayer.getOutOfJailCards() > 0){
                 currentPlayer.addOutOfJailCard(-1);
                 currentPlayer.setJailed(false);
+                monoGUI.Showmsg(Language.GetString("UsedJailCard"));
             }
             if (currentPlayer.getPlayerBalance() > 1){
                 currentPlayer.AddBalance(-1);
