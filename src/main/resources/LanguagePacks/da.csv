@@ -63,8 +63,8 @@ case18;Flyt til "Skaterparken". Hvis det ikke har en ejer så får du det gratis
 case19;Flyt til et blåt felt eller rødt felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
 case20;Flyt til et brunt felt eller gult felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
 
-tokenChance;Flyt til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
-
+tokenChance;Flyt til et felt som ikke har en ejer og få det gratis.
+tokenChanceowned;Alle felter har en ejer, flyt til et ejet felt og køb det fra en anden spiller.
 
 throwDice;slå med terningen!
 chooseLanguage;Vælg sproget.

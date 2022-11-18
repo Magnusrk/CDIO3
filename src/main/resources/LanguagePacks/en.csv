@@ -65,7 +65,8 @@ case18;Move to "Skatepark" If it's unowned get it for free, if not pay rent
 case19;Move to a blue or red field, if it's unowned get it for free, if not you pay rent
 case20;Move to a brown or yellow field, if it's unowned get it for free, if not you pay rent
 
-tokenChance;Move to an unowned field and get it for free. If no unowned fields exist, buy one from another player.
+tokenChance;Move to an unowned field and get it for free.
+tokenChanceowned; There are no unowned fields, move to an owned field and buy it from another player.
 
 throwDice;throw the dice!
 chooseLanguage;Choose game language
