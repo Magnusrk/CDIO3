@@ -217,6 +217,7 @@ public class GameController {
 
         switch (chancecard.getNumchance()[0]) {
             case 1 -> {
+
                 for (Player player : players) {
                     if (player.playerToken == Token.Ufo) {
                         player.setTokenChancecard(true);
