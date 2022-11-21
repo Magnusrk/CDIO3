@@ -194,7 +194,7 @@ public class GameController {
                     playerNum = i;
                 }
             }
-            monoGUI.Showmsg(players[playerNum].getName() + " won the game!");
+            monoGUI.Showmsg(players[playerNum].getName() + Language.GetString("WonTheGame"));
             winnerFound = true;
         }
     }
