@@ -2,7 +2,6 @@ package org.g16.MonopolyJR;
 
 import org.g16.GUI.MonopolyGUI;
 import org.g16.MonopolyJR.Fields.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -159,8 +158,7 @@ public class GameController {
                 currentPlayer.addOutOfJailCard(-1);
                 currentPlayer.setJailed(false);
                 monoGUI.Showmsg(Language.GetString("UsedJailCard"));
-            }
-            if (currentPlayer.getPlayerBalance() > 1){
+            } else if (currentPlayer.getPlayerBalance() > 1){
                 currentPlayer.AddBalance(-1);
                 checkBankrupt(currentPlayer);
                 currentPlayer.setJailed(false);
