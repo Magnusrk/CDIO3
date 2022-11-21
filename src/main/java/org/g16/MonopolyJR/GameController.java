@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 public class GameController {
     private boolean winnerFound = false;
     private Player[] players;
-    ChanceCard chancecard =new ChanceCard(IntStream.range(1,21).toArray());
+    ChanceCard chancecard = new ChanceCard(IntStream.range(1,21).toArray());
     int[] chanceArray=chancecard.Shufflechancecard();
     ChanceField chanceField= new ChanceField("chancefield");
     Initializer init = new Initializer();
@@ -30,9 +30,6 @@ public class GameController {
     private void setup(){
         String chosenLanguage = monoGUI.chooseLanguage();
         Language.SetLanguage(chosenLanguage);
-
-        System.out.println(Language.GetString("noowner"));
-        System.out.println(chosenLanguage);
         monoGUI.UpdateFields();
         monoGUI.SetupPlayers();
     }
@@ -66,7 +63,7 @@ public class GameController {
         currentPlayer = players[playerIndex];
 
         checkJail(currentPlayer);
-        if (currentPlayer.getTokenChancecard()==true){
+        if (currentPlayer.getTokenChancecard()){
             TokenChanceCard(currentPlayer);
         } else {
 
@@ -94,10 +91,8 @@ public class GameController {
         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
             if (property.getOwner() == null) {
                 currentPlayer.AddBalance(-1 * property.getPrice());
-               // System.out.println("You pay " + property.getPrice());
                 property.setOwner(currentPlayer);
                 monoGUI.updateOwner(currentPlayer.getID(), currentPlayer.getPlayerPosition());
-                System.out.println(property.getOwner());
                 monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
                 monoGUI.Showmsg(currentPlayer.getName() +" "  + Language.GetString("BoughtField") + " " + Language.GetString(property.getName())  +  ". " + Language.GetString("YouPay") + " "+ property.getPrice() );
                 checkBankrupt(currentPlayer);
@@ -117,15 +112,12 @@ public class GameController {
                 }
             }
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof VisitorField) {
-            System.out.println("visit");
 
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof ChanceField) {
             DoChanceCard(currentPlayer);
-            System.out.println("Chance");
 
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof GoToJailField){
             currentPlayer.setJailed(true);
-            System.out.println("You're jailed");
             monoGUI.PromptGotoJail(currentPlayer.getID());
             currentPlayer.setPlayerPosition(6);
             monoGUI.DrawPlayerPosition(currentPlayer.getID(), 6);
@@ -202,7 +194,6 @@ public class GameController {
                     playerNum = i;
                 }
             }
-            System.out.println("Player " + (playerNum+1) + " won");
             monoGUI.Showmsg(players[playerNum].getName() + " won the game!");
             winnerFound = true;
         }
@@ -335,7 +326,6 @@ public class GameController {
                         , Language.GetString("museum"), Language.GetString("library"), Language.GetString("waterpark"), Language.GetString("beach"));
                 monoGUI.DrawPlayerPosition(currentPlayer.getID(), 7);
                 if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                    System.out.println(property.getName());
                     if (property.getOwner() == null) {
                         property.setOwner(currentPlayer);
                         monoGUI.updateOwner(currentPlayer.getID(), 7);
@@ -406,7 +396,6 @@ public class GameController {
         checkPassStart(currentPlayer);
         monoGUI.DrawPlayerPosition(currentPlayer.getID(), position);
         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-            System.out.println(property.getName());
             if (property.getOwner() == null) {
                 property.setOwner(currentPlayer);
                 monoGUI.updateOwner(currentPlayer.getID(), position);
@@ -417,9 +406,9 @@ public class GameController {
     public void TokenChanceCard(Player currentPlayer){
         List<String> avbprops=new ArrayList<String>();
         List<String> allprops=new ArrayList<String>();
-        for (int i=0;i<prop.length;i++){
-            if (prop[i] instanceof PropertyField propertyField){
-                if (propertyField.getOwner()==null){
+        for (Field field : prop) {
+            if (field instanceof PropertyField propertyField) {
+                if (propertyField.getOwner() == null) {
                     avbprops.add(Language.GetString(propertyField.getName()));
                 }
                 allprops.add(Language.GetString(propertyField.getName()));
