@@ -1,7 +1,7 @@
 package org.g16.MonopolyJR;
 
 public class Initializer {
-    Field fields[] = new Field[24];
+    Field[] fields = new Field[24];
 
     /**
      * Sets values for every field in the game
