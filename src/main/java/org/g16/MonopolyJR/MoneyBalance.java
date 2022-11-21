@@ -1,10 +1,13 @@
 package org.g16.MonopolyJR;
-
 public class MoneyBalance {
-    private final int STARTBALANCE = 20;
-    private int balance = STARTBALANCE;
+    int players = 0;
+    private int startbalance;
+    private int balance;
     public MoneyBalance(){
 
+    }
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 
     //Adds money to the players balance. x will be a variable from the field class
@@ -17,9 +20,11 @@ public class MoneyBalance {
     }
 
     public void reset(){
-        balance = STARTBALANCE;
+        balance = startbalance;
     }
     public int getStartingbalance(){
-        return STARTBALANCE;
+        return startbalance;
     }
+
+
 }

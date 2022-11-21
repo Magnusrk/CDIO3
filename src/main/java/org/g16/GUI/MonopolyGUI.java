@@ -271,7 +271,7 @@ public class MonopolyGUI {
 
         GUI_Player guiPlayer;
 
-        int startingBalance = 20;
+        int startingBalance = 24 -(2* guiPlayers.length);
         switch (playerCount) {
             case 0 -> {
                 car = new GUI_Car(Color.black, Color.red, CAR, HORIZONTAL_GRADIANT);

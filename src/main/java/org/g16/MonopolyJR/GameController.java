@@ -54,9 +54,15 @@ public class GameController {
                 youngestAge = playerAge;
             }
         }
-
+        setStartingBalance();
         //Start with the youngest lad
         playRound(firstTurnIndex+1);
+    }
+    public void setStartingBalance(){
+        int playerCount = players.length;
+        for (int i = 0; i<players.length; i++){
+            players[i].setBalance(24-(2*playerCount));
+        }
     }
     private void playRound(int pt) {
         int playerIndex = pt-1;

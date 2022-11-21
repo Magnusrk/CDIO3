@@ -76,6 +76,9 @@ public class Player {
             bankrupt = true;
         }
     }
+    public void setBalance(int ba) {
+        balance.setBalance(ba);
+    }
 
     public void setPlayerPosition(int position){
         prevPlayerPosition = playerPosition;
