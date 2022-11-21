@@ -1,10 +1,10 @@
 package org.g16.MonopolyJR;
 
 
+import org.apache.velocity.texen.util.FileUtil;
 import org.g16.Main;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,12 +30,12 @@ public class Language {
     public static void SetLanguage(String pack){
         try {
             //Reads file from resources folder
-            File languagePack = new File(Objects.requireNonNull(Main.class.getClassLoader()
-                    .getResource(languagePackPath + "/" + pack + ".csv")).toURI());
+            InputStream languagePack = Objects.requireNonNull(Main.class.getClassLoader()
+                    .getResourceAsStream(languagePackPath + "/" + pack + ".csv"));
 
             currentLanguagePack = pack;
             InitializeLanguagePack(languagePack);
-        } catch (URISyntaxException | NullPointerException e){
+        } catch (NullPointerException e){
             System.out.println("Couldn't find language pack '" + pack+languagePackExtension + "'");
 
         }
@@ -58,9 +58,9 @@ public class Language {
      * Initialize current language pack
      * Reads the language pack file and maps the keys and values to the dictionary variable.
      */
-    private static void InitializeLanguagePack(File languagePack){
+    private static void InitializeLanguagePack(InputStream languagePack){
         dictionary.clear();
-        try {
+
             Scanner fileReader = new Scanner(languagePack);
             int lineNumber = 1;
             //Reads each line of the language pack
@@ -77,11 +77,8 @@ public class Language {
                     }
                 }
                 lineNumber++;
-
             }
-        } catch (FileNotFoundException e){
-            System.out.println("Couldn't find language pack. " + currentLanguagePack);
-        }
+
 
 
     }
