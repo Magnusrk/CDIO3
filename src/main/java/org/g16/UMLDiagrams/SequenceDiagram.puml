@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+UI -> Player: Request Language
+UI <- Player: Choose Language
+UI -> Player: Request No. players
+UI <- Player: Choose No. players
+    loop No. players times
+        UI -> Player: Request Name
+        UI <- Player: Choose Name
+        UI -> Player: Request Age
+        UI <- Player: Choose Age
+        end
+
+Player <- Moneybalance: Check balance
+alt
+
+
+@enduml
