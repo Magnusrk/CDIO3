@@ -1,6 +1,7 @@
 package org.g16.MonopolyJR;
 
 import org.g16.GUI.MonopolyGUI;
+import org.g16.MonopolyJR.Fields.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -111,8 +112,6 @@ public class GameController {
                     checkBankrupt(currentPlayer);
                 }
             }
-        } else if (getField(currentPlayer.getPlayerPosition()) instanceof VisitorField) {
-
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof ChanceField) {
             DoChanceCard(currentPlayer);
 
@@ -125,7 +124,7 @@ public class GameController {
     }
 
     private boolean AllColorsOwned(PropertyField currentProperty){
-        org.g16.MonopolyJR.Color propertyColor = currentProperty.getColor();
+        Color propertyColor = currentProperty.getColor();
         Player propertyOwner = currentProperty.getOwner();
 
         if(currentProperty.getOwner() != null){
@@ -159,8 +158,7 @@ public class GameController {
                 currentPlayer.addOutOfJailCard(-1);
                 currentPlayer.setJailed(false);
                 monoGUI.Showmsg(Language.GetString("UsedJailCard"));
-            }
-            if (currentPlayer.getPlayerBalance() > 1){
+            } else if (currentPlayer.getPlayerBalance() > 1){
                 currentPlayer.AddBalance(-1);
                 checkBankrupt(currentPlayer);
                 currentPlayer.setJailed(false);
@@ -194,7 +192,7 @@ public class GameController {
                     playerNum = i;
                 }
             }
-            monoGUI.Showmsg(players[playerNum].getName() + " won the game!");
+            monoGUI.Showmsg(players[playerNum].getName() + Language.GetString("WonTheGame"));
             winnerFound = true;
         }
     }
@@ -404,8 +402,8 @@ public class GameController {
     }
 
     public void TokenChanceCard(Player currentPlayer){
-        List<String> avbprops=new ArrayList<String>();
-        List<String> allprops=new ArrayList<String>();
+        List<String> avbprops= new ArrayList<>();
+        List<String> allprops= new ArrayList<>();
         for (Field field : prop) {
             if (field instanceof PropertyField propertyField) {
                 if (propertyField.getOwner() == null) {

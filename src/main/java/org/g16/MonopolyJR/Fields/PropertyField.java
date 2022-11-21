@@ -1,4 +1,6 @@
-package org.g16.MonopolyJR;
+package org.g16.MonopolyJR.Fields;
+
+import org.g16.MonopolyJR.Player;
 
 public class PropertyField extends Field {
     protected int price;
