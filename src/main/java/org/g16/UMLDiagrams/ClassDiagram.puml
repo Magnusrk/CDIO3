@@ -1,0 +1,147 @@
+@startuml
+class org.g16.MonopolyJR.Jail {
+}
+class org.g16.MonopolyJR.Initializer {
+~ Field[] fields
++ Field[] InitFields()
+}
+enum org.g16.MonopolyJR.Token {
++  Car
++  Tractor
++  Racecar
++  Ufo
+}
+class org.g16.MonopolyJR.VisitorField {
+}
+
+class org.g16.MonopolyJR.GoToJailField {
+}
+
+class org.g16.MonopolyJR.Language {
+- {static} languagePackPath: String
+- {static} languagePackDelimiter: String
+- {static} languagePackExtension:String
+- {static} dictionary:Map<String,String>
+- {static} currentLanguagePack: String
++ {static} SetLanguage(String): void
++ {static} GetString(String): String
+- {static} InitializeLanguagePack(File): void
+}
+
+enum org.g16.MonopolyJR.Color {
++  Red
++  Blue
++  Yellow
++  DarkBlue
++  Pink
++  Brown
++  Green
++  Orange
+}
+class org.g16.MonopolyJR.Player {
+~ balance: MoneyBalance
+- name: String
+- playerPosition: int
+- prevPlayerPosition: int
+~ playerToken: Token
+- age: int
+- jailed: boolean
+- bankrupt: boolean
+- outOfJailCards: int
+- ID: int
+- tokenChancecard: boolean
++ getName(): String
++ setName(String): void
++ setID(int): void
++ getID(): int
++ getPlayerBalance(): int
++ getPlayerPosition(): int
++ getPrevPlayerPosition(): int
++ getPlayerToken(): Token
++ getAge(): int
++ getBankrupt(): boolean
++ getJailed(): boolean
++ addOutOfJailCard(int): void
++ getOutOfJailCards(): int
++ setAge(int): void
++ setTokenChancecard(boolean): void
++ getTokenChancecard(): boolean
++ AddBalance(int): void
++ setPlayerPosition(int):void
++ setJailed(boolean): void
++ reset(): void
+}
+class org.g16.MonopolyJR.ChanceField {
+~ {static} chancecard: ChanceCard
++ drawChancecard(): int[]
+}
+class org.g16.MonopolyJR.Die {
+- {static} DIESIDE: int
++ {static} throwDie(): int
++ {static} getDIESIDE(): int
+}
+class org.g16.MonopolyJR.ChanceCard {
+~ {static} numchance: int[]
++ Shufflechancecard(): int[]
++ leftshiftarray(): int[]
++ getNumchance(): int[]
++ setNumchance(int[]): void
+}
+class org.g16.MonopolyJR.MoneyBalance {
+- STARTBALANCE: int
+- balance: int
++ addmoney(int): void
++ getBalance(): int
++ reset(): void
++ getStartingbalance(): int
+}
+class org.g16.MonopolyJR.PropertyField {
+# price: int
+# color: Color
+# owner: Player
++ getPrice(): int
++ getColor(): Color
++ getOwner(): Player
++ setOwner(Player): void
+}
+abstract class org.g16.MonopolyJR.Field {
+# name: String
++ getName(): String
+}
+
+class org.g16.MonopolyJR.GameController{
+- winnerfound: boolean
+- players: Player[]
+- chancecard: ChanceCard
+- chanceArray: int[]
+-chanceField: ChanceField
+-init:Initializer
+-prop: Field[]
+-monoGUI: MonopolyGUI
++ play(): void
+-setup(): void
++ createplayer(int[], String[]): void
+- playround(int): void
+- landOnField(Player): void
+- allColorsOwned(Propertyfield)
+}
+
+
+org.g16.MonopolyJR.Field <|-- org.g16.MonopolyJR.Jail
+org.g16.MonopolyJR.Field <|-- org.g16.MonopolyJR.VisitorField
+org.g16.MonopolyJR.Field <|-- org.g16.MonopolyJR.GoToJailField
+org.g16.MonopolyJR.Field <|-- org.g16.MonopolyJR.ChanceField
+org.g16.MonopolyJR.Field <|-- org.g16.MonopolyJR.PropertyField
+
+org.g16.MonopolyJR.Initializer - org.g16.MonopolyJR.Field
+org.g16.MonopolyJR.GameController - org.g16.MonopolyJR.Initializer
+org.g16.MonopolyJR.Die "1" - "1" org.g16.MonopolyJR.GameController
+org.g16.MonopolyJR.GameController "1" -- "2..4" org.g16.MonopolyJR.Player
+org.g16.MonopolyJR.Player "1" -- "1" org.g16.MonopolyJR.MoneyBalance
+org.g16.MonopolyJR.ChanceField -- org.g16.MonopolyJR.ChanceCard
+org.g16.MonopolyJR.PropertyField - org.g16.MonopolyJR.Color
+org.g16.MonopolyJR.Token "1" - "1" org.g16.MonopolyJR.Player
+org.g16.MonopolyJR.Language
+org.g16.MonopolyJR.Player - org.g16.MonopolyJR.PropertyField :owns >
+org.g16.MonopolyJR.Language - org.g16.MonopolyJR.GameController
+@enduml

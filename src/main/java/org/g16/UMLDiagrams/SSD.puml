@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Main -> GameController: PlayGame()
+GameController -> GameController: setup()
+GameController -> GameController: CreatePlayers()
+GameController -> Language: SetLanguage()
+GameController -> GameController: CheckJail()
+GameController <- GameController: results boolean
+alt CheckJail true
+    GameController -> Player: getOutOfJailCard()
+    GameController <- Player: results boolean
+    alt GetOutOfJailCard true
+    GameController -> Player: setOutOfJailCard(false)
+    end
+    GameController -> Player: AddBalance()
+    end
+GameController -> Die: ThrowDie:
+GameController <- Die: results: int
+GameController -> GameController: Moveplayer(player: player[], die: int)
+
+
+@enduml
