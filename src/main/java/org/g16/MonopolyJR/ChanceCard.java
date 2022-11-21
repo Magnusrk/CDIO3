@@ -12,7 +12,6 @@ public class ChanceCard {
 
 
     /* shuffles the values in the array. Code found on https://www.digitalocean.com/community/tutorials/shuffle-array-java
-
      */
     public int[] Shufflechancecard(){
         Random rand = new Random();
@@ -44,14 +43,5 @@ public class ChanceCard {
         numchance=proxy;
     }
 
-    public static void main(String[] args) {
-        int[] proxy = new int[numchance.length];
-        for (int i = 0; i < numchance.length-1; i++) {
-            proxy[i] = numchance[i + 1];
-        }
-        proxy[numchance.length-1] = numchance[0];
-        System.out.println(Arrays.toString(proxy));
-
-    }
     }
 

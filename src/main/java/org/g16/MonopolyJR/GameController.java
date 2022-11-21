@@ -1,16 +1,7 @@
 package org.g16.MonopolyJR;
 
-import gui_fields.GUI_Car;
-import gui_fields.GUI_Player;
 import org.g16.GUI.MonopolyGUI;
-
-import java.awt.Color;
-
-import static gui_fields.GUI_Car.Pattern.ZEBRA;
-import static gui_fields.GUI_Car.Type.UFO;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -18,9 +9,7 @@ import java.util.stream.IntStream;
 public class GameController {
     private boolean winnerFound = false;
     private Player[] players;
-
-
-    ChanceCard chancecard =new ChanceCard(IntStream.range(1,21).toArray());
+    ChanceCard chancecard = new ChanceCard(IntStream.range(1,21).toArray());
     int[] chanceArray=chancecard.Shufflechancecard();
     ChanceField chanceField= new ChanceField("chancefield");
     Initializer init = new Initializer();
@@ -41,9 +30,6 @@ public class GameController {
     private void setup(){
         String chosenLanguage = monoGUI.chooseLanguage();
         Language.SetLanguage(chosenLanguage);
-
-        System.out.println(Language.GetString("noowner"));
-        System.out.println(chosenLanguage);
         monoGUI.UpdateFields();
         monoGUI.SetupPlayers();
     }
@@ -77,16 +63,19 @@ public class GameController {
         currentPlayer = players[playerIndex];
 
         checkJail(currentPlayer);
+        if (currentPlayer.getTokenChancecard()){
+            TokenChanceCard(currentPlayer);
+        } else {
 
-        monoGUI.PromptThrowDice(playerIndex);
-        int roll = Die.throwDie();
-        monoGUI.DrawDie(roll);
-        movePlayer(currentPlayer,roll);
+            monoGUI.PromptThrowDice(playerIndex);
+            int roll = Die.throwDie();
+            monoGUI.DrawDie(roll);
+            movePlayer(currentPlayer, roll);
 
+            checkPassStart(currentPlayer);
+            landOnField(currentPlayer);
 
-        checkPassStart(currentPlayer);
-        landOnField(currentPlayer);
-
+        }
         if (!winnerFound){
             if (pt == players.length){
                 pt = 1;
@@ -100,41 +89,35 @@ public class GameController {
 
     private void landOnField(Player currentPlayer) {
         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-            System.out.println(property.getName());
             if (property.getOwner() == null) {
                 currentPlayer.AddBalance(-1 * property.getPrice());
-                checkBankrupt(currentPlayer);
-               // System.out.println("You pay " + property.getPrice());
                 property.setOwner(currentPlayer);
                 monoGUI.updateOwner(currentPlayer.getID(), currentPlayer.getPlayerPosition());
-                System.out.println(property.getOwner());
                 monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
                 monoGUI.Showmsg(currentPlayer.getName() +" "  + Language.GetString("BoughtField") + " " + Language.GetString(property.getName())  +  ". " + Language.GetString("YouPay") + " "+ property.getPrice() );
+                checkBankrupt(currentPlayer);
             } else {
                 if (property.getOwner() != currentPlayer) {
                     int rentMultiplier = AllColorsOwned(property) ? 2 : 1;
                     currentPlayer.AddBalance(-1 * rentMultiplier * property.getPrice());
-                    checkBankrupt(currentPlayer);
                     property.getOwner().AddBalance(rentMultiplier * property.getPrice());
                     monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
                     monoGUI.SetPlayerBalance(property.getOwner().getID(), property.getOwner().getPlayerBalance());
                     String notificationText = currentPlayer.getName() + " " + Language.GetString("PaysRent") + " " + property.getOwner().getName() + "." + Language.GetString("YouPay") + " " + (property.getPrice() * rentMultiplier) + ". ";
                     if (rentMultiplier == 2) {
-                        notificationText += "Because all colors are owned, the rent was doubled!";
+                        notificationText += Language.GetString("RentDoubled");
                     }
                     monoGUI.Showmsg(notificationText);
+                    checkBankrupt(currentPlayer);
                 }
             }
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof VisitorField) {
-            System.out.println("visit");
 
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof ChanceField) {
             DoChanceCard(currentPlayer);
-            System.out.println("Chance");
 
         } else if (getField(currentPlayer.getPlayerPosition()) instanceof GoToJailField){
             currentPlayer.setJailed(true);
-            System.out.println("You're jailed");
             monoGUI.PromptGotoJail(currentPlayer.getID());
             currentPlayer.setPlayerPosition(6);
             monoGUI.DrawPlayerPosition(currentPlayer.getID(), 6);
@@ -166,7 +149,7 @@ public class GameController {
     private void checkPassStart(Player currentPlayer) {
         if (currentPlayer.getPlayerPosition() < currentPlayer.getPrevPlayerPosition()){
             currentPlayer.AddBalance(2);
-            monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance()+2);
+            monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
         }
     }
 
@@ -175,6 +158,7 @@ public class GameController {
             if (currentPlayer.getOutOfJailCards() > 0){
                 currentPlayer.addOutOfJailCard(-1);
                 currentPlayer.setJailed(false);
+                monoGUI.Showmsg(Language.GetString("UsedJailCard"));
             }
             if (currentPlayer.getPlayerBalance() > 1){
                 currentPlayer.AddBalance(-1);
@@ -200,7 +184,6 @@ public class GameController {
         player.setPlayerPosition(newPos);
     }
     private void checkBankrupt(Player player){
-        System.out.println(player.getPlayerBalance());
         if (player.getBankrupt()){
             int max = 0;
             int playerNum = 0;
@@ -211,7 +194,6 @@ public class GameController {
                     playerNum = i;
                 }
             }
-            System.out.println("Player " + (playerNum+1) + " won");
             monoGUI.Showmsg(players[playerNum].getName() + " won the game!");
             winnerFound = true;
         }
@@ -223,11 +205,14 @@ public class GameController {
         switch (chancecard.getNumchance()[0]) {
             case 1 -> {
                 for (Player player : players) {
-                    if (player.playerToken == Token.Car) {
-                        player.setTokenChancecard();
+                    if (player.playerToken == Token.Ufo) {
+                        monoGUI.Showmsg(Language.GetString("case1"));
+                        player.setTokenChancecard(true);
+                    } else {
+                        chanceArray = chanceField.drawChancecard();
+                        DoChanceCard(currentPlayer);
                     }
                 }
-                monoGUI.Showmsg(Language.GetString("case1"));
             }
             case 2 -> {
                 currentPlayer.setPlayerPosition(0);
@@ -237,6 +222,7 @@ public class GameController {
             case 3 -> {
                 int move = monoGUI.getUserinterger5();
                 movePlayer(currentPlayer,move);
+                checkPassStart(currentPlayer);
                 landOnField(currentPlayer);
             }
             case 4 -> {
@@ -254,6 +240,7 @@ public class GameController {
                         Language.GetString("case5opt1"), Language.GetString("case5opt2"));
                 if (action == 1) {
                     movePlayer(currentPlayer, 1);
+                    checkPassStart(currentPlayer);
                     landOnField(currentPlayer);
                 } else if (action == 2) {
                     chanceArray = chanceField.drawChancecard();
@@ -262,15 +249,19 @@ public class GameController {
             }
             case 6 -> {
                 for (Player player : players) {
-                    if (player.playerToken == Token.Car) {
-                        player.setTokenChancecard();
+                    if (player.playerToken == Token.Racecar) {
+                        monoGUI.Showmsg(Language.GetString("case6"));
+                        player.setTokenChancecard(true);
+                    } else {
+                        chanceArray = chanceField.drawChancecard();
+                        DoChanceCard(currentPlayer);
                     }
                 }
-                monoGUI.Showmsg(Language.GetString("case6"));
+
             }
             case 7 -> {
                 currentPlayer.AddBalance(-2);
-                monoGUI.SetPlayerBalance(currentPlayer.getID(), -2);
+                monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
             }
             case 8 -> {
                 int move = monoGUI.Userselection4(Language.GetString("case8")
@@ -301,33 +292,32 @@ public class GameController {
                 monoGUI.Showmsg(Language.GetString("case10"));
             }
             case 11 -> {
+                monoGUI.Showmsg(Language.GetString("case11"));
                 currentPlayer.setPlayerPosition(23);
                 monoGUI.DrawPlayerPosition(currentPlayer.getID(), 23);
                 landOnField(currentPlayer);
-                monoGUI.Showmsg(Language.GetString("case11"));
             }
             case 12 -> {
                 for (Player player : players) {
                     if (player.playerToken == Token.Car) {
-                        player.setTokenChancecard();
+                        player.setTokenChancecard(true);
                     }
                 }
                 monoGUI.Showmsg(Language.GetString("case12"));
             }
             case 13 -> {
                 for (Player player : players) {
-                    if (player.playerToken == Token.Car) {
-                        player.setTokenChancecard();
+                    if (player.playerToken == Token.Tractor) {
+                        player.setTokenChancecard(true);
                     }
                 }
                 monoGUI.Showmsg(Language.GetString("case13"));
             }
             case 14 -> {
                 currentPlayer.AddBalance(players.length);
-                monoGUI.SetPlayerBalance(currentPlayer.getID(), players.length);
-
                 for (Player player : players) {
                     player.AddBalance(-1);
+                    monoGUI.SetPlayerBalance(player.getID(), player.getPlayerBalance());
                 }
                 monoGUI.Showmsg(Language.GetString("case14"));
             }
@@ -336,7 +326,6 @@ public class GameController {
                         , Language.GetString("museum"), Language.GetString("library"), Language.GetString("waterpark"), Language.GetString("beach"));
                 monoGUI.DrawPlayerPosition(currentPlayer.getID(), 7);
                 if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-                    System.out.println(property.getName());
                     if (property.getOwner() == null) {
                         property.setOwner(currentPlayer);
                         monoGUI.updateOwner(currentPlayer.getID(), 7);
@@ -352,7 +341,7 @@ public class GameController {
             }
             case 16 -> {
                 currentPlayer.AddBalance(2);
-                monoGUI.SetPlayerBalance(currentPlayer.getID(), 2);
+                monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
                 monoGUI.Showmsg(Language.GetString("case16"));
             }
             case 17 -> {
@@ -404,9 +393,9 @@ public class GameController {
 
     private void moveAndBuy(Player currentPlayer, int position) {
         currentPlayer.setPlayerPosition(position);
+        checkPassStart(currentPlayer);
         monoGUI.DrawPlayerPosition(currentPlayer.getID(), position);
         if (getField(currentPlayer.getPlayerPosition()) instanceof PropertyField property) {
-            System.out.println(property.getName());
             if (property.getOwner() == null) {
                 property.setOwner(currentPlayer);
                 monoGUI.updateOwner(currentPlayer.getID(), position);
@@ -417,9 +406,9 @@ public class GameController {
     public void TokenChanceCard(Player currentPlayer){
         List<String> avbprops=new ArrayList<String>();
         List<String> allprops=new ArrayList<String>();
-        for (int i=0;i<prop.length;i++){
-            if (prop[i] instanceof PropertyField propertyField){
-                if (propertyField.getOwner()==null){
+        for (Field field : prop) {
+            if (field instanceof PropertyField propertyField) {
+                if (propertyField.getOwner() == null) {
                     avbprops.add(Language.GetString(propertyField.getName()));
                 }
                 allprops.add(Language.GetString(propertyField.getName()));
@@ -435,7 +424,8 @@ public class GameController {
                 if (Language.GetString(prop[i].getName()).equals(selectedprop)){
                     currentPlayer.setPlayerPosition(i);
                     monoGUI.DrawPlayerPosition(currentPlayer.getID(),i);
-                    PropertyField propertyField= (PropertyField) prop[i];
+                    checkPassStart(currentPlayer);
+                    PropertyField propertyField = (PropertyField) prop[i];
                     propertyField.getOwner().AddBalance(propertyField.getPrice());
                     monoGUI.SetPlayerBalance(propertyField.getOwner().getID(),propertyField.getOwner().getPlayerBalance());
                     propertyField.setOwner(currentPlayer);
@@ -447,18 +437,19 @@ public class GameController {
         }else {
                     String[] options= new String[avbprops.size()];
                     avbprops.toArray(options);
-            String selectedprop=monoGUI.Userselectionarray("dsfa", options);
+            String selectedprop=monoGUI.Userselectionarray(Language.GetString("tokenChance"), options);
             for (int i=0;i<prop.length;i++){
 
                   if (Language.GetString(prop[i].getName()).equals(selectedprop)){
                       currentPlayer.setPlayerPosition(i);
                       monoGUI.DrawPlayerPosition(currentPlayer.getID(),i);
+                      checkPassStart(currentPlayer);
                       PropertyField propertyField= (PropertyField) prop[i];
                       propertyField.setOwner(currentPlayer);
                       monoGUI.updateOwner(currentPlayer.getID(),i);
                   }
                 }
-
+            currentPlayer.setTokenChancecard(false);
         }
     }
 

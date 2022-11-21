@@ -3,6 +3,11 @@ package org.g16.MonopolyJR;
 public class Initializer {
     Field fields[] = new Field[24];
 
+    /**
+     * Sets values for every field in the game
+     * And adds them into an array
+     * @return array with fields
+     */
     public Field[] InitFields(){
         //field 0
         VisitorField start = new VisitorField("start");

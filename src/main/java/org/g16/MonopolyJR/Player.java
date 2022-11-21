@@ -64,8 +64,8 @@ public class Player {
     public void setAge(int age){
         this.age = age;
     }
-    public void setTokenChancecard(){
-        this.tokenChancecard=true;
+    public void setTokenChancecard(boolean tcard){
+        this.tokenChancecard=tcard;
     }
     public boolean getTokenChancecard(){
         return tokenChancecard;

@@ -42,42 +42,46 @@ gotojail;Gå i fængsel
 
 
 
-case1;Giv dette card kort til bilen. På deres næste tur, kan de flytte til et feldt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal du købe et fra en anden spiller.
-case2;Fly til Start
-case3; Flyt frem op til 5 felter
-case4;Flyt til et orange feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
-case5;Flyt 1 eller træk et andet chancekort
-case5opt1;Flyt 1
-case5opt2; Træk chancekort
-case6;Giv dette card kort til skibet. På deres næste tur, kan de flytte til et feldt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal du købe et fra en anden spiller.
-case8;Flyt til et orange feldt eller grønt feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
-case9;Flyt til et blåt feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
-case10;Du fik et "get out of jail free card" Use it when you get jailed.
-case11;Flyt til "Strandpromenaden"
-case12;Giv dette card kort til katten. På deres næste tur, kan de flytte til et feldt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal du købe et fra en anden spiller.
-case13;Giv dette card kort til hunden. På deres næste tur, kan de flytte til et feldt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal du købe et fra en anden spiller.
-case14;Det er din fødselsdag få 1$ fra allesammen.
-case15;Flyt til et lyserød feldt eller mørkblåt feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
+case1;Giv dette kort til Ufo'en. På deres næste tur, kan de flytte til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
+case2;Flyt til Start.
+case3; Flyt op til 5 felter frem.
+case4;Flyt til et orange felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
+case5;Flyt et felt frem eller træk et andet chancekort.
+case5opt1;Flyt et felt frem.
+case5opt2; Træk et chancekort.
+case6;Giv dette card kort til Racer bilen. På deres næste tur, kan de flytte til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
+case8;Flyt til et orange felt eller grønt felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
+case9;Flyt til et blåt felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
+case10;Du fik et "kom ud af fængsel kort". Brug det når de fængsles.
+case11;Flyt til "Strandpromenaden".
+case12;Giv dette card kort til Bilen. På deres næste tur, kan de flytte til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
+case13;Giv dette card kort til Traktoren. På deres næste tur, kan de flytte til et felt som ikke har en ejer og får det gratis. Hvis alle felter har en ejer, skal de købe et fra en anden spiller.
+case14;Det er din fødselsdag modtag 1$ fra alle spillere.
+case15;Flyt til et lyserødt felt eller mørkeblåt felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
 case16;Du er færdig med alle dine lektier få 2$ fra banken.
-case17;Flyt til et rødt feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
-case18;Flyt til "Skaterparken", Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
-case19;Flyt til et blåt feldt eller rødt feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
-case20;Flyt til et brunt feldt eller gult feldt, Hvis det ikke har en ejer så får du det gratis. Hvis det ikke er ledigt, så skal du betale husleje.
+case17;Flyt til et rødt felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
+case18;Flyt til "Skaterparken". Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
+case19;Flyt til et blåt felt eller rødt felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
+case20;Flyt til et brunt felt eller gult felt. Hvis det ikke har en ejer så får du det gratis, ellers skal du betale husleje.
+
+tokenChance;Flyt til et felt som ikke har en ejer og få det gratis.
+tokenChanceowned;Alle felter har en ejer, flyt til et ejet felt og køb det fra en anden spiller.
+
 throwDice;slå med terningen!
-chooseLanguage;Vælg sproget
+chooseLanguage;Vælg sproget.
 howManyPlayers;Hvor mange spillere er i?
 tooManyOrFew;For mange eller for få spillere..
 enterAge;Indtast alder
 enterPlayerName;Indtast navn
 playerNameTaken;Navnet er allerede taget. Vælg et unikt navn.
 addedPlayer;Tilføjede spiller
+UsedJailCard;Du brugte dit "kom ud af fængsel" kort
 gotojailprompt;bliver sat i fængsel.
-BoughtField;Købt ejendommen
-YouPay; Du betale
-PaysRent; Betal rante til
-RentDoubled;Because all colors are owned, the rent was doubled!
+BoughtField;Købte ejendommen
+YouPay; Du betalte
+PaysRent; Betal leje til
+RentDoubled;Fordi alle farver har en ejer er lejen fordoblet!
 WonTheGame;Vandt spillet!
 yesTxt;Ja
 noTxt;Nej
-restartQuestion; Vil du gerne genstart spillet?
-;
+restartQuestion; Vil du gerne genstarte spillet?
