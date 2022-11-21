@@ -1,4 +1,4 @@
-package org.g16.MonopolyJR;
+package org.g16.MonopolyJR.Fields;
 
 public class Initializer {
     Field[] fields = new Field[24];

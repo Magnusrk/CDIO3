@@ -2,6 +2,8 @@ package org.g16.GUI;
 import gui_fields.*;
 import org.g16.MonopolyJR.*;
 import gui_main.GUI;
+import org.g16.MonopolyJR.Fields.Field;
+import org.g16.MonopolyJR.Fields.PropertyField;
 
 import java.awt.Color;
 
@@ -111,29 +113,29 @@ public class MonopolyGUI {
      * @param col the color from the MonopolyJR class.
      *@return java.awt.Color
      */
-    private java.awt.Color ConvertColor(org.g16.MonopolyJR.Color col){
-        if(org.g16.MonopolyJR.Color.DarkBlue == col){
+    private java.awt.Color ConvertColor(org.g16.MonopolyJR.Fields.Color col){
+        if(org.g16.MonopolyJR.Fields.Color.DarkBlue == col){
          return Color.BLUE;
         }
-        if(org.g16.MonopolyJR.Color.Blue == col){
+        if(org.g16.MonopolyJR.Fields.Color.Blue == col){
             return Color.CYAN;
         }
-        if(org.g16.MonopolyJR.Color.Brown == col){
+        if(org.g16.MonopolyJR.Fields.Color.Brown == col){
             return Color.getHSBColor(0.063f,0.69f,0.65f);
         }
-        if(org.g16.MonopolyJR.Color.Red == col){
+        if(org.g16.MonopolyJR.Fields.Color.Red == col){
             return Color.RED;
         }
-        if(org.g16.MonopolyJR.Color.Pink == col){
+        if(org.g16.MonopolyJR.Fields.Color.Pink == col){
             return Color.pink;
         }
-        if(org.g16.MonopolyJR.Color.Green == col){
+        if(org.g16.MonopolyJR.Fields.Color.Green == col){
             return Color.green;
         }
-        if(org.g16.MonopolyJR.Color.Orange == col){
+        if(org.g16.MonopolyJR.Fields.Color.Orange == col){
             return Color.orange;
         }
-        if(org.g16.MonopolyJR.Color.Yellow == col){
+        if(org.g16.MonopolyJR.Fields.Color.Yellow == col){
             return Color.YELLOW;
         }
         return Color.MAGENTA;
