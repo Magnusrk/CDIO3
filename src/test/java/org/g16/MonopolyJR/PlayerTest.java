@@ -20,19 +20,20 @@ public class PlayerTest {
     public void passStartTest() {
         Player player = createPlayer(12, 0, "Test");
         player.setPlayerPosition(20);
+        player.setBalance(20);
         int prevBalance = player.getPlayerBalance();
-    player.setPlayerPosition(2);
-    if (player.getPlayerPosition() < player.getPrevPlayerPosition()) {
-        player.AddBalance(2);
-    }
-    assertEquals(prevBalance+2, player.getPlayerBalance());
+        player.setPlayerPosition(2);
+        if (player.getPlayerPosition() < player.getPrevPlayerPosition()) {
+            player.AddBalance(2);
+        }
+        assertEquals(prevBalance+2, player.getPlayerBalance());
     }
 
     @Test
     public void jailTest(){
         Player player = createPlayer(12, 0, "Test");
         player.setJailed(true);
-
+        player.setBalance(20);
         int prevBalance = player.getPlayerBalance();
         if (player.getJailed()){
             if (player.getOutOfJailCards() > 0){

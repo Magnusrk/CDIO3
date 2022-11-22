@@ -1,12 +1,11 @@
 package org.g16.MonopolyJR;
 
 public class Player {
-    MoneyBalance balance = new MoneyBalance();
-
+    private MoneyBalance balance = new MoneyBalance();
     private String name;
     private int playerPosition = 0;
     private int prevPlayerPosition = 0;
-    Token playerToken;
+    public Token playerToken;
     private int age;
     private boolean jailed = false;
     private boolean bankrupt = false;

@@ -39,11 +39,11 @@ enum org.g16.MonopolyJR.Color {
 +  Orange
 }
 class org.g16.MonopolyJR.Player {
-~ balance: MoneyBalance
+- balance: MoneyBalance
 - name: String
 - playerPosition: int
 - prevPlayerPosition: int
-~ playerToken: Token
++ playerToken: Token
 - age: int
 - jailed: boolean
 - bankrupt: boolean
@@ -141,7 +141,6 @@ org.g16.MonopolyJR.Player "1" -- "1" org.g16.MonopolyJR.MoneyBalance
 org.g16.MonopolyJR.ChanceField -- org.g16.MonopolyJR.ChanceCard
 org.g16.MonopolyJR.PropertyField - org.g16.MonopolyJR.Color
 org.g16.MonopolyJR.Token "1" - "1" org.g16.MonopolyJR.Player
-org.g16.MonopolyJR.Language
 org.g16.MonopolyJR.Player - org.g16.MonopolyJR.PropertyField :owns >
-org.g16.MonopolyJR.Language - org.g16.MonopolyJR.GameController
+org.g16.MonopolyJR.Language -- org.g16.MonopolyJR.GameController
 @enduml
