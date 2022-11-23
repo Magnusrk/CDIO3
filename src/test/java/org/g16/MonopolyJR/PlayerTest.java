@@ -1,7 +1,6 @@
 package org.g16.MonopolyJR;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.g16.MonopolyJR.Fields.*;
 import org.junit.jupiter.api.Test;
 
