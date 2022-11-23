@@ -8,18 +8,21 @@ GameController -> GameController: setup()
 GameController -> GameController: CreatePlayers()
 GameController -> Language: SetLanguage()
 GameController -> GameController: CheckJail()
-GameController <- GameController: results boolean
+GameController <-- GameController: CheckJail status
 alt CheckJail true
     GameController -> Player: getOutOfJailCard()
-    GameController <- Player: results boolean
-    alt GetOutOfJailCard true
+    GameController <-- Player: GetOutOfJailCard Status
+    alt GetOutOfJailCard false
+    GameController -> Player: AddBalance(-1)
+    end
     GameController -> Player: setOutOfJailCard(false)
     end
-    GameController -> Player: AddBalance()
-    end
 GameController -> Die: ThrowDie:
-GameController <- Die: results: int
-GameController -> GameController: Moveplayer(player: player[], die: int)
-
+GameController <-- Die: ThrowDie Resuslt
+GameController -> GameController: Moveplayer(Player: player[], die: int)
+GameController -> GameController: LandOnField(Player: player[])
+alt propertyfield
+    GameController -> Player: AddBalance()
+    GameController -> Field: setOwner()
 
 @enduml
