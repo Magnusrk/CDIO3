@@ -7,6 +7,7 @@ Main -> GameController: PlayGame()
 GameController -> GameController: setup()
 GameController -> GameController: CreatePlayers()
 GameController -> Language: SetLanguage()
+Loop until getBalance <0
 GameController -> GameController: CheckJail()
 GameController <-- GameController: CheckJail status
 alt CheckJail true
@@ -21,8 +22,11 @@ GameController -> Die: ThrowDie:
 GameController <-- Die: ThrowDie Resuslt
 GameController -> GameController: Moveplayer(Player: player[], die: int)
 GameController -> GameController: LandOnField(Player: player[])
-alt propertyfield
-    GameController -> Player: AddBalance()
-    GameController -> Field: setOwner()
-
+GameController -> Player: getBalance
+GameController <-- player: balance
+end
+Loop No. Player times
+GameController -> Player: getBalance
+GameController <-- Player: balance
+end
 @enduml

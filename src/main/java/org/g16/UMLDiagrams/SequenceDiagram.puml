@@ -2,20 +2,29 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
-
-UI -> Player: Request Language
-UI <- Player: Choose Language
-UI -> Player: Request No. players
-UI <- Player: Choose No. players
+Player <- UI: Request Language
+Player -> UI: Choose Language
+Player <- UI: Request No. players
+Player -> UI: Choose No. players
     loop No. players times
-        UI -> Player: Request Name
-        UI <- Player: Choose Name
-        UI -> Player: Request Age
-        UI <- Player: Choose Age
+        Player <- UI: Request Name
+        Player -> UI: Choose Name
+        Player <- UI: Request Age
+        Player -> UI: Choose Age
         end
 
-Player <- Moneybalance: Check balance
-alt
+Player -> Moneybalance: get balance
+Moneybalance-> Player: balance
+alt balance<0
+Ui -> Player: winner found
+end
+alt balance>0
+Player -> Die: Throw die
+Player <- Die: results
+Player -> UI: move player
+Player -> Field: Do field stuff
+end
+Player <- UI: announce winner
 
 
 @enduml
